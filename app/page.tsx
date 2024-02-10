@@ -1,7 +1,7 @@
-import Image from "next/image";
+import InputComp from "@/app/_components/@ui/InputComp";
 
 export default function Home() {
   return (
-    <main>Hello</main>
+    <main className="app"><InputComp /></main>
   );
 }
