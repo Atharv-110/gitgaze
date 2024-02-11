@@ -1,7 +1,8 @@
-import InputComp from "@/app/_components/@ui/InputComp";
-
+import MainSection from "@/app/_components/sections/MainSection";
 export default function Home() {
   return (
-    <main className="app"><InputComp /></main>
+    <main className="app">
+      <MainSection />
+    </main>
   );
 }

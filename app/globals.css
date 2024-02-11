@@ -2,18 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+
 .app {
-  @apply w-full h-screen flex items-center justify-center;
+  @apply w-full h-screen bg-white-dull flex items-center justify-center px-[5%] font-spacemono font-normal;
 }
 
 .search-box {
-  @apply flex items-center border p-2 gap-x-2 rounded-xl;
+  @apply flex items-center justify-between bg-white p-2 md:p-3 gap-x-2 shadow-2xl rounded-xl;
+}
+
+.icon-section {
+  @apply text-theme-blue md:px-1;
 }
 
 .search-input {
-  @apply outline-none bg-transparent;
+  @apply w-full outline-none bg-transparent text-sm md:text-xl;
 }
 
 .btn {
-  @apply px-4 py-2 bg-blue-500 text-white rounded-lg;
+  @apply px-3 py-2 md:text-xl font-bold bg-theme-blue text-white rounded-lg hover:bg-white-blue;
+}
+
+.card {
+  @apply bg-white p-8 shadow-xl rounded-xl flex justify-between;
 }

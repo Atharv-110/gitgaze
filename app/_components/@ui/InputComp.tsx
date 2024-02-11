@@ -8,7 +8,12 @@ const InputComp: React.FC = () => {
         <div className="icon-section">
           <MagnifyingGlassIcon />
         </div>
-        <input type="text" name="username" className="search-input"/>
+        <input
+          type="text"
+          name="username"
+          className="search-input"
+          placeholder="Search GitHub Username..."
+        />
         <ButtonComp title="Search" type="submit" />
       </div>
     </form>

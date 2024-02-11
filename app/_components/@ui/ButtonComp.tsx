@@ -1,6 +1,6 @@
 interface IProps {
   title: string;
-  type?: "submit" | "reset" | "button";
+  type?: "submit" | "button";
 }
 
 const ButtonComp: React.FC<IProps> = (props) => {
