@@ -5,7 +5,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
 
 .app {
-  @apply w-full h-screen bg-white-dull flex items-center justify-center px-[5%] font-spacemono font-normal;
+  @apply w-full h-screen bg-white-dull flex items-center justify-center px-[3%] font-spacemono font-normal;
 }
 
 .search-box {
@@ -25,5 +25,9 @@
 }
 
 .card {
-  @apply bg-white p-8 shadow-xl rounded-xl;
+  @apply bg-white p-5 md:p-8 shadow-xl rounded-xl;
+}
+
+.card-footer-icon {
+  @apply w-[20px] flex items-center justify-center fill-theme-gray;
 }

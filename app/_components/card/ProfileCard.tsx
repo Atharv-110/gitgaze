@@ -8,10 +8,10 @@ const ProfileCard = () => {
   return (
     <div className="card">
       <div className="flex justify-between">
-        <div className="w-[120px] h-fit rounded-full overflow-hidden">
+        <div className="w-[75px] md:w-[120px] h-fit rounded-full overflow-hidden">
           <AvatarComp />
         </div>
-        <div className="w-[calc(100%-150px)]">
+        <div className="w-[calc(100%-90px)] md:w-[calc(100%-150px)]">
           <ProfileCardHeader />
           <div className="hidden lg:block mt-8">
             <ProfileCardMain />
