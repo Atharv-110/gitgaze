@@ -4,7 +4,8 @@ export const searchUser = async (user: string) => {
   try {
     const res = await fetch(`${BASE_URL}/${user}`);
     if (res.ok) {
-      return res.json();
+      const data = await res.json();
+      return data;
     }
   } catch (error) {
     console.log(error);

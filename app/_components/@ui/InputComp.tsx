@@ -13,7 +13,8 @@ const InputComp: React.FC<IProps> = (props) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    setUsername(inputValue);
+    setUsername(inputValue)
+    // setData(await searchUser(inputValue));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
