@@ -1,19 +1,25 @@
 import { memo } from "react";
 import AvatarComp from "@/app/_components/@ui/AvatarComp";
-import TypographyComp from "../@ui/TypographyComp";
+import ProfileCardHeader from "./sections/ProfileCardHeader";
+import ProfileCardMain from "./sections/ProfileCardMain";
 
 const ProfileCard = () => {
   return (
     <div className="card">
-        <div className="w-[120px] rounded-full overflow-hidden">
-            <AvatarComp />
+      <div className="flex justify-between">
+        <div className="w-[120px] h-fit rounded-full overflow-hidden">
+          <AvatarComp />
         </div>
         <div className="w-[calc(100%-150px)]">
-            <TypographyComp variant="title" text="The Octocat" />
-            <TypographyComp variant="link" text="Thelink" url="https://github-user-search-app-gold.vercel.app/" />
+          <ProfileCardHeader />
+          <div className="hidden lg:block mt-8">
+            <ProfileCardMain />
+          </div>
         </div>
+      </div>
+      {/* <div>Hello</div> */}
     </div>
-  )
-}
+  );
+};
 
 export default memo(ProfileCard);

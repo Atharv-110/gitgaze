@@ -9,7 +9,7 @@
 }
 
 .search-box {
-  @apply flex items-center justify-between bg-white p-2 md:p-3 gap-x-2 shadow-2xl rounded-xl;
+  @apply flex items-center justify-between bg-white p-2 md:p-2.5 gap-x-2 shadow-2xl rounded-xl;
 }
 
 .icon-section {
@@ -25,5 +25,5 @@
 }
 
 .card {
-  @apply bg-white p-8 shadow-xl rounded-xl flex justify-between;
+  @apply bg-white p-8 shadow-xl rounded-xl;
 }
