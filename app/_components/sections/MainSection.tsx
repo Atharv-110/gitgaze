@@ -3,7 +3,7 @@ import ProfileCard from "@/app/_components/card/ProfileCard";
 
 const MainSection: React.FC = () => {
   return (
-    <section className="w-full md:w-[700px] flex flex-col gap-10">
+    <section className="w-full md:w-[760px] flex flex-col gap-10">
       <InputComp />
       <ProfileCard />
     </section>

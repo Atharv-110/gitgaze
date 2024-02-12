@@ -17,6 +17,9 @@ const ProfileCard = () => {
           </div>
         </div>
       </div>
+      <div className="lg:hidden mt-8">
+        <ProfileCardMain />
+      </div>
       {/* <div>Hello</div> */}
     </div>
   );
