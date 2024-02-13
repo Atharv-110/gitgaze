@@ -3,8 +3,15 @@ import AvatarComp from "@/app/_components/@ui/AvatarComp";
 import ProfileCardHeader from "./sections/ProfileCardHeader";
 import ProfileCardMain from "./sections/ProfileCardMain";
 import ProfileCardFooter from "./sections/ProfileCardFooter";
+import { IData } from "@/app/_interface/iData";
 
-const ProfileCard = () => {
+interface IProps {
+  data: IData[];
+}
+
+const ProfileCard: React.FC<IProps> = (props) => {
+  const { data } = props;
+  console.log(data)
   return (
     <div className="card">
       <div className="flex justify-between">
