@@ -10,11 +10,16 @@ interface IProps {
   username: string;
   url: string;
   bio: string | null;
+  date: {
+    day: number;
+    month: string;
+    year: number;
+  };
   // data: IData[];
 }
 
 const ProfileCard: React.FC<IProps> = (props) => {
-  const { image, name, username, url, bio } = props;
+  const { image, name, username, url, bio, date } = props;
   return (
     <div className="card">
       <div className="flex justify-between">
@@ -27,6 +32,7 @@ const ProfileCard: React.FC<IProps> = (props) => {
             username={username}
             url={url}
             bio={bio}
+            date={date}
           />
           <div className="hidden lg:block mt-8">
             <ProfileCardMain />
