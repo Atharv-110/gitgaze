@@ -8,7 +8,9 @@ import { IData } from "@/app/_interface/iData";
 
 const MainSection: React.FC = () => {
   const [username, setUsername] = useState<string>("octocat");
-  const [data, setData] = useState<IData[]>([]);
+  const [data, setData] = useState<{ avatar_url: string | null }>({
+    avatar_url: null,
+  });
   // console.log(data);
 
   useEffect(() => {
@@ -16,8 +18,8 @@ const MainSection: React.FC = () => {
       try {
         const responseData = await searchUser(username);
         if (responseData !== undefined) {
-          setData(responseData?.data);
-        } else setData([]);
+          setData({ avatar_url: responseData.data.avatar_url });
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -30,7 +32,7 @@ const MainSection: React.FC = () => {
     <section className="w-full md:w-[760px] flex flex-col gap-12">
       <TypographyComp variant="title" text="GitGaze" />
       <InputComp setUsername={setUsername} />
-      <ProfileCard data={data} />
+      <ProfileCard image={data.avatar_url} />
     </section>
   );
 };

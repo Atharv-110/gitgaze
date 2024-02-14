@@ -1,4 +1,3 @@
-import { memo } from "react";
 import AvatarComp from "@/app/_components/@ui/AvatarComp";
 import ProfileCardHeader from "./sections/ProfileCardHeader";
 import ProfileCardMain from "./sections/ProfileCardMain";
@@ -6,17 +5,17 @@ import ProfileCardFooter from "./sections/ProfileCardFooter";
 import { IData } from "@/app/_interface/iData";
 
 interface IProps {
-  data: IData[];
+  image: string | null;
+  // data: IData[];
 }
 
 const ProfileCard: React.FC<IProps> = (props) => {
-  const { data } = props;
-  console.log(data)
+  const { image } = props;
   return (
     <div className="card">
       <div className="flex justify-between">
         <div className="w-[75px] md:w-[120px] h-fit rounded-full overflow-hidden">
-          <AvatarComp />
+          <AvatarComp image={image} />
         </div>
         <div className="w-[calc(100%-90px)] md:w-[calc(100%-150px)]">
           <ProfileCardHeader />
@@ -35,4 +34,4 @@ const ProfileCard: React.FC<IProps> = (props) => {
   );
 };
 
-export default memo(ProfileCard);
+export default ProfileCard;

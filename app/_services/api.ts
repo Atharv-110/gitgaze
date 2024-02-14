@@ -5,7 +5,7 @@ const BASE_URL = "https://api.github.com/users";
 
 export const searchUser = async (user: string) => {
   try {
-    const res = await axios.get<IData[]>(`${BASE_URL}/${user}`);
+    const res = await axios.get<IData>(`${BASE_URL}/${user}`);
     if (res) {
       return res;
     }
