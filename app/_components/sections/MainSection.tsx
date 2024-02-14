@@ -8,8 +8,18 @@ import { IData } from "@/app/_interface/iData";
 
 const MainSection: React.FC = () => {
   const [username, setUsername] = useState<string>("octocat");
-  const [data, setData] = useState<{ avatar_url: string | null }>({
+  const [data, setData] = useState<{
+    avatar_url: string | null;
+    name: string;
+    username: string;
+    url: string;
+    bio: string | null;
+  }>({
     avatar_url: null,
+    name: "",
+    username: "",
+    url: "",
+    bio: null
   });
   // console.log(data);
 
@@ -18,7 +28,14 @@ const MainSection: React.FC = () => {
       try {
         const responseData = await searchUser(username);
         if (responseData !== undefined) {
-          setData({ avatar_url: responseData.data.avatar_url });
+          console.log(responseData.data);
+          setData({
+            avatar_url: responseData.data.avatar_url,
+            name: responseData.data.name,
+            username: responseData.data.login,
+            url: responseData.data.html_url,
+            bio: responseData.data.bio
+          });
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -32,7 +49,13 @@ const MainSection: React.FC = () => {
     <section className="w-full md:w-[760px] flex flex-col gap-12">
       <TypographyComp variant="title" text="GitGaze" />
       <InputComp setUsername={setUsername} />
-      <ProfileCard image={data.avatar_url} />
+      <ProfileCard
+        image={data.avatar_url}
+        name={data.name}
+        username={data.username}
+        url={data.url}
+        bio={data.bio}
+      />
     </section>
   );
 };

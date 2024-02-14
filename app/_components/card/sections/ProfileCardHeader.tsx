@@ -1,17 +1,25 @@
 import TypographyComp from "@/app/_components/@ui/TypographyComp";
 
-const ProfileCardHeader: React.FC = () => {
+interface IProps {
+  name: string,
+  username: string,
+  url: string,
+  bio: string | null
+}
+
+const ProfileCardHeader: React.FC<IProps> = (props) => {
+  const  { name, username, url, bio } = props;
   return (
     <div className="flex flex-col gap-y-1 lg:flex-row items-baseline justify-between text-lg">
       <div className="flex flex-col">
-        <TypographyComp variant="title" text="The Octocat" />
+        <TypographyComp variant="title" text={name}  />
         <TypographyComp
           variant="link"
-          text="Thelink"
-          url="https://github-user-search-app-gold.vercel.app/"
+          text={username}
+          url={url}
         />
         <div className="hidden lg:block mt-2">
-          <TypographyComp variant="subtitle" text="This profile has no bio" />
+          <TypographyComp variant="subtitle" text={bio ?? "This profile has no bio"} />
         </div>
       </div>
       <div>

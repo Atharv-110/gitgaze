@@ -18,6 +18,7 @@ const TypographyComp: React.FC<IProps> = (props) => {
     case "link":
       return (
         <Link
+          target="_blank"
           href={`${url}`}
           className="text-sm md:text-base text-theme-blue hover:underline underline-offset-2"
         >

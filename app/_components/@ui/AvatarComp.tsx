@@ -1,5 +1,4 @@
 import Image from "next/image";
-import im from "@/public/atharv-vani.jpg"
 
 interface IProps {
   image: string | null
@@ -13,6 +12,7 @@ const AvatarComp:React.FC<IProps> = (props) => {
       height={50}
       alt="avatar"
       className="w-full rounded-full"
+      unoptimized
     />
   );
 };
