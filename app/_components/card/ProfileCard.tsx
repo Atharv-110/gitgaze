@@ -2,47 +2,75 @@ import AvatarComp from "@/app/_components/@ui/AvatarComp";
 import ProfileCardHeader from "./sections/ProfileCardHeader";
 import ProfileCardMain from "./sections/ProfileCardMain";
 import ProfileCardFooter from "./sections/ProfileCardFooter";
-// import { IData } from "@/app/_interface/iData";
+import { IData } from "@/app/_interface/iData";
 
-interface IProps {
-  image: string | null;
-  name: string;
-  username: string;
-  url: string;
-  bio: string | null;
-  date: {
-    day: number;
-    month: string;
-    year: number;
-  };
-  // data: IData[];
-}
+interface IProps extends IData {}
 
 const ProfileCard: React.FC<IProps> = (props) => {
-  const { image, name, username, url, bio, date } = props;
+  const {
+    avatar_url,
+    bio,
+    blog,
+    company,
+    created_at,
+    followers,
+    following,
+    html_url,
+    location,
+    login,
+    name,
+    public_repos,
+    twitter_username,
+  } = props;
+  const date = new Date(created_at);
+  const newDate = date
+    .toLocaleDateString("en-GB", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    })
+    .replace(",", "");
   return (
     <div className="card">
       <div className="flex justify-between">
         <div className="w-[75px] md:w-[120px] h-fit rounded-full overflow-hidden">
-          <AvatarComp image={image} />
+          <AvatarComp image={avatar_url} />
         </div>
         <div className="w-[calc(100%-90px)] md:w-[calc(100%-150px)]">
           <ProfileCardHeader
             name={name}
-            username={username}
-            url={url}
+            username={login}
+            url={html_url}
             bio={bio}
-            date={date}
+            date={newDate}
           />
           <div className="hidden lg:block mt-8">
-            <ProfileCardMain />
-            <ProfileCardFooter />
+            <ProfileCardMain
+              followers={followers}
+              following={following}
+              repos={public_repos}
+            />
+            <ProfileCardFooter
+              twitter_username={twitter_username}
+              blog={blog}
+              location={location}
+              company={company}
+            />
           </div>
         </div>
       </div>
       <div className="lg:hidden mt-8">
-        <ProfileCardMain />
-        <ProfileCardFooter />
+        <ProfileCardMain
+          followers={followers}
+          following={following}
+          repos={public_repos}
+        />
+        <ProfileCardFooter
+          twitter_username={twitter_username}
+          blog={blog}
+          location={location}
+          company={company}
+        />
       </div>
       {/* <div>Hello</div> */}
     </div>

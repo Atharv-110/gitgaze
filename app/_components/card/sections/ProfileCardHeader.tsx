@@ -5,16 +5,12 @@ interface IProps {
   username: string;
   url: string;
   bio: string | null;
-  date: {
-    day: number;
-    month: string;
-    year: number;
-  };
+  date: string
 }
 
 const ProfileCardHeader: React.FC<IProps> = (props) => {
   const { name, username, url, bio, date } = props;
-  const dateString: string = `Joined ${date.day} ${date.month} ${date.year}`;
+  const dateString: string = `Joined ${date}`;
   return (
     <div className="flex flex-col gap-y-1 lg:flex-row items-baseline justify-between text-lg">
       <div className="flex flex-col">
