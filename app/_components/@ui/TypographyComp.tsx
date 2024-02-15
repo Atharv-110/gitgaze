@@ -30,7 +30,7 @@ const TypographyComp: React.FC<IProps> = (props) => {
         <Link
           target="_blank"
           href={`${url}`}
-          className="text-theme-gray hover:underline underline-offset-2"
+          className="text-theme-gray text-wrap hover:underline underline-offset-2"
         >
           {text}
         </Link>

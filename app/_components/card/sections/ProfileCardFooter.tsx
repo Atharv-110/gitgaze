@@ -40,7 +40,7 @@ const ProfileCardFooter: React.FC<IProps> = (props) => {
         <TypographyComp
           variant={blog ? "secondary_link" : "date"}
           url={blog}
-          text={blog ?? "Not Available"}
+          text={blog.substring(8, blog.length) ?? "Not Available"}
         />
       </div>
       <div className="flex items-center gap-4">
