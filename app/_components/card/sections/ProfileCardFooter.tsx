@@ -21,7 +21,7 @@ const ProfileCardFooter: React.FC<IProps> = (props) => {
         <div className="card-footer-icon">
           <LocationIcon />
         </div>
-        <TypographyComp variant="date" text={location} />
+        <TypographyComp variant="date" text={location ?? "Not Available"} />
       </div>
       <div className="flex items-center gap-4">
         <div className="card-footer-icon">
@@ -40,14 +40,14 @@ const ProfileCardFooter: React.FC<IProps> = (props) => {
         <TypographyComp
           variant={blog ? "secondary_link" : "date"}
           url={blog}
-          text={blog}
+          text={blog ?? "Not Available"}
         />
       </div>
       <div className="flex items-center gap-4">
         <div className="card-footer-icon">
           <BuildingIcon />
         </div>
-        <TypographyComp variant="date" text={company} />
+        <TypographyComp variant="date" text={company ?? "Not Available"} />
       </div>
     </div>
   );

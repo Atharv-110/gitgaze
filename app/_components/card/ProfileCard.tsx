@@ -3,6 +3,7 @@ import ProfileCardHeader from "./sections/ProfileCardHeader";
 import ProfileCardMain from "./sections/ProfileCardMain";
 import ProfileCardFooter from "./sections/ProfileCardFooter";
 import { IData } from "@/app/_interface/iData";
+import TypographyComp from "../@ui/TypographyComp";
 
 interface IProps extends IData {}
 
@@ -59,7 +60,10 @@ const ProfileCard: React.FC<IProps> = (props) => {
           </div>
         </div>
       </div>
-      <div className="lg:hidden mt-8">
+      <div className="lg:hidden mt-4 px-1">
+        <TypographyComp variant="subtitle" text={bio ?? "This profile has no bio"} />
+      </div>
+      <div className="lg:hidden mt-4">
         <ProfileCardMain
           followers={followers}
           following={following}

@@ -13,6 +13,7 @@ const AvatarComp:React.FC<IProps> = (props) => {
       alt="avatar"
       className="w-full rounded-full"
       unoptimized
+      priority
     />
   );
 };
