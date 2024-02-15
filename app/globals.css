@@ -29,5 +29,5 @@
 }
 
 .card-footer-icon {
-  @apply w-[20px] flex items-center justify-center fill-theme-gray;
+  @apply flex items-center justify-center fill-theme-gray;
 }

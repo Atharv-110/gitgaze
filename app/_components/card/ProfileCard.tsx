@@ -5,7 +5,9 @@ import ProfileCardFooter from "./sections/ProfileCardFooter";
 import { IData } from "@/app/_interface/iData";
 import TypographyComp from "../@ui/TypographyComp";
 
-interface IProps extends IData {}
+interface IProps extends IData {
+  reff: any;
+}
 
 const ProfileCard: React.FC<IProps> = (props) => {
   const {
@@ -22,6 +24,7 @@ const ProfileCard: React.FC<IProps> = (props) => {
     name,
     public_repos,
     twitter_username,
+    reff,
   } = props;
   const date = new Date(created_at);
   const newDate = date
@@ -32,7 +35,7 @@ const ProfileCard: React.FC<IProps> = (props) => {
     })
     .replace(",", "");
   return (
-    <div className="card">
+    <div ref={reff} className="card">
       <div className="flex justify-between">
         <div className="w-[75px] md:w-[120px] h-fit rounded-full overflow-hidden">
           <AvatarComp image={avatar_url} />
@@ -61,7 +64,10 @@ const ProfileCard: React.FC<IProps> = (props) => {
         </div>
       </div>
       <div className="lg:hidden mt-4 px-1">
-        <TypographyComp variant="subtitle" text={bio ?? "This profile has no bio"} />
+        <TypographyComp
+          variant="subtitle"
+          text={bio ?? "This profile has no bio"}
+        />
       </div>
       <div className="lg:hidden mt-4">
         <ProfileCardMain
@@ -76,7 +82,6 @@ const ProfileCard: React.FC<IProps> = (props) => {
           company={company}
         />
       </div>
-      {/* <div>Hello</div> */}
     </div>
   );
 };

@@ -38,9 +38,9 @@ const ProfileCardFooter: React.FC<IProps> = (props) => {
           <LinkIcon />
         </div>
         <TypographyComp
-          variant={blog ? "secondary_link" : "date"}
+          variant={blog === "" ? "date" : "secondary_link"}
           url={blog}
-          text={blog.substring(8, blog.length) ?? "Not Available"}
+          text={blog === "" ? "Not Available" : blog.substring(8, blog.length)}
         />
       </div>
       <div className="flex items-center gap-4">
