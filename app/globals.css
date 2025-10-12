@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+@use url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
 
 .app {
   @apply w-full h-screen bg-white-dull flex items-center justify-center px-[3%] font-spacemono font-normal;
