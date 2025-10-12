@@ -56,9 +56,6 @@ const MainSection: React.FC = () => {
     fetchData();
   }, [username]);
 
-  console.log(data);
-  
-
   return (
     <section className="w-full md:w-[760px] flex flex-col gap-8">
       <TypographyComp variant="title" text="GitGaze" />
