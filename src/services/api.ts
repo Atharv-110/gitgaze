@@ -1,5 +1,5 @@
+import { IData } from "@/interface/iData";
 import axios from "axios";
-import { IData } from "@/src/interface/iData";
 
 const BASE_URL = "https://api.github.com/users";
 
