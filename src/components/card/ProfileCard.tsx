@@ -1,9 +1,10 @@
-import AvatarComp from "@/app/_components/@ui/AvatarComp";
 import ProfileCardHeader from "./sections/ProfileCardHeader";
 import ProfileCardMain from "./sections/ProfileCardMain";
 import ProfileCardFooter from "./sections/ProfileCardFooter";
-import { IData } from "@/app/_interface/iData";
+
 import TypographyComp from "../@ui/TypographyComp";
+import { IData } from "@/interface/iData";
+import AvatarComp from "../@ui/AvatarComp";
 
 interface IProps extends IData {
   reff: any;
