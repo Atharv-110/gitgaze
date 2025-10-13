@@ -1,11 +1,11 @@
-import TypographyComp from "@/app/_components/@ui/TypographyComp";
+import TypographyComp from "@/components/@ui/TypographyComp";
 
 interface IProps {
   name: string;
   username: string;
   url: string;
   bio: string | null;
-  date: string
+  date: string;
 }
 
 const ProfileCardHeader: React.FC<IProps> = (props) => {

@@ -1,12 +1,12 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import InputComp from "@/app/_components/@ui/InputComp";
-import ProfileCard from "@/app/_components/card/ProfileCard";
-import TypographyComp from "@/app/_components/@ui/TypographyComp";
-import { searchUser } from "@/app/_services/api";
-import { IData } from "@/app/_interface/iData";
-import ButtonComp from "@/app/_components/@ui/ButtonComp";
 import html2canvas from "html2canvas";
+import ButtonComp from "../@ui/ButtonComp";
+import { IData } from "@/interface/iData";
+import { searchUser } from "@/services/api";
+import TypographyComp from "../@ui/TypographyComp";
+import InputComp from "../@ui/InputComp";
+import ProfileCard from "../card/ProfileCard";
 
 const MainSection: React.FC = () => {
   const [username, setUsername] = useState<string>("octocat");

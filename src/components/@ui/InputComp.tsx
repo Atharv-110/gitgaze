@@ -1,7 +1,7 @@
+import { MagnifyingGlassIcon } from "@/assets/icons/icons";
 import { FormEvent, useState } from "react";
-import ButtonComp from "@/app/_components/@ui/ButtonComp";
-import { MagnifyingGlassIcon } from "@/app/_assets/icons/icons";
 import { Dispatch, SetStateAction } from "react";
+import ButtonComp from "./ButtonComp";
 
 interface IProps {
   setUsername: Dispatch<SetStateAction<string>>;

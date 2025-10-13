@@ -1,10 +1,10 @@
 import {
-  LocationIcon,
-  TwitterIcon,
   BuildingIcon,
   LinkIcon,
-} from "@/app/_assets/icons/icons";
-import TypographyComp from "@/app/_components/@ui/TypographyComp";
+  LocationIcon,
+  TwitterIcon,
+} from "@/assets/icons/icons";
+import TypographyComp from "@/components/@ui/TypographyComp";
 
 interface IProps {
   location: string;
