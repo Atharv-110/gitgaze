@@ -9,10 +9,12 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.90.3",
     "axios": "^1.12.2",
     "downloadjs": "^1.4.7",
     "html2canvas": "^1.4.1",
     "next": "15.5.4",
+    "next-auth": "^4.24.11",
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },
