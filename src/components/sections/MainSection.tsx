@@ -7,12 +7,14 @@ import { searchUser } from "@/services/api";
 import TypographyComp from "../@ui/TypographyComp";
 import InputComp from "../@ui/InputComp";
 import ProfileCard from "../card/ProfileCard";
+import { useRouter } from "next/navigation";
 
 const MainSection: React.FC = () => {
   const [username, setUsername] = useState<string>("octocat");
   const [data, setData] = useState<IData | null>(null);
 
   const divRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const downloadDivAsImage = async () => {
     // Get the div element
@@ -62,6 +64,10 @@ const MainSection: React.FC = () => {
       <InputComp setUsername={setUsername} />
       {data && <ProfileCard reff={divRef} {...data} />}
       {data && <ButtonComp onClick={downloadDivAsImage} title="Download" />}
+      {/* <ButtonComp
+        onClick={() => router.push("/dashboard")}
+        title="Go to Dashboard"
+      /> */}
     </section>
   );
 };
