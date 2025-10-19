@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import MainProvider from "@/providers/main-provider";
+import { Montserrat } from "next/font/google";
 
 export const metadata: Metadata = {
   title: "GitGaze",
   description: "",
 };
+
+const montserrat = Montserrat({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -14,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={montserrat.className}>
         <MainProvider>{children}</MainProvider>
       </body>
     </html>

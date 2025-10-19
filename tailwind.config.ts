@@ -12,9 +12,7 @@ const config: Config = {
         "gray-blue": "#4B699B",
         "white-blue": "#61ABFF",
       },
-      fontFamily: {
-        spacemono: ["Space Mono", "monospace"],
-      },
+      fontFamily: {},
     },
   },
   plugins: [],
