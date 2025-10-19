@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "",
 };
 
-const montserrat = Montserrat({ subsets: ["latin"] });
+const montserrat = Montserrat({ subsets: ["latin"], display: "swap" });
 
 export default function RootLayout({
   children,
@@ -16,8 +16,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={montserrat.className}>
+    <html lang="en" className={montserrat.className}>
+      <body>
         <MainProvider>{children}</MainProvider>
       </body>
     </html>
