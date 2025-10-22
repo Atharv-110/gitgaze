@@ -13,20 +13,28 @@ const CustomInput = () => {
       router.push(`/u/${trimmedValue}`);
     }
   };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleClick();
+    }
+  };
   return (
-    <div className="max-w-xl w-full flex items-stretch gap-2 p-1 rounded-full border border-gray-300">
+    <div className="max-w-xl w-full flex items-stretch gap-2 p-1.5 rounded-full border border-gray-300">
       <Image
-        src="/gitgaze_logo.svg"
+        src="/gitgaze_logo.png"
         alt="GitGaze Logo"
-        width={56}
-        height={56}
-        className="h-full fill-black"
+        width={50}
+        height={50}
+        className="pl-1.5 w-14 object-contain"
       />
       <input
         value={value}
         onChange={(e) => setValue(e.target.value)}
         type="text"
-        className="w-full appearance-none outline-none text-3xl leading-none font-medium placeholder:font-normal placeholder:text-[22px]"
+        onKeyDown={handleKeyDown}
+        className="w-full appearance-none outline-none text-[28px] font-medium placeholder:font-normal placeholder:text-[22px]"
         placeholder="Enter github username..."
       />
       <Button
