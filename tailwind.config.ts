@@ -39,8 +39,8 @@ const config: Config = {
       },
       animation: {
         aurora: "aurora 8s ease-in-out infinite alternate",
-        upDown: "upDown 30s ease-in-out infinite",
-        downUp: "downUp 30s ease-in-out infinite",
+        upDown: "upDown 50s ease-in-out infinite",
+        downUp: "downUp 50s ease-in-out infinite",
       },
       backgroundSize: {
         aurora: "400% 400%",
