@@ -29,18 +29,49 @@ const config: Config = {
           },
         },
         upDown: {
-          "0%, 100%": { transform: "translateY(-20px)" },
-          "50%": { transform: "translateY(100dvh)" },
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(220px)" },
         },
         downUp: {
-          "0%, 100%": { transform: "translateY(20px)" },
-          "50%": { transform: "translateY(-100dvh)" },
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-220px)" },
+        },
+        "turn-to-large": {
+          "50%": {
+            height: "calc(var(--large-height) * 1.02)",
+            width: "calc(var(--large-width) * 1.02)",
+            borderRadius: "var(--large-radius)",
+            boxShadow:
+              "inset 0 0 0 1.5px rgb(255 255 255 / 0.1), 0 5px 15px rgb(0 0 0 / 0.6)",
+          },
+          "100%": {
+            height: "var(--large-height)",
+            width: "var(--large-width)",
+            borderRadius: "var(--large-radius)",
+            boxShadow:
+              "inset 0 0 0 1.5px rgb(255 255 255 / 0.1), 0 5px 15px rgb(0 0 0 / 0.6)",
+          },
+        },
+        "turn-to-small": {
+          "0%": {
+            height: "var(--large-height)",
+            width: "var(--large-width)",
+            borderRadius: "var(--large-radius)",
+            boxShadow:
+              "inset 0 0 0 1.5px rgb(255 255 255 / 0.1), 0 5px 15px rgb(0 0 0 / 0.6)",
+          },
+          "50%": {
+            height: "calc(var(--small-height) * 0.94)",
+            width: "calc(var(--small-width) * 0.94)",
+          },
         },
       },
       animation: {
         aurora: "aurora 8s ease-in-out infinite alternate",
         upDown: "upDown 50s ease-in-out infinite",
         downUp: "downUp 50s ease-in-out infinite",
+        "turn-to-large": "turn-to-large 1s ease-in-out forwards",
+        "turn-to-small": "turn-to-small 1s ease-in-out forwards",
       },
       backgroundSize: {
         aurora: "400% 400%",
