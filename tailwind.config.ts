@@ -42,14 +42,14 @@ const config: Config = {
             width: "calc(var(--large-width) * 1.02)",
             borderRadius: "var(--large-radius)",
             boxShadow:
-              "inset 0 0 0 1.5px rgb(255 255 255 / 0.1), 0 5px 15px rgb(0 0 0 / 0.6)",
+              "inset 0 0 0 1.5px rgb(255 255 255 / 0.1), 0 8px 30px rgb(0 0 0 / 0.6)",
           },
           "100%": {
             height: "var(--large-height)",
             width: "var(--large-width)",
             borderRadius: "var(--large-radius)",
             boxShadow:
-              "inset 0 0 0 1.5px rgb(255 255 255 / 0.1), 0 5px 15px rgb(0 0 0 / 0.6)",
+              "inset 0 0 0 1.5px rgb(255 255 255 / 0.1), 0 8px 30px rgb(0 0 0 / 0.6)",
           },
         },
         "turn-to-small": {
@@ -58,7 +58,7 @@ const config: Config = {
             width: "var(--large-width)",
             borderRadius: "var(--large-radius)",
             boxShadow:
-              "inset 0 0 0 1.5px rgb(255 255 255 / 0.1), 0 5px 15px rgb(0 0 0 / 0.6)",
+              "inset 0 0 0 1.5px rgb(255 255 255 / 0.1), 0 8px 30px rgb(0 0 0 / 0.6)",
           },
           "50%": {
             height: "calc(var(--small-height) * 0.94)",
@@ -70,8 +70,8 @@ const config: Config = {
         aurora: "aurora 8s ease-in-out infinite alternate",
         upDown: "upDown 50s ease-in-out infinite",
         downUp: "downUp 50s ease-in-out infinite",
-        "turn-to-large": "turn-to-large 1s ease-in-out forwards",
-        "turn-to-small": "turn-to-small 1s ease-in-out forwards",
+        "turn-to-large": "turn-to-large 0.6s ease-in-out forwards",
+        "turn-to-small": "turn-to-small 0.6s ease-in-out forwards",
       },
       backgroundSize: {
         aurora: "400% 400%",

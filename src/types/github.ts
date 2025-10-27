@@ -29,5 +29,12 @@ export interface GitHubUser {
   isDeveloperProgramMember: boolean;
   isHireable: boolean;
   twitterUsername: string | null;
+  company: string | null;
   websiteUrl: string | null;
+}
+
+export interface GhUserAchievement {
+  type: string | null;
+  tier: number | null;
+  image: string | null;
 }

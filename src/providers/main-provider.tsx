@@ -1,6 +1,7 @@
 "use client";
 
 import Background from "@/components/background";
+import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { usePathname } from "next/navigation";
@@ -17,8 +18,10 @@ export default function MainProvider({ children }: { children: ReactNode }) {
     <QueryClientProvider client={queryClient}>
       <Background />
       {username && <Header username={username} />}
-      <main className="flex-1 w-full flex items-center">{children}</main>
-      <footer>Footer</footer>
+      <main className="flex-1 w-full flex justify-start px-4 xl:px-16 overflow-hidden overflow-y-auto">
+        {children}
+      </main>
+      <Footer />
     </QueryClientProvider>
   );
 }
