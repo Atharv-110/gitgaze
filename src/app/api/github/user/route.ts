@@ -16,6 +16,7 @@ export async function POST(req: Request) {
         isDeveloperProgramMember
         twitterUsername
         websiteUrl
+        company
         status {
           message
           emoji

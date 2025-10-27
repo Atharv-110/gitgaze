@@ -12,3 +12,11 @@ export const axiosInstance = axios.create({
   baseURL,
   headers: { "Content-Type": "application/json" },
 });
+
+axiosInstance.interceptors.response.use(
+  (res) => res,
+  (error) => {
+    console.error("Axios error:", error.response?.data || error.message);
+    return Promise.reject(error);
+  }
+);

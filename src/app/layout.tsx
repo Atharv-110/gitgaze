@@ -4,7 +4,7 @@ import MainProvider from "@/providers/main-provider";
 import { Montserrat } from "next/font/google";
 
 export const metadata: Metadata = {
-  title: "GitGaze",
+  title: "GitGaze by Atharv Vani",
   description: "",
 };
 

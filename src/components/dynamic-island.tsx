@@ -63,7 +63,7 @@ const DynamicIsland = (props: DynamicIslandProps) => {
   onChangeRef.current = onChange;
 
   const onOpen = () => {
-    navigator.vibrate?.(200);
+    // navigator.vibrate?.(200);
     setIsSmall(false);
     onChangeRef.current?.(true);
   };
@@ -113,10 +113,10 @@ const DynamicIsland = (props: DynamicIslandProps) => {
           isSmall
             ? `${smallClassName} cursor-pointer select-none duration-300 hover:[--scale:1.05] ${
                 initialAnimation || hasMount.current
-                  ? "animate-[turn-to-small_0.5s_ease-out_both]"
+                  ? "animate-[turn-to-small_0.4s_ease-out_both]"
                   : ""
               }`
-            : `${largeClassName} animate-[turn-to-large_0.5s_ease-out_both]`
+            : `${largeClassName} animate-[turn-to-large_0.4s_ease-out_both]`
         }`}
         {...(isClickType
           ? { onClick: onOpen }
