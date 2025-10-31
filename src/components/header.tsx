@@ -8,7 +8,7 @@ const Header = ({ username }: { username: string | null }) => {
   return (
     <DynamicIsland
       className="flex justify-center items-center"
-      smallWidth={255}
+      smallWidth={235}
       smallHeight={35}
       largeHeight={80}
       largeRadius={12}
