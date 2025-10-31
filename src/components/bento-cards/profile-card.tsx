@@ -7,6 +7,7 @@ import Image from "next/image";
 import Card from "../card";
 import { ParseEmoji } from "../ui/parse-emoji";
 import Chip from "../ui/chip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 const ProfileCard = ({ username }: { username: string }) => {
   const [userData, setUserData] = React.useState<GitHubUser | null>(null);
@@ -23,14 +24,15 @@ const ProfileCard = ({ username }: { username: string }) => {
       {isLoading && <div>Loading...</div>}
       {error && <div>Error loading user</div>}
       {userData && (
-        <div className="space-y-2">
+        // <div className="h-full flex flex-col justify-between">
+        <>
           <div className="flex items-stretch gap-3">
             <Image
               src={userData.avatarUrl}
               alt={`${userData.name}'s avatar`}
               width={80}
               height={80}
-              className="h-full rounded-lg object-contain"
+              className="h-full rounded-xl object-contain"
             />{" "}
             <div className="space-y-1.5">
               <Chip>
@@ -39,7 +41,20 @@ const ProfileCard = ({ username }: { username: string }) => {
               </Chip>
               <h1 className="pl-px flex items-center justify-start font-semibold text-xl leading-none gap-1.5">
                 {userData.name}{" "}
-                <CpuChipIcon className="size-[22px] text-purple-500" />
+                {userData.isDeveloperProgramMember && (
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <CpuChipIcon className="size-[22px] text-purple-500" />
+                    </TooltipTrigger>
+                    <TooltipContent
+                      align="start"
+                      side="right"
+                      className="bg-black text-white rounded-lg"
+                    >
+                      <p>Developer Program Member</p>
+                    </TooltipContent>
+                  </Tooltip>
+                )}
               </h1>
               <p className="flex items-center justify-start text-sm gap-1 text-slate-600">
                 <span>
@@ -53,7 +68,8 @@ const ProfileCard = ({ username }: { username: string }) => {
           <div className="bg-slate-100 border border-slate-200 py-1 px-4 rounded-md">
             <p className="text-sm text-center">github.com/{userData.login}</p>
           </div>
-        </div>
+        </>
+        // </div>
       )}
     </Card>
   );
