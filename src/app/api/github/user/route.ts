@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { githubRequest } from "../utils/githubClient";
-import type { GitHubAPIResponse, GitHubUser } from "@/types/github";
+import type { GitHubAPIResponse } from "@/types/github/github.types";
+import { GitHubUser } from "@/types/github/user.types";
 
 export async function POST(req: Request) {
   const { login } = (await req.json()) as { login: string };
@@ -17,6 +18,12 @@ export async function POST(req: Request) {
         twitterUsername
         websiteUrl
         company
+        followers {
+            totalCount
+        }
+        following {
+            totalCount
+        }
         status {
           message
           emoji

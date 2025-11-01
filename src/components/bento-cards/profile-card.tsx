@@ -1,13 +1,17 @@
 "use client";
 import React from "react";
 import useGithubUser from "@/hooks/useGithubUser";
-import { GitHubUser } from "@/types/github";
-import { BuildingOffice2Icon, CpuChipIcon } from "@heroicons/react/24/outline";
+import {
+  BuildingOffice2Icon,
+  CpuChipIcon,
+  UsersIcon,
+} from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Card from "../card";
 import { ParseEmoji } from "../ui/parse-emoji";
 import Chip from "../ui/chip";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import { GitHubUser } from "@/types/github/user.types";
 
 const ProfileCard = ({ username }: { username: string }) => {
   const [userData, setUserData] = React.useState<GitHubUser | null>(null);
@@ -24,7 +28,6 @@ const ProfileCard = ({ username }: { username: string }) => {
       {isLoading && <div>Loading...</div>}
       {error && <div>Error loading user</div>}
       {userData && (
-        // <div className="h-full flex flex-col justify-between">
         <>
           <div className="flex items-stretch gap-3">
             <Image
@@ -39,29 +42,59 @@ const ProfileCard = ({ username }: { username: string }) => {
                 <ParseEmoji emoji={userData.status?.emojiHTML} size={15} />{" "}
                 <p>{userData.status?.message}</p>
               </Chip>
-              <h1 className="pl-px flex items-center justify-start font-semibold text-xl leading-none gap-1.5">
+              <h1 className="pl-px flex items-center justify-start font-semibold text-xl leading-none gap-x-1">
                 {userData.name}{" "}
                 {userData.isDeveloperProgramMember && (
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <CpuChipIcon className="size-[22px] text-purple-500" />
+                      <CpuChipIcon className="ml-0.5 size-[22px] text-violet-500" />
                     </TooltipTrigger>
                     <TooltipContent
                       align="start"
-                      side="right"
+                      side="bottom"
                       className="bg-black text-white rounded-lg"
                     >
                       <p>Developer Program Member</p>
                     </TooltipContent>
                   </Tooltip>
                 )}
+                {userData.company && (
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <BuildingOffice2Icon className="size-5 text-slate-600 hover:text-black" />
+                    </TooltipTrigger>
+                    <TooltipContent
+                      align="start"
+                      side="bottom"
+                      className="bg-black text-white rounded-lg"
+                    >
+                      <p>Works at {userData.company}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                )}
               </h1>
-              <p className="flex items-center justify-start text-sm gap-1 text-slate-600">
-                <span>
-                  <BuildingOffice2Icon className="size-4" />
-                </span>
-                {userData.company}
-              </p>
+              {userData.company && false ? (
+                <p className="flex items-center justify-start text-sm gap-1 text-slate-600">
+                  <span>
+                    <BuildingOffice2Icon className="size-4" />
+                  </span>
+                  {userData?.company}
+                </p>
+              ) : (
+                <p className="flex items-center justify-start text-sm gap-1 text-slate-600">
+                  <span>
+                    <UsersIcon className="size-4" />
+                  </span>
+                  <span className="font-medium">
+                    {userData.followers.totalCount}
+                  </span>{" "}
+                  followers <span className="font-bold">·</span>{" "}
+                  <span className="font-medium">
+                    {userData.following.totalCount}
+                  </span>{" "}
+                  following
+                </p>
+              )}
             </div>
           </div>
           <p className="text-xs text-slate-600">{userData.bio}</p>
@@ -69,7 +102,6 @@ const ProfileCard = ({ username }: { username: string }) => {
             <p className="text-sm text-center">github.com/{userData.login}</p>
           </div>
         </>
-        // </div>
       )}
     </Card>
   );

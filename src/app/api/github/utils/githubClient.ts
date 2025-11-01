@@ -1,4 +1,7 @@
-import { GitHubAPIResponse, GitHubGraphQLResponse } from "@/types/github";
+import {
+  GitHubAPIResponse,
+  GitHubGraphQLResponse,
+} from "@/types/github/github.types";
 import axios from "axios";
 
 export async function githubRequest<T>(

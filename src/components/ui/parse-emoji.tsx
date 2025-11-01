@@ -32,7 +32,7 @@ export const ParseEmoji = ({
     return (
       <span
         className="inline-block align-middle leading-none"
-        style={{ fontSize: size }}
+        // style={{ fontSize: size - 4 }}
       >
         {text}
       </span>

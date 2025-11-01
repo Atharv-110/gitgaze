@@ -1,6 +1,5 @@
 import BentoComponent from "@/components/bento-component";
-import { Metadata, ResolvingMetadata } from "next";
-import React from "react";
+import { Metadata } from "next";
 
 type Props = {
   params: Promise<{ username: string }>;

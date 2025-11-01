@@ -1,14 +1,3 @@
-export interface GitHubAPIResponse<T> {
-  success: boolean;
-  message: string;
-  data: T | null;
-}
-
-export interface GitHubGraphQLResponse<T> {
-  data?: T;
-  errors?: Array<{ message: string }>;
-}
-
 export interface GitHubUserStatus {
   message: string | null;
   emoji: string | null;
@@ -26,6 +15,8 @@ export interface GitHubUser {
   isViewer: boolean;
   isGitHubStar: boolean;
   isCampusExpert: boolean;
+  followers: { totalCount: number };
+  following: { totalCount: number };
   isDeveloperProgramMember: boolean;
   isHireable: boolean;
   twitterUsername: string | null;

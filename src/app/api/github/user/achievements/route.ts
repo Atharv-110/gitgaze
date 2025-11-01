@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
-import { GhUserAchievement } from "@/types/github";
+import { GhUserAchievement } from "@/types/github/user.types";
 
 export async function POST(req: Request) {
   try {

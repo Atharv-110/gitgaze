@@ -1,6 +1,5 @@
-import { fetchGhUserAchievements, fetchGitHubUser } from "@/lib/fetcher";
+import { fetchGhUserAchievements } from "@/lib/fetcher";
 import { useQuery } from "@tanstack/react-query";
-import useGithubUser from "./useGithubUser";
 
 const useGhUserAchievements = (username: string) => {
   return useQuery({

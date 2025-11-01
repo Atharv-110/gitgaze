@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, useLayoutEffect } from "react";
 import Card from "../card";
-import { GhUserAchievement } from "@/types/github";
 import useGhUserAchievements from "@/hooks/useGhAchievements";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import { GhUserAchievement } from "@/types/github/user.types";
 
 const AchievementsCard = ({ username }: { username: string }) => {
   const [achievements, setAchievements] = React.useState<
