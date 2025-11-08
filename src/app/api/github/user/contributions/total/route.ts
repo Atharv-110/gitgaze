@@ -8,12 +8,7 @@ import { getUserCreatedAtDate } from "../helper";
 import { GhUserTotalContributions } from "@/types/github/contributions.types";
 import { GitHubUser } from "@/types/github/user.types";
 
-const fetchOneWindow = async (
-  login: string,
-  from: string,
-  to: string
-): Promise<GhUserTotalContributions | null> => {
-  const query = `
+const TOTAL_CONTRIBUTIONS_QUERY = `
         query ($login: String!, $from: DateTime!, $to: DateTime!) {
             user(login: $login) {
                 contributionsCollection(from: $from, to: $to) {
@@ -22,9 +17,15 @@ const fetchOneWindow = async (
             }
         }
     `;
+
+const fetchOneWindow = async (
+  login: string,
+  from: string,
+  to: string
+): Promise<GhUserTotalContributions | null> => {
   const res = await githubRequest<{
     user: GhUserTotalContributions;
-  }>(query, { login, from, to });
+  }>(TOTAL_CONTRIBUTIONS_QUERY, { login, from, to });
 
   return res.data?.user ?? null;
 };
@@ -58,7 +59,12 @@ export async function POST(req: Request) {
     });
   }
 
-  return NextResponse.json({
+  return NextResponse.json<
+    GitHubAPIResponse<{
+      contributions: GhYearlyContribution[];
+      userCreatedAt: string;
+    }>
+  >({
     success: true,
     message: "OK",
     data: { contributions, userCreatedAt },

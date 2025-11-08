@@ -1,4 +1,4 @@
-import { GitHubAPIResponse } from "@/types/github/github.types";
+import { GhStreak, GitHubAPIResponse } from "@/types/github/github.types";
 import { NextResponse } from "next/server";
 import { githubRequest } from "../../../utils/githubClient";
 import {
@@ -6,6 +6,24 @@ import {
   GhContributionWeek,
   GhUserContributionCalendar,
 } from "@/types/github/contributions.types";
+import { fetchUserContributionCalendar } from "../helper";
+
+const CONTRIBUTION_CALENDAR_QUERY = `
+      query ($login: String!) {
+        user(login: $login) {
+          contributionsCollection {
+            contributionCalendar {
+              weeks {
+                contributionDays {
+                  date
+                  contributionCount
+                }
+              }
+            }
+          }
+        }
+      }
+    `;
 
 const calculateStreak = (weeks: GhContributionWeek[]) => {
   const days: GhContributionDay[] = weeks.flatMap((w) => w.contributionDays);
@@ -59,28 +77,15 @@ const calculateStreak = (weeks: GhContributionWeek[]) => {
 
 export async function POST(req: Request) {
   const { login } = (await req.json()) as { login: string };
-  const query = `
-    query ($login: String!) {
-      user(login: $login) {
-        contributionsCollection {
-          contributionCalendar {
-            weeks {
-              contributionDays {
-                date
-                contributionCount
-              }
-            }
-          }
-        }
-      }
-    }
-  `;
-  const result = await githubRequest<{
-    user: GhUserContributionCalendar;
-  }>(query, { login });
+  const result = await fetchUserContributionCalendar(
+    login,
+    CONTRIBUTION_CALENDAR_QUERY
+  );
 
   if (!result.success || !result.data?.user) {
-    return NextResponse.json<GitHubAPIResponse<GhUserContributionCalendar>>(
+    return NextResponse.json<
+      GitHubAPIResponse<{ currentStreak: GhStreak; longestStreak: GhStreak }>
+    >(
       { success: false, message: "User not found", data: null },
       { status: 404 }
     );
@@ -91,7 +96,9 @@ export async function POST(req: Request) {
 
   const totalStreaks = calculateStreak(weeks);
 
-  return NextResponse.json({
+  return NextResponse.json<
+    GitHubAPIResponse<{ currentStreak: GhStreak; longestStreak: GhStreak }>
+  >({
     success: true,
     message: "OK",
     data: totalStreaks,

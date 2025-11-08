@@ -27,13 +27,14 @@ const AchievementsCard = ({ username }: { username: string }) => {
     }
   }, [data]);
   useLayoutEffect(() => {
-    if (achievements && divRef.current) {
+    if (divRef.current && achievements) {
+      debugger;
       const size = divRef.current.getBoundingClientRect();
-      const widthPerItem = size.height;
-      setWidthPerItem(widthPerItem);
-      setSpaceX((dataLength * widthPerItem - size.width) / (dataLength - 1));
+      const widthPerItm = size.height;
+      setWidthPerItem(widthPerItm);
+      setSpaceX((dataLength * widthPerItm - size.width) / (dataLength - 1));
     }
-  }, [achievements, dataLength]);
+  }, [dataLength, achievements]);
 
   return (
     <Card cardTitle="Achievements" iconName="TrophyIcon">
@@ -53,8 +54,8 @@ const AchievementsCard = ({ username }: { username: string }) => {
                   alt={achievement.type || "achievement"}
                   style={{ marginLeft: i > 0 ? -spaceX : 0 }}
                   width={widthPerItem}
-                  height={widthPerItem}
-                  className="object-contain transition-all ease-in-out duration-200 group-hover:opacity-50 hover:!opacity-100 hover:z-10 hover:scale-110"
+                  height={100}
+                  className="h-full object-contain transition-all ease-in-out duration-200 group-hover:opacity-50 hover:!opacity-100 hover:z-10 hover:scale-110"
                 />
               </TooltipTrigger>
               <TooltipContent

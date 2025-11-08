@@ -19,3 +19,20 @@ export interface GhStreak {
   startDate: string;
   endDate: string;
 }
+
+export interface Language {
+  name: string;
+  totalSize: number;
+  color: string;
+}
+
+export interface ChartData {
+  labels: string[];
+  datasets: {
+    label: string;
+    data: number[];
+    backgroundColor: string[];
+    borderColor?: string[];
+    borderWidth?: number;
+  }[];
+}

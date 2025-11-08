@@ -1,5 +1,6 @@
 import { GitHubUser } from "@/types/github/user.types";
 import { githubRequest } from "../../utils/githubClient";
+import { GhUserContributionCalendar } from "@/types/github/contributions.types";
 
 export const getUserCreatedAtDate = async (
   login: string
@@ -20,4 +21,21 @@ export const getUserCreatedAtDate = async (
   }
 
   return result.data.user.createdAt;
+};
+
+export const fetchUserContributionCalendar = async (
+  login: string,
+  query: string,
+  from?: Date,
+  to?: Date
+) => {
+  if (from && to) {
+    return await githubRequest<{
+      user: GhUserContributionCalendar;
+    }>(query, { login, from: from.toISOString(), to: to.toISOString() });
+  } else {
+    return await githubRequest<{
+      user: GhUserContributionCalendar;
+    }>(query, { login });
+  }
 };

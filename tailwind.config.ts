@@ -30,11 +30,11 @@ const config: Config = {
         },
         upDown: {
           "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(220px)" },
+          "50%": { transform: "translateY(250px)" },
         },
         downUp: {
           "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-220px)" },
+          "50%": { transform: "translateY(-250px)" },
         },
         "turn-to-large": {
           "50%": {
@@ -68,8 +68,8 @@ const config: Config = {
       },
       animation: {
         aurora: "aurora 8s ease-in-out infinite alternate",
-        upDown: "upDown 50s ease-in-out infinite",
-        downUp: "downUp 50s ease-in-out infinite",
+        upDown: "upDown 40s ease-in-out infinite",
+        downUp: "downUp 40s ease-in-out infinite",
         "turn-to-large": "turn-to-large 0.6s ease-in-out forwards",
         "turn-to-small": "turn-to-small 0.6s ease-in-out forwards",
       },

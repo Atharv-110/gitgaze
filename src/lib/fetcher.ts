@@ -1,4 +1,4 @@
-import { GhYearlyContribution } from "@/types/github/github.types";
+import { GhYearlyContribution, Language } from "@/types/github/github.types";
 import { axiosInstance } from "./axios";
 
 export async function fetchGitHubUser(username: string) {
@@ -27,6 +27,15 @@ export async function fetchGhTotalStreaks(username: string): Promise<{
   longestStreak: { count: number; startDate: string; endDate: string };
 }> {
   const res = await axiosInstance.post("/user/contributions/streak", {
+    login: username,
+  });
+  return res.data.data;
+}
+
+export async function fetchGhTopLanguages(
+  username: string
+): Promise<Language[]> {
+  const res = await axiosInstance.post("/user/languages", {
     login: username,
   });
   return res.data.data;
