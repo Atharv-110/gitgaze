@@ -1,36 +1,39 @@
 "use client";
-import { Language } from "@/types/github/github.types";
 import React from "react";
-import SimpleAreaChart from "../area-chart";
+import useGhContributionGraph from "@/hooks/useGhContributionGraph";
+import { GhContributionDay } from "@/types/github/contributions.types";
+import CustomAreaChart from "../area-chart";
 import Card from "../card";
 
 const ContributionGraph = ({ username }: { username: string }) => {
   const chartDivRef = React.useRef<HTMLDivElement>(null);
   const [height, setHeight] = React.useState<number | null>(null);
-  const [data, setData] = React.useState<Language[] | null>(null);
-  //   const { data: fetchedData } = useGhTopLanguages(username);
+  const [data, setData] = React.useState<GhContributionDay[] | null>(null);
+  const [window, setWindow] = React.useState<number>(30);
+  const { data: fetchedData } = useGhContributionGraph(username, window);
 
-  //   React.useEffect(() => {
-  //     if (fetchedData) {
-  //       setData(fetchedData.slice(0, 5));
-  //     }
-  //   }, [fetchedData]);
+  React.useEffect(() => {
+    if (fetchedData) {
+      setData(fetchedData);
+      console.log(fetchedData);
+    }
+  }, [fetchedData]);
 
   React.useLayoutEffect(() => {
-    if (!chartDivRef.current) return;
+    if (!chartDivRef.current || !data) return;
     const parentHeight = chartDivRef.current?.clientHeight;
     if (parentHeight) setHeight(parentHeight);
-  }, []);
+  }, [data]);
 
   return (
-    <Card cardTitle="Top Languages" iconName="ChartPieIcon">
+    <Card cardTitle="Contribution Graph" iconName="PresentationChartLineIcon">
       <div
         ref={chartDivRef}
         className="flex-1 w-full h-full flex justify-center items-center"
       >
-        {height && (
+        {height && data && (
           <div className="w-full h-full" style={{ maxHeight: height }}>
-            <SimpleAreaChart />
+            <CustomAreaChart data={data} />
           </div>
         )}
       </div>

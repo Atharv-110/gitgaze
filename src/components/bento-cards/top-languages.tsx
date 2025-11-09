@@ -3,7 +3,7 @@ import useGhTopLanguages from "@/hooks/useGhTopLanguages";
 import { Language } from "@/types/github/github.types";
 import React from "react";
 import Card from "../card";
-import PieChartWithPaddingAngle from "../pie-chart";
+import CustomPieChart from "../pie-chart";
 
 const TopLanguages = ({ username }: { username: string }) => {
   const chartDivRef = React.useRef<HTMLDivElement>(null);
@@ -31,7 +31,7 @@ const TopLanguages = ({ username }: { username: string }) => {
       >
         {height && data && (
           <div className="w-full h-full" style={{ maxHeight: height }}>
-            <PieChartWithPaddingAngle data={data} />
+            <CustomPieChart data={data} />
           </div>
         )}
       </div>

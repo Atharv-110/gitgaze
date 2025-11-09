@@ -22,13 +22,12 @@ const AchievementsCard = ({ username }: { username: string }) => {
 
   useEffect(() => {
     if (data) {
-      setAchievements(data);
+      setAchievements(data.slice(0, 4));
       setDataLength(data.length);
     }
   }, [data]);
   useLayoutEffect(() => {
     if (divRef.current && achievements) {
-      debugger;
       const size = divRef.current.getBoundingClientRect();
       const widthPerItm = size.height;
       setWidthPerItem(widthPerItm);
@@ -74,7 +73,8 @@ const AchievementsCard = ({ username }: { username: string }) => {
           {dataLength - 4 > 0 && (
             <Link
               className="text-blue-500 hover:underline font-medium tracking-tight text-sm"
-              href="https://github.com/Atharv-110?tab=achievements"
+              href={`https://github.com/${username}?tab=achievements`}
+              target="_blank"
             >
               +{dataLength - 4} more
             </Link>
