@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import * as Icons from "@heroicons/react/24/solid";
+import * as Icons from "@heroicons/react/24/outline";
 import { ButtonHTMLAttributes } from "react";
 
 interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -34,7 +34,7 @@ export default function Button({
         className
       )}
     >
-      {label && <span className={cn(color, "font-medium")}>{label}</span>}
+      {label && <span className={cn("font-medium", color)}>{label}</span>}
       <IconComponent style={{ width: size, height: size }} className={color} />
     </button>
   );

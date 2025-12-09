@@ -1,6 +1,7 @@
 import { GhYearlyContribution, Language } from "@/types/github/github.types";
 import { axiosInstance } from "./axios";
 import { GhContributionDay } from "@/types/github/contributions.types";
+import { RepositoryWithLanguageNames } from "@/types/github/repositories.types";
 
 export async function fetchGitHubUser(username: string) {
   const res = await axiosInstance.post("/user", { login: username });
@@ -37,6 +38,15 @@ export async function fetchGhTopLanguages(
   username: string
 ): Promise<Language[]> {
   const res = await axiosInstance.post("/user/languages", {
+    login: username,
+  });
+  return res.data.data;
+}
+
+export async function fetchGhTopRepos(
+  username: string
+): Promise<RepositoryWithLanguageNames[]> {
+  const res = await axiosInstance.post("/user/repositories", {
     login: username,
   });
   return res.data.data;

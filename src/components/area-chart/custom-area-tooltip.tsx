@@ -26,7 +26,7 @@ const CustomAreaTooltip: React.FC<CustomTooltipProps> = ({
   const { value } = payload[0];
   const date = label ? new Date(label) : null;
   return (
-    <div className="bg-black/60 backdrop-blur-sm rounded-lg px-3 py-2 text-white border border-black">
+    <div className="bg-black/55 backdrop-blur-sm rounded-lg px-3 py-2 text-white border border-black">
       <p className="text-[10px] font-medium text-slate-100">
         {date?.toLocaleDateString("en-US", {
           month: "long",

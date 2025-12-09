@@ -5,6 +5,12 @@ export interface RepositoriesResponse {
   };
 }
 
+export interface PinnedRepoResponse {
+  pinnedItems: {
+    nodes: RepositoryNode[];
+  };
+}
+
 export interface PageInfo {
   hasNextPage: boolean;
   endCursor: string | null;
@@ -12,7 +18,16 @@ export interface PageInfo {
 
 export interface RepositoryNode {
   name: string;
+  description?: string | null;
+  url?: string;
+  homepageUrl?: string | null;
+  stargazerCount?: number;
   languages: Languages;
+}
+
+export interface RepositoryWithLanguageNames
+  extends Omit<RepositoryNode, "languages"> {
+  languageNames: string[];
 }
 
 export interface Languages {
@@ -20,11 +35,11 @@ export interface Languages {
 }
 
 export interface LanguageEdge {
-  size: number;
+  size?: number;
   node: LanguageNode;
 }
 
 export interface LanguageNode {
   name: string;
-  color: string | null;
+  color?: string | null;
 }

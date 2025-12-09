@@ -1,29 +1,48 @@
+import axios, { AxiosInstance } from "axios";
 import {
   GitHubAPIResponse,
   GitHubGraphQLResponse,
 } from "@/types/github/github.types";
-import axios from "axios";
+
+const githubAxios: AxiosInstance = axios.create({
+  baseURL: process.env.GITHUB_GRAPHQL!,
+  timeout: 10000,
+  headers: {
+    "Content-Type": "application/json",
+    "Accept-Encoding": "gzip, br",
+    Authorization: `Bearer ${process.env.GITHUB_SECRET_TOKEN}`,
+  },
+  decompress: true,
+  transitional: {
+    silentJSONParsing: true,
+  },
+});
+
+// Keep-alive agent for Node (reduces TLS handshake cost)
+import https from "https";
+
+githubAxios.defaults.httpsAgent = new https.Agent({
+  keepAlive: true,
+  maxSockets: 50,
+});
 
 export async function githubRequest<T>(
   query: string,
-  variables?: Record<string, string | number | boolean>
+  variables: Record<string, unknown> = {}
 ): Promise<GitHubAPIResponse<T>> {
   try {
-    const { data } = await axios.post<GitHubGraphQLResponse<T>>(
-      process.env.GITHUB_GRAPHQL!,
-      { query, variables },
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.GITHUB_SECRET_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await githubAxios.post<GitHubGraphQLResponse<T>>("", {
+      query,
+      variables,
+    });
 
-    if (data.errors && data.errors.length > 0) {
+    const { data } = response;
+
+    // Handle GraphQL-level errors
+    if (data.errors?.length) {
       return {
         success: false,
-        message: data.errors[0].message || "GitHub GraphQL error",
+        message: data.errors[0].message,
         data: null,
       };
     }
@@ -33,11 +52,24 @@ export async function githubRequest<T>(
       message: "OK",
       data: data.data ?? null,
     };
-  } catch (err) {
-    console.error(err);
+  } catch (error: unknown) {
+    console.error("GitHub API Error:", error);
+
+    // Timeout or network failure error
+    if (axios.isAxiosError(error)) {
+      return {
+        success: false,
+        message:
+          error.response?.data?.message ||
+          error.message ||
+          "Network error contacting GitHub",
+        data: null,
+      };
+    }
+
     return {
       success: false,
-      message: "Server error while fetching from GitHub",
+      message: "Unexpected server error",
       data: null,
     };
   }

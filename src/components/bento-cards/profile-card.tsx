@@ -97,7 +97,9 @@ const ProfileCard = ({ username }: { username: string }) => {
               )}
             </div>
           </div>
-          <p className="text-xs text-slate-600">{userData.bio}</p>
+          <p className="text-xs text-slate-600 leading-normal">
+            {userData.bio}
+          </p>
           <div className="bg-slate-100 border border-slate-200 py-1 px-4 rounded-md">
             <p className="text-sm text-center">github.com/{userData.login}</p>
           </div>

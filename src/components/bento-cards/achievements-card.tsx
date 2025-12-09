@@ -1,12 +1,11 @@
 "use client";
 import React, { useEffect, useLayoutEffect } from "react";
-import Card from "../card";
-import useGhUserAchievements from "@/hooks/useGhAchievements";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import useGhUserAchievements from "@/hooks/useGhAchievements";
 import { GhUserAchievement } from "@/types/github/user.types";
+import Card from "../card";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 const AchievementsCard = ({ username }: { username: string }) => {
   const [achievements, setAchievements] = React.useState<
@@ -21,18 +20,20 @@ const AchievementsCard = ({ username }: { username: string }) => {
   const { data, isLoading, error } = useGhUserAchievements(username);
 
   useEffect(() => {
-    if (data) {
-      setAchievements(data.slice(0, 4));
-      setDataLength(data.length);
-    }
+    if (!data) return;
+    const reversedData = [...data].reverse();
+    const slicedData =
+      data.length > 4 ? reversedData.slice(1, 5) : reversedData.slice(0, 4);
+    setAchievements(slicedData);
+    setDataLength(data.length);
   }, [data]);
   useLayoutEffect(() => {
-    if (divRef.current && achievements) {
-      const size = divRef.current.getBoundingClientRect();
-      const widthPerItm = size.height;
-      setWidthPerItem(widthPerItm);
-      setSpaceX((dataLength * widthPerItm - size.width) / (dataLength - 1));
+    if (!(divRef.current && achievements)) {
+      return;
     }
+    const size = divRef.current.getBoundingClientRect();
+    setWidthPerItem(size.height);
+    setSpaceX((dataLength * size.height - size.width) / (dataLength - 1));
   }, [dataLength, achievements]);
 
   return (
@@ -72,9 +73,10 @@ const AchievementsCard = ({ username }: { username: string }) => {
           ))}
           {dataLength - 4 > 0 && (
             <Link
-              className="text-blue-500 hover:underline font-medium tracking-tight text-sm"
+              className="text-blue-500 hover:underline font-medium tracking-tight text-xs"
               href={`https://github.com/${username}?tab=achievements`}
               target="_blank"
+              rel="noopener noreferrer"
             >
               +{dataLength - 4} more
             </Link>
