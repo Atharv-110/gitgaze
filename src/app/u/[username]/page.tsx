@@ -17,8 +17,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   };
 }
 
-const UserPage = async (props: Props) => {
-  const { username } = await props.params;
+const UserPage = async ({ params }: { params: { username: string } }) => {
+  const { username } = params;
   return (
     <section className="mt-16 xl:max-w-screen-xl w-full mx-auto">
       <BentoComponent username={username} />
