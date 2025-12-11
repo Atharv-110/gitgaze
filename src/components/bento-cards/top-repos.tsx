@@ -58,12 +58,13 @@ const TopRepos = ({ username }: { username: string }) => {
   const [data, setData] = React.useState<RepositoryWithLanguageNames[] | null>(
     null
   );
-  const { data: fetchedData, isLoading } = useGhTopRepos(username);
+  const { data: fetchedData, isLoading, error } = useGhTopRepos(username);
   React.useEffect(() => {
     if (fetchedData) {
       setData(fetchedData);
     }
   }, [fetchedData]);
+
   return (
     <Card cardTitle={"Top Repositories"} iconName={"BriefcaseIcon"}>
       <div className="space-y-2.5 flex-1 overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:hidden">

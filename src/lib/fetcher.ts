@@ -54,11 +54,13 @@ export async function fetchGhTopRepos(
 
 export async function fetchGhContributionGraph(
   username: string,
-  window: number = 30
+  window?: number,
+  year?: number
 ): Promise<GhContributionDay[]> {
   const res = await axiosInstance.post("/user/contributions", {
     login: username,
     window: window,
+    year: year,
   });
   return res.data.data;
 }

@@ -11,6 +11,7 @@ const nextConfig = {
         hostname: "github.githubassets.com",
       },
     ],
+    qualities: [75, 85, 90, 95, 100],
     dangerouslyAllowSVG: true,
   },
 };

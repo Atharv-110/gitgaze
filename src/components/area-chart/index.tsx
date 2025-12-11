@@ -42,12 +42,7 @@ const CustomAreaChart = ({ data }: { data: GhContributionDay[] }) => {
   }, [data]);
   return (
     <AreaChart
-      style={{
-        width: "100%",
-        maxWidth: "100%",
-        maxHeight: "100%",
-        aspectRatio: 1.618,
-      }}
+      className="w-full max-w-full max-h-full aspect-[1.618]"
       responsive
       data={data}
     >

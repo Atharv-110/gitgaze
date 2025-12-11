@@ -1,22 +1,8 @@
 import React from "react";
-import { TooltipProps } from "recharts";
-import {
-  NameType,
-  ValueType,
-} from "recharts/types/component/DefaultTooltipContent";
-import { ChartData } from "recharts/types/state/chartDataSlice";
+import { CustomTooltipProps } from "@/types/chart/chart.types";
+import { GhContributionDay } from "@/types/github/contributions.types";
 
-interface CustomTooltipProps extends TooltipProps<ValueType, NameType> {
-  label?: string;
-  payload?: {
-    value: number;
-    name: string;
-    color: string;
-    payload: ChartData;
-  }[];
-}
-
-const CustomAreaTooltip: React.FC<CustomTooltipProps> = ({
+const CustomAreaTooltip: React.FC<CustomTooltipProps<GhContributionDay[]>> = ({
   active,
   payload,
   label,
@@ -34,7 +20,7 @@ const CustomAreaTooltip: React.FC<CustomTooltipProps> = ({
           year: "numeric",
         })}
       </p>
-      <h3 className="font-semibold text-sm">Contributions: {value}</h3>
+      <p className="font-semibold text-xs">Contributions: {value}</p>
     </div>
   );
 };

@@ -1,12 +1,16 @@
 import { fetchGhContributionGraph } from "@/lib/fetcher";
 import { useQuery } from "@tanstack/react-query";
 
-const useGhContributionGraph = (username: string, window: number) => {
+const useGhContributionWindow = (
+  username: string,
+  window?: number,
+  year?: number
+) => {
   return useQuery({
-    queryKey: ["gh-user-contribution-graph", username, window],
-    queryFn: () => fetchGhContributionGraph(username, window),
+    queryKey: ["gh-user-contribution-graph", username, window, year],
+    queryFn: () => fetchGhContributionGraph(username, window, year),
     enabled: !!username,
   });
 };
 
-export default useGhContributionGraph;
+export default useGhContributionWindow;

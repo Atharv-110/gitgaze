@@ -1,4 +1,5 @@
 import AchievementsCard from "./bento-cards/achievements-card";
+import ActiveDays from "./bento-cards/active-days";
 import AllLanguages from "./bento-cards/all-languages";
 import ContributionGraph from "./bento-cards/contribution-graph";
 import ProfileCard from "./bento-cards/profile-card";
@@ -8,7 +9,7 @@ import TopRepos from "@/components/bento-cards/top-repos";
 
 const BentoComponent = ({ username }: { username: string }) => {
   return (
-    <div className="h-full grid grid-cols-6 grid-rows-10 gap-4 xl:gap-4">
+    <div className="h-full grid grid-cols-6 grid-rows-10 gap-4 xl:gap-5 pb-2">
       <div className="col-span-2 row-span-3">
         <ProfileCard username={username} />
       </div>
@@ -28,12 +29,10 @@ const BentoComponent = ({ username }: { username: string }) => {
         <ContributionGraph username={username} />
       </div>
       <div className="col-span-2 row-span-3 row-start-8">
-        <TopRepos username={username} />
+        <ActiveDays username={username} />
       </div>
       <div className="col-span-2 row-span-3 col-start-3 row-start-8">
-        <p className="flex justify-center items-center h-full text-xs text-center border rounded-xl bg-white">
-          Coming Soon..
-        </p>
+        <TopRepos username={username} />
       </div>
       <div className="col-span-2 row-span-3 col-start-5 row-start-8">
         <p className="flex justify-center items-center h-full text-xs text-center border rounded-xl bg-white">

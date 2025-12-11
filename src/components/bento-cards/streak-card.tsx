@@ -1,14 +1,11 @@
 "use client";
+import useGhTotalStreaks from "@/hooks/useGhTotalStreaks";
+import useGhYearlyContributions from "@/hooks/useGhYearlyContributions";
+import { GhStreak, GhYearlyContribution } from "@/types/github/github.types";
+import Image from "next/image";
 import React, { useEffect } from "react";
 import Card from "../card";
 import { AuroraText } from "../ui/aurora-text";
-import { Trigger } from "@radix-ui/react-tooltip";
-import { Tooltip, TooltipContent } from "../ui/tooltip";
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
-import { GhStreak, GhYearlyContribution } from "@/types/github/github.types";
-import useGhYearlyContributions from "@/hooks/useGhYearlyContributions";
-import useGhTotalStreaks from "@/hooks/useGhTotalStreaks";
 
 const getTotalContributions = (data: GhYearlyContribution[]) => {
   return data.reduce(
@@ -48,8 +45,6 @@ const StreakCard = ({ username }: { username: string }) => {
       setUserCreatedAt(new Date(yearlyContributionData.userCreatedAt));
     }
     if (totalStreaksData) {
-      console.log(totalStreaksData);
-
       if (totalStreaksData.currentStreak.count > 0) {
         setStreakData({
           streak: totalStreaksData.currentStreak,

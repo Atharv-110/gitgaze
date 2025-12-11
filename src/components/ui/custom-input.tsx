@@ -21,13 +21,13 @@ const CustomInput = () => {
     }
   };
   return (
-    <div className="max-w-xl w-full flex items-stretch gap-1 md:gap-2 p-1 rounded-full bg-white border border-gray-300">
+    <div className="max-w-xl w-full flex items-stretch gap-1 p-1 rounded-full bg-white border border-gray-300">
       <Image
         src="/gitgaze_logo.png"
         alt="GitGaze Logo"
         width={50}
         height={50}
-        className="pl-1.5 w-12 object-contain"
+        className="pl-1.5 w-11 mx-auto aspect-square object-contain"
       />
       <input
         value={value}

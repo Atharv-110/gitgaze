@@ -25,14 +25,28 @@ query ($login: String!, $from: DateTime!, $to: DateTime!) {
 `;
 
 export async function POST(req: Request) {
-  const { login, window } = (await req.json()) as {
+  const { login, window, year } = (await req.json()) as {
     login: string;
-    window: number;
+    window?: number;
+    year?: number;
   };
-  let endDate = new Date();
 
-  let startDate = new Date();
-  startDate.setDate(endDate.getDate() - window);
+  if (window && window > 365) {
+    return NextResponse.json<GitHubAPIResponse<GhUserContributionCalendar>>(
+      {
+        success: false,
+        message: "Window size cannot exceed 365 days",
+        data: null,
+      },
+      { status: 400 }
+    );
+  }
+
+  let endDate = year ? new Date(`${year}-12-31T23:59:59Z`) : new Date();
+  let startDate = year ? new Date(`${year}-01-01T00:00:00Z`) : new Date();
+  if (!year && window) {
+    startDate.setDate(endDate.getDate() - window);
+  }
 
   const result = await fetchUserContributionCalendar(
     login,

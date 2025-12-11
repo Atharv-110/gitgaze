@@ -1,7 +1,7 @@
 "use client";
-import React from "react";
-import useGhContributionGraph from "@/hooks/useGhContributionGraph";
+import useGhContributionWindow from "@/hooks/useGhContributionGraph";
 import { GhContributionDay } from "@/types/github/contributions.types";
+import React from "react";
 import CustomAreaChart from "../area-chart";
 import Card from "../card";
 
@@ -10,12 +10,11 @@ const ContributionGraph = ({ username }: { username: string }) => {
   const [height, setHeight] = React.useState<number | null>(null);
   const [data, setData] = React.useState<GhContributionDay[] | null>(null);
   const [window, setWindow] = React.useState<number>(30);
-  const { data: fetchedData } = useGhContributionGraph(username, window);
+  const { data: fetchedData } = useGhContributionWindow(username, window);
 
   React.useEffect(() => {
     if (fetchedData) {
       setData(fetchedData);
-      console.log(fetchedData);
     }
   }, [fetchedData]);
 

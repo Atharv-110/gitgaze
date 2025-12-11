@@ -1,22 +1,40 @@
-// lib/axios.ts
 import axios from "axios";
+import http from "http";
+import https from "https";
 
 const isServer = typeof window === "undefined";
-console.log(process.env.NEXT_PUBLIC_API_BASE_URL);
 
-const baseURL = `${
-  isServer ? process.env.NEXT_PUBLIC_API_BASE_URL : ""
-}/api/github`;
+const serverDefaultHeaders = isServer
+  ? {
+      "Content-Type": "application/json",
+      "Accept-Encoding": "gzip, deflate, br",
+    }
+  : {
+      "Content-Type": "application/json",
+    };
+
+const baseURL = isServer
+  ? process.env.APP_URL?.replace(/\/$/, "") + "/api/github"
+  : "/api/github";
 
 export const axiosInstance = axios.create({
   baseURL,
-  headers: { "Content-Type": "application/json" },
+  timeout: 8000,
+  headers: serverDefaultHeaders,
+  ...(isServer && {
+    httpAgent: new http.Agent({ keepAlive: true }),
+    httpsAgent: new https.Agent({ keepAlive: true }),
+  }),
 });
 
 axiosInstance.interceptors.response.use(
   (res) => res,
   (error) => {
-    console.error("Axios error:", error.response?.data || error.message);
+    console.error(
+      "Axios Error:",
+      error.response?.status,
+      error.response?.data?.message || error.message
+    );
     return Promise.reject(error);
   }
 );

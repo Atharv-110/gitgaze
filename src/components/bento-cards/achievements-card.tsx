@@ -55,6 +55,8 @@ const AchievementsCard = ({ username }: { username: string }) => {
                   style={{ marginLeft: i > 0 ? -spaceX : 0 }}
                   width={widthPerItem}
                   height={100}
+                  priority
+                  quality={95}
                   className="h-full object-contain transition-all ease-in-out duration-200 group-hover:opacity-50 hover:!opacity-100 hover:z-10 hover:scale-110"
                 />
               </TooltipTrigger>
