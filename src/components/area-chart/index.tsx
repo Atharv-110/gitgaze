@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { GhContributionDay } from "@/types/github/contributions.types";
 import hexToRgba from "hex-to-rgba";

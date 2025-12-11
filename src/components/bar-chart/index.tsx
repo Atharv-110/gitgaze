@@ -1,3 +1,5 @@
+"use client";
+import React from "react";
 import {
   CustomTooltipProps,
   DayWiseContributionProps,
@@ -72,4 +74,5 @@ const BarChartComponent = ({ data }: { data: DayWiseContributionProps[] }) => {
   );
 };
 
-export default BarChartComponent;
+export default React.memo(BarChartComponent);
+BarChartComponent.displayName = "BarChartComponent";

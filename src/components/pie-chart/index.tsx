@@ -1,10 +1,11 @@
+"use client";
+import React, { useCallback, useMemo } from "react";
 import { getTextWidth } from "@/lib/utils";
 import { Language } from "@/types/github/github.types";
 import hexToRgba from "hex-to-rgba";
 import { Cell, Pie, PieChart, PieLabelRenderProps, Tooltip } from "recharts";
 import LanguageIcon, { LanguageKey } from "../ui/language-icon";
 import CustomPieTooltip from "./custom-tooltip";
-import React, { useCallback, useMemo } from "react";
 
 const CustomPieChart = ({
   isAnimationActive = true,

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { CustomTooltipProps } from "@/types/chart/chart.types";
 import { GhContributionDay } from "@/types/github/contributions.types";
