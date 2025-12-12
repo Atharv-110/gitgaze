@@ -24,7 +24,7 @@ const ProfileCard = ({ username }: { username: string }) => {
   }, [data]);
 
   return (
-    <Card>
+    <Card className="">
       {isLoading && <div>Loading...</div>}
       {error && <div>Error loading user</div>}
       {userData && (

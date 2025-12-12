@@ -74,14 +74,7 @@ const CustomPieChart = ({
   );
 
   return (
-    <PieChart
-      style={{
-        width: "100%",
-        height: "100%",
-        aspectRatio: 1,
-      }}
-      responsive
-    >
+    <PieChart className="w-full max-w-full max-h-full aspect-square" responsive>
       <Pie
         data={processedData}
         innerRadius="45%"

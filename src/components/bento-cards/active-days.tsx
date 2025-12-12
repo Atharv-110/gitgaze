@@ -43,7 +43,7 @@ const prepareWeeklyChartData = (
 
 const ActiveDays = ({ username }: { username: string }) => {
   const chartDivRef = React.useRef<HTMLDivElement>(null);
-  const [height, setHeight] = React.useState<number | null>(null);
+  const [height, setHeight] = React.useState<number>(250);
   const [data, setData] = React.useState<DayWiseContributionProps[] | null>(
     null
   );

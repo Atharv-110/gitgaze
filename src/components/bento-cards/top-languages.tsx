@@ -7,7 +7,7 @@ import CustomPieChart from "../pie-chart";
 
 const TopLanguages = ({ username }: { username: string }) => {
   const chartDivRef = React.useRef<HTMLDivElement>(null);
-  const [height, setHeight] = React.useState<number | null>(null);
+  const [height, setHeight] = React.useState<number>(250);
   const [data, setData] = React.useState<Language[] | null>(null);
   const { data: fetchedData } = useGhTopLanguages(username);
 
@@ -24,7 +24,11 @@ const TopLanguages = ({ username }: { username: string }) => {
   }, [data]);
 
   return (
-    <Card cardTitle="Top Languages" iconName="ChartPieIcon">
+    <Card
+      cardTitle="Top Languages"
+      iconName="ChartPieIcon"
+      className="max-sm:max-h-[300px]"
+    >
       <div
         ref={chartDivRef}
         className="flex-1 w-full h-full flex justify-center items-center"

@@ -63,11 +63,11 @@ const BarChartComponent = ({ data }: { data: DayWiseContributionProps[] }) => {
         tickLine={false}
         tickFormatter={(value: string) => value.slice(0, 3)}
       />
-      <YAxis hide domain={[0, "dataMax"]} />
+      <YAxis hide domain={[0, (dataMax: number) => dataMax + 15]} />
       <Bar
         dataKey="contributionCount"
-        fill="#e87851"
-        radius={5}
+        fill="#4CB944"
+        radius={4}
         activeBar={{ enableBackground: 0 }}
       />
     </BarChart>

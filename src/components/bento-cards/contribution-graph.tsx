@@ -7,7 +7,7 @@ import Card from "../card";
 
 const ContributionGraph = ({ username }: { username: string }) => {
   const chartDivRef = React.useRef<HTMLDivElement>(null);
-  const [height, setHeight] = React.useState<number | null>(null);
+  const [height, setHeight] = React.useState<number | null>(250);
   const [data, setData] = React.useState<GhContributionDay[] | null>(null);
   const [window, setWindow] = React.useState<number>(30);
   const { data: fetchedData } = useGhContributionWindow(username, window);

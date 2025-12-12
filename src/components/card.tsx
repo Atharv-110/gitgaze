@@ -15,9 +15,9 @@ const Card = ({ children, className, cardTitle, iconName }: CardProps) => {
   return (
     <div
       className={cn(
-        "w-full h-full flex flex-col justify-between items-stretch isolate p-5 bg-white border border-slate-200 shadow-md rounded-xl",
+        "w-full h-full flex flex-col justify-between items-stretch isolate p-3 md:p-5 bg-white border border-slate-200 shadow-md rounded-xl max-sm:max-h-[260px]",
         className,
-        cardTitle ? "space-y-2" : ""
+        cardTitle ? "space-y-2" : "space-y-2"
       )}
     >
       {cardTitle && (

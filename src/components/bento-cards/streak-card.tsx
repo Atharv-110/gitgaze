@@ -65,7 +65,7 @@ const StreakCard = ({ username }: { username: string }) => {
           <div className="flex flex-col items-center gap-y-1.5">
             <AuroraText
               colors={["#ABE098", "#83D475", "#57C84D", "#2EB62C"]}
-              className="text-6xl leading-none font-extrabold"
+              className="text-5xl md:text-6xl leading-none font-extrabold"
             >
               {totalContributions}
             </AuroraText>
@@ -100,7 +100,7 @@ const StreakCard = ({ username }: { username: string }) => {
         </div>
         <div className="w-1/2 h-full flex flex-col justify-center items-center gap-y-1.5">
           <div
-            className={`p-1.5 size-24 aspect-square rounded-full ${
+            className={`p-1 md:p-1.5 size-20 md:size-24 aspect-square rounded-full ${
               streakData.type === "CURRENT"
                 ? "bg-gradient-to-b from-amber-300 via-amber-500  to-orange-600"
                 : "bg-amber-500"
@@ -113,11 +113,11 @@ const StreakCard = ({ username }: { username: string }) => {
                   alt="Fire Icon"
                   width={50}
                   height={50}
-                  className="size-8 absolute -top-5 bg-white"
+                  className="size-7 md:size-8 absolute -top-4 md:-top-5 bg-white"
                   unoptimized
                 />
               )}
-              <h2 className="text-3xl leading-none font-bold">
+              <h2 className="text-2xl md:text-3xl leading-none font-bold">
                 {streakData.streak.count}
               </h2>
               <p className="text-xs leading-none text-slate-600">Days</p>

@@ -9,7 +9,7 @@ import LanguageIcon, { LanguageKey } from "../ui/language-icon";
 const AllLanguages = ({ username }: { username: string }) => {
   const divRef = React.useRef<HTMLDivElement>(null);
   const [data, setData] = React.useState<Language[] | null>(null);
-  const [height, setHeight] = React.useState<number | null>(null);
+  const [height, setHeight] = React.useState<number>(250);
   const { data: fetchedData } = useGhTopLanguages(username);
   React.useEffect(() => {
     if (fetchedData) setData(fetchedData);
