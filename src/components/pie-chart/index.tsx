@@ -35,7 +35,6 @@ const CustomPieChart = ({
       cy,
       midAngle,
       outerRadius,
-
       name,
       fill,
       percent,
@@ -48,6 +47,7 @@ const CustomPieChart = ({
       const y = Number(cy) + radius * Math.sin(-midAngle! * RADIAN);
 
       const isRight = x > Number(cx);
+      const isTop = y < Number(cy);
       const { height: fontHeight, width: fontWidth } = getTextWidth(name!, 12);
       const adjustedFontWidth = fontWidth + 28;
       const adjustedFontHeight = fontHeight + 14;
@@ -55,17 +55,19 @@ const CustomPieChart = ({
       return (
         <foreignObject
           x={x - (isRight ? 0 : adjustedFontWidth)}
-          y={y - adjustedFontHeight / 2}
-          width={adjustedFontWidth}
-          height={adjustedFontHeight}
-          overflow={"visible"}
+          y={y - (adjustedFontHeight / 2 + (isTop ? 8 : 0))}
+          overflow="visible"
+          className="w-full h-full"
         >
           <div
-            className="w-full h-full flex items-center justify-center gap-1 text-xs leading-none p-1 bg-white rounded-md border-2 shadow-sm"
+            className="w-fit h-fit flex items-center justify-center gap-1 leading-none p-1 bg-white rounded-md border-2 shadow-sm"
             style={{ borderColor: fill }}
           >
-            <LanguageIcon name={name as LanguageKey} size={14} />
-            <span>{name}</span>
+            <LanguageIcon
+              name={name as LanguageKey}
+              className="size-3 md:size-[14px]"
+            />
+            <span className="text-[10px] md:text-xs">{name}</span>
           </div>
         </foreignObject>
       );
