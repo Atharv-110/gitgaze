@@ -57,7 +57,8 @@ const CustomPieChart = ({
           x={x - (isRight ? 0 : adjustedFontWidth)}
           y={y - (adjustedFontHeight / 2 + (isTop ? 8 : 0))}
           overflow="visible"
-          className="w-full h-full"
+          width={adjustedFontWidth}
+          height={adjustedFontHeight}
         >
           <div
             className="w-fit h-fit flex items-center justify-center gap-1 leading-none px-1 py-0.5 bg-white rounded-md border-2 shadow-sm"

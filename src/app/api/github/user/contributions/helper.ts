@@ -1,6 +1,9 @@
 import { GitHubUser } from "@/types/github/user.types";
 import { githubRequest } from "../../utils/githubClient";
-import { GhUserContributionCalendar } from "@/types/github/contributions.types";
+import {
+  GhUserContributionCalendar,
+  GhUserTotalContributions,
+} from "@/types/github/contributions.types";
 
 export const getUserCreatedAtDate = async (
   login: string
@@ -38,4 +41,17 @@ export const fetchUserContributionCalendar = async (
       user: GhUserContributionCalendar;
     }>(query, { login });
   }
+};
+
+export const fetchYearlyContributions = async (
+  query: string,
+  login: string,
+  from: string,
+  to: string
+): Promise<GhUserTotalContributions | null> => {
+  const res = await githubRequest<{
+    user: GhUserTotalContributions;
+  }>(query, { login, from, to });
+
+  return res.data?.user ?? null;
 };

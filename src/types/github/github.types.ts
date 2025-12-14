@@ -2,11 +2,13 @@ export interface GitHubAPIResponse<T> {
   success: boolean;
   message: string;
   data: T | null;
+  status: number;
 }
 
 export interface GitHubGraphQLResponse<T> {
   data?: T;
   errors?: Array<{ message: string }>;
+  status?: number;
 }
 
 export interface GhYearlyContribution {
@@ -26,13 +28,8 @@ export interface Language {
   color: string;
 }
 
-export interface ChartData {
-  labels: string[];
-  datasets: {
-    label: string;
-    data: number[];
-    backgroundColor: string[];
-    borderColor?: string[];
-    borderWidth?: number;
-  }[];
+export interface WrappedSlideProps {
+  title: string;
+  description: string;
+  stats: number | string | number[] | string[];
 }

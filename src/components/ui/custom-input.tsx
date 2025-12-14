@@ -27,7 +27,9 @@ const CustomInput = () => {
         alt="GitGaze Logo"
         width={50}
         height={50}
-        className="pl-1.5 w-11 mx-auto aspect-square object-contain"
+        className="pl-2 w-11 mx-auto aspect-square object-contain"
+        quality={75}
+        priority
       />
       <input
         value={value}

@@ -10,7 +10,7 @@ const AllLanguages = ({ username }: { username: string }) => {
   const divRef = React.useRef<HTMLDivElement>(null);
   const [data, setData] = React.useState<Language[] | null>(null);
   const [height, setHeight] = React.useState<number>(250);
-  const { data: fetchedData } = useGhTopLanguages(username);
+  const { data: fetchedData, isLoading } = useGhTopLanguages(username);
   React.useEffect(() => {
     if (fetchedData) setData(fetchedData);
   }, [fetchedData]);
@@ -21,7 +21,11 @@ const AllLanguages = ({ username }: { username: string }) => {
     if (parentHeight) setHeight(parentHeight);
   }, [data]);
   return (
-    <Card cardTitle="Tech Stack" iconName="ComputerDesktopIcon">
+    <Card
+      cardTitle="Tech Stack"
+      iconName="ComputerDesktopIcon"
+      isLoading={isLoading}
+    >
       <div ref={divRef} className="flex-1">
         {height && (
           <div

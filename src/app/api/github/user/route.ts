@@ -37,7 +37,12 @@ export async function POST(req: Request) {
 
   if (!result.success || !result.data?.user) {
     return NextResponse.json<GitHubAPIResponse<GitHubUser>>(
-      { success: false, message: "User not found", data: null },
+      {
+        success: false,
+        message: result.message,
+        data: null,
+        status: result.status,
+      },
       { status: 404 }
     );
   }
@@ -46,5 +51,6 @@ export async function POST(req: Request) {
     success: true,
     message: "OK",
     data: result.data.user,
+    status: result.status,
   });
 }

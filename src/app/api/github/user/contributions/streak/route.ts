@@ -1,11 +1,9 @@
-import { GhStreak, GitHubAPIResponse } from "@/types/github/github.types";
-import { NextResponse } from "next/server";
-import { githubRequest } from "../../../utils/githubClient";
 import {
   GhContributionDay,
   GhContributionWeek,
-  GhUserContributionCalendar,
 } from "@/types/github/contributions.types";
+import { GhStreak, GitHubAPIResponse } from "@/types/github/github.types";
+import { NextResponse } from "next/server";
 import { fetchUserContributionCalendar } from "../helper";
 
 const CONTRIBUTION_CALENDAR_QUERY = `
@@ -85,10 +83,12 @@ export async function POST(req: Request) {
   if (!result.success || !result.data?.user) {
     return NextResponse.json<
       GitHubAPIResponse<{ currentStreak: GhStreak; longestStreak: GhStreak }>
-    >(
-      { success: false, message: "User not found", data: null },
-      { status: 404 }
-    );
+    >({
+      success: false,
+      message: result.message,
+      data: null,
+      status: result.status,
+    });
   }
 
   const weeks =
@@ -100,7 +100,8 @@ export async function POST(req: Request) {
     GitHubAPIResponse<{ currentStreak: GhStreak; longestStreak: GhStreak }>
   >({
     success: true,
-    message: "OK",
+    message: result.message,
     data: totalStreaks,
+    status: result.status,
   });
 }

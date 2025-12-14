@@ -78,10 +78,10 @@ const GithubWrapped: React.FC<GithubWrappedProps> = ({ duration = 4000 }) => {
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-20 bg-slate-200 rounded-full h-1.5 bg-transparent">
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-20 bg-slate-100 rounded-full h-1.5">
         <motion.div
           key={current}
-          className="h-full bg-slate-800 overflow-hidden rounded-full"
+          className="h-full bg-slate-700 overflow-hidden rounded-full"
           initial={{ width: 0 }}
           animate={{ width: "100%" }}
           transition={{

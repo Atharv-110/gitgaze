@@ -40,10 +40,12 @@ export async function POST(req: Request) {
   }> = await githubRequest(PINNED_REPOS_QUERY, { login });
 
   if (!result.success || !result.data?.user) {
-    return NextResponse.json<GitHubAPIResponse<RepositoryNode[]>>(
-      { success: false, message: "User not found", data: null },
-      { status: 404 }
-    );
+    return NextResponse.json<GitHubAPIResponse<RepositoryNode[]>>({
+      success: false,
+      message: result.message,
+      data: null,
+      status: result.status,
+    });
   }
   let nodes: RepositoryWithLanguageNames[] = [];
   if (result.success && result.data?.user) {
@@ -64,5 +66,6 @@ export async function POST(req: Request) {
     success: true,
     message: "OK",
     data: nodes,
+    status: result.status,
   });
 }

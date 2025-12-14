@@ -32,14 +32,12 @@ export async function POST(req: Request) {
   };
 
   if (window && window > 365) {
-    return NextResponse.json<GitHubAPIResponse<GhUserContributionCalendar>>(
-      {
-        success: false,
-        message: "Window size cannot exceed 365 days",
-        data: null,
-      },
-      { status: 400 }
-    );
+    return NextResponse.json<GitHubAPIResponse<GhUserContributionCalendar>>({
+      success: false,
+      message: "Window size cannot exceed 365 days",
+      data: null,
+      status: 400,
+    });
   }
 
   let endDate = year ? new Date(`${year}-12-31T23:59:59Z`) : new Date();
@@ -56,10 +54,12 @@ export async function POST(req: Request) {
   );
 
   if (!result.success || !result.data?.user) {
-    return NextResponse.json<GitHubAPIResponse<GhUserContributionCalendar>>(
-      { success: false, message: "User not found", data: null },
-      { status: 404 }
-    );
+    return NextResponse.json<GitHubAPIResponse<GhUserContributionCalendar>>({
+      success: false,
+      message: result.message,
+      data: null,
+      status: result.status,
+    });
   }
   const flattenData =
     result.data.user.contributionsCollection.contributionCalendar.weeks.flatMap(
@@ -70,5 +70,6 @@ export async function POST(req: Request) {
     success: true,
     message: "OK",
     data: flattenData,
+    status: result.status,
   });
 }

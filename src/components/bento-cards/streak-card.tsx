@@ -59,7 +59,11 @@ const StreakCard = ({ username }: { username: string }) => {
     }
   }, [yearlyContributionData, totalStreaksData]);
   return (
-    <Card cardTitle="Contributions & Streak" iconName="FireIcon">
+    <Card
+      cardTitle="Contributions & Streak"
+      iconName="FireIcon"
+      isLoading={yearlyContributionLoading || totalStreaksLoading}
+    >
       <div className="flex-1 h-full flex items-center justify-center py-2">
         <div className="w-1/2 border-r border-slate-200 h-full flex justify-center items-center">
           <div className="flex flex-col items-center gap-y-1.5">

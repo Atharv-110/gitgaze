@@ -66,7 +66,11 @@ const TopRepos = ({ username }: { username: string }) => {
   }, [fetchedData]);
 
   return (
-    <Card cardTitle={"Top Repositories"} iconName={"BriefcaseIcon"}>
+    <Card
+      cardTitle={"Top Repositories"}
+      iconName={"BriefcaseIcon"}
+      isLoading={isLoading}
+    >
       <div className="space-y-2.5 flex-1 overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:hidden">
         {data?.map((repo) => (
           <RepositoryCard key={repo.name} repository={repo} />

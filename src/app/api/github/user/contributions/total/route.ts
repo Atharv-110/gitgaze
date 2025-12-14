@@ -2,11 +2,10 @@ import {
   GhYearlyContribution,
   GitHubAPIResponse,
 } from "@/types/github/github.types";
-import { NextResponse } from "next/server";
-import { githubRequest } from "../../../utils/githubClient";
-import { getUserCreatedAtDate } from "../helper";
-import { GhUserTotalContributions } from "@/types/github/contributions.types";
 import { GitHubUser } from "@/types/github/user.types";
+import { NextResponse } from "next/server";
+import { fetchYearlyContributions, getUserCreatedAtDate } from "../helper";
+import { stat } from "fs";
 
 const TOTAL_CONTRIBUTIONS_QUERY = `
         query ($login: String!, $from: DateTime!, $to: DateTime!) {
@@ -18,28 +17,18 @@ const TOTAL_CONTRIBUTIONS_QUERY = `
         }
     `;
 
-const fetchOneWindow = async (
-  login: string,
-  from: string,
-  to: string
-): Promise<GhUserTotalContributions | null> => {
-  const res = await githubRequest<{
-    user: GhUserTotalContributions;
-  }>(TOTAL_CONTRIBUTIONS_QUERY, { login, from, to });
-
-  return res.data?.user ?? null;
-};
-
 export async function POST(req: Request) {
   const { login } = (await req.json()) as { login: string };
 
   const userCreatedAt = await getUserCreatedAtDate(login);
 
   if (!userCreatedAt) {
-    return NextResponse.json<GitHubAPIResponse<Pick<GitHubUser, "createdAt">>>(
-      { success: false, message: "User not found", data: null },
-      { status: 404 }
-    );
+    return NextResponse.json<GitHubAPIResponse<Pick<GitHubUser, "createdAt">>>({
+      success: false,
+      message: "User not found",
+      data: null,
+      status: 404,
+    });
   }
   const contributions: GhYearlyContribution[] = [];
   let startYear = userCreatedAt
@@ -50,7 +39,12 @@ export async function POST(req: Request) {
   for (let year = startYear; year <= endYear; year++) {
     const from = `${year}-01-01T00:00:00Z`;
     const to = `${year}-12-31T23:59:59Z`;
-    const yearData = await fetchOneWindow(login, from, to);
+    const yearData = await fetchYearlyContributions(
+      TOTAL_CONTRIBUTIONS_QUERY,
+      login,
+      from,
+      to
+    );
 
     contributions.push({
       year,
@@ -68,5 +62,6 @@ export async function POST(req: Request) {
     success: true,
     message: "OK",
     data: { contributions, userCreatedAt },
+    status: 200,
   });
 }

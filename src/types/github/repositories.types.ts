@@ -20,6 +20,7 @@ export interface RepositoryNode {
   name: string;
   description?: string | null;
   url?: string;
+  updatedAt?: string;
   homepageUrl?: string | null;
   stargazerCount?: number;
   languages: Languages;

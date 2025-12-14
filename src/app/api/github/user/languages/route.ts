@@ -72,10 +72,12 @@ export async function POST(req: Request) {
     }> = await githubRequest(LANGUAGE_QUERY, { login, after: afterCursor });
 
     if (!result.success || !result.data?.user) {
-      return NextResponse.json<GitHubAPIResponse<Language[]>>(
-        { success: false, message: "User not found", data: null },
-        { status: 404 }
-      );
+      return NextResponse.json<GitHubAPIResponse<Language[]>>({
+        success: false,
+        message: result.message,
+        data: null,
+        status: result.status,
+      });
     }
 
     const repoData = result.data?.user?.repositories;
@@ -91,5 +93,6 @@ export async function POST(req: Request) {
     success: true,
     message: "Fetched repositories & languages successfully",
     data: aggregateLanguages(allRepos),
+    status: 200,
   });
 }

@@ -10,7 +10,10 @@ const ContributionGraph = ({ username }: { username: string }) => {
   const [height, setHeight] = React.useState<number | null>(250);
   const [data, setData] = React.useState<GhContributionDay[] | null>(null);
   const [window, setWindow] = React.useState<number>(30);
-  const { data: fetchedData } = useGhContributionWindow(username, window);
+  const { data: fetchedData, isLoading } = useGhContributionWindow(
+    username,
+    window
+  );
 
   React.useEffect(() => {
     if (fetchedData) {
@@ -25,7 +28,11 @@ const ContributionGraph = ({ username }: { username: string }) => {
   }, [data]);
 
   return (
-    <Card cardTitle="Contribution Graph" iconName="PresentationChartLineIcon">
+    <Card
+      cardTitle="Contribution Graph"
+      iconName="PresentationChartLineIcon"
+      isLoading={isLoading}
+    >
       <div
         ref={chartDivRef}
         className="flex-1 w-full h-full flex justify-center items-center"

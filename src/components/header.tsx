@@ -39,7 +39,9 @@ const Header = ({ username }: { username: string | null }) => {
               alt="GitGaze Logo"
               width={28}
               height={28}
-              className="h-full object-contain"
+              className="h-full aspect-square object-contain"
+              priority
+              quality={75}
             />
             <h1 className="text-lg font-extrabold tracking-wider whitespace-nowrap pointer-events-none">
               {username + "'s"} <AuroraText>GitGaze</AuroraText>

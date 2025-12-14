@@ -36,14 +36,14 @@ export async function githubRequest<T>(
       variables,
     });
 
-    const { data } = response;
+    const { data, status } = response;
 
-    // Handle GraphQL-level errors
     if (data.errors?.length) {
       return {
         success: false,
         message: data.errors[0].message,
         data: null,
+        status: status,
       };
     }
 
@@ -51,6 +51,7 @@ export async function githubRequest<T>(
       success: true,
       message: "OK",
       data: data.data ?? null,
+      status: status,
     };
   } catch (error: unknown) {
     console.error("GitHub API Error:", error);
@@ -64,6 +65,7 @@ export async function githubRequest<T>(
           error.message ||
           "Network error contacting GitHub",
         data: null,
+        status: error.response?.status || 500,
       };
     }
 
@@ -71,6 +73,7 @@ export async function githubRequest<T>(
       success: false,
       message: "Unexpected server error",
       data: null,
+      status: 500,
     };
   }
 }

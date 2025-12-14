@@ -64,7 +64,11 @@ const ActiveDays = ({ username }: { username: string }) => {
     if (parentHeight) setHeight(parentHeight);
   }, [data]);
   return (
-    <Card cardTitle="Day Wise Activity" iconName="CalendarDaysIcon">
+    <Card
+      cardTitle="Day Wise Activity"
+      iconName="CalendarDaysIcon"
+      isLoading={isLoading}
+    >
       <div
         ref={chartDivRef}
         className="flex-1 w-full h-full flex justify-center items-center"

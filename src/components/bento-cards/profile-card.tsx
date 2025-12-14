@@ -1,17 +1,17 @@
 "use client";
-import React from "react";
 import useGithubUser from "@/hooks/useGithubUser";
+import { GitHubUser } from "@/types/github/user.types";
 import {
   BuildingOffice2Icon,
   CpuChipIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import React from "react";
 import Card from "../card";
-import { ParseEmoji } from "../ui/parse-emoji";
 import Chip from "../ui/chip";
+import { ParseEmoji } from "../ui/parse-emoji";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { GitHubUser } from "@/types/github/user.types";
 
 const ProfileCard = ({ username }: { username: string }) => {
   const [userData, setUserData] = React.useState<GitHubUser | null>(null);
@@ -24,8 +24,7 @@ const ProfileCard = ({ username }: { username: string }) => {
   }, [data]);
 
   return (
-    <Card className="">
-      {isLoading && <div>Loading...</div>}
+    <Card isLoading={isLoading}>
       {error && <div>Error loading user</div>}
       {userData && (
         <>

@@ -1,6 +1,9 @@
 export interface GhUserTotalContributions {
   contributionsCollection: {
     totalCommitContributions: number;
+    totalPullRequestContributions?: number;
+    totalIssueContributions?: number;
+    totalRepositoryContributions?: number;
   };
 }
 

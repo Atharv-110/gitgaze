@@ -1,9 +1,9 @@
 "use client";
-import React, { useEffect, useLayoutEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import useGhUserAchievements from "@/hooks/useGhAchievements";
 import { GhUserAchievement } from "@/types/github/user.types";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useEffect, useLayoutEffect } from "react";
 import Card from "../card";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
@@ -37,8 +37,7 @@ const AchievementsCard = ({ username }: { username: string }) => {
   }, [dataLength, achievements]);
 
   return (
-    <Card cardTitle="Achievements" iconName="TrophyIcon">
-      {isLoading && <div>Loading...</div>}
+    <Card cardTitle="Achievements" iconName="TrophyIcon" isLoading={isLoading}>
       {error && <div>Error loading user</div>}
       {achievements && (
         <div

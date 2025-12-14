@@ -9,7 +9,7 @@ const TopLanguages = ({ username }: { username: string }) => {
   const chartDivRef = React.useRef<HTMLDivElement>(null);
   const [height, setHeight] = React.useState<number>(250);
   const [data, setData] = React.useState<Language[] | null>(null);
-  const { data: fetchedData } = useGhTopLanguages(username);
+  const { data: fetchedData, isLoading } = useGhTopLanguages(username);
 
   React.useEffect(() => {
     if (fetchedData) {
@@ -28,6 +28,7 @@ const TopLanguages = ({ username }: { username: string }) => {
       cardTitle="Top Languages"
       iconName="ChartPieIcon"
       className="max-sm:max-h-[300px]"
+      isLoading={isLoading}
     >
       <div
         ref={chartDivRef}
