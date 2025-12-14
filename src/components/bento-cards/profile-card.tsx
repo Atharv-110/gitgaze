@@ -41,7 +41,7 @@ const ProfileCard = ({ username }: { username: string }) => {
                 <ParseEmoji emoji={userData.status?.emojiHTML} size={15} />{" "}
                 <p>{userData.status?.message}</p>
               </Chip>
-              <h1 className="pl-px flex items-center justify-start font-semibold text-xl leading-none gap-x-1">
+              <h1 className="pl-px flex items-center justify-start font-semibold text-lg md:text-xl leading-none gap-x-1">
                 {userData.name}{" "}
                 {userData.isDeveloperProgramMember && (
                   <Tooltip>

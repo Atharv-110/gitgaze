@@ -56,7 +56,7 @@ const CustomAreaChart = ({ data }: { data: GhContributionDay[] }) => {
         label={{
           value: "Days",
           position: "center",
-          dy: 12,
+          dy: 10,
           fontSize: 12,
         }}
       />
@@ -72,7 +72,7 @@ const CustomAreaChart = ({ data }: { data: GhContributionDay[] }) => {
           value: "Contributions",
           angle: -90,
           position: "center",
-          dx: -12,
+          dx: -10,
           fontSize: 12,
         }}
       />

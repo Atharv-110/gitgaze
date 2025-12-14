@@ -28,48 +28,28 @@ const BarChartComponent = ({ data }: { data: DayWiseContributionProps[] }) => {
       className="w-full max-w-full max-h-full aspect-[1.618]"
       responsive
       data={data}
-      margin={{ bottom: -13 }}
+      margin={{ bottom: 10 }}
     >
       <Tooltip
         wrapperStyle={{ pointerEvents: "none" }}
         content={<CustomTooltip />}
         cursor={false}
       />
-      {/* <CartesianGrid strokeDasharray="4 4" /> */}
-      {/* <XAxis
-        dataKey="name"
-        tick={{ display: "none" }}
-        interval={0}
-        // tickFormatter={(value: string) => new Date(value).getDate().toString()}
-        label={{
-          value: "Days",
-          position: "center",
-          dy: 12,
-          fontSize: 12,
-        }}
-      />
-      <YAxis
-        tick={{ display: "none" }}
-        width="auto"
-        scale="linear"
-        type="number"
-        allowDecimals={false}
-      /> */}
       <XAxis
         dataKey="name"
-        tick={{ fontSize: 12, fontWeight: 500 }}
+        tick={{ fontSize: 11, fontWeight: 500 }}
         interval={0}
         axisLine={false}
         tickLine={false}
         tickFormatter={(value: string) => value.slice(0, 3)}
       />
-      <YAxis hide domain={[0, (dataMax: number) => dataMax + 60]} />
+      <YAxis hide domain={[0, (dataMax: number) => dataMax + 50]} />
       <Bar
         dataKey="contributionCount"
         fill="#4CB944"
         radius={4}
         activeBar={{ enableBackground: 0 }}
-        label={{ position: "top", fontSize: 10, fill: "#000000" }}
+        label={{ position: "top", fontSize: 9, fill: "#000000" }}
       />
     </BarChart>
   );
