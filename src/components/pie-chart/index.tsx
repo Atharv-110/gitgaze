@@ -60,14 +60,16 @@ const CustomPieChart = ({
           className="w-full h-full"
         >
           <div
-            className="w-fit h-fit flex items-center justify-center gap-1 leading-none p-1 bg-white rounded-md border-2 shadow-sm"
+            className="w-fit h-fit flex items-center justify-center gap-1 leading-none px-1 py-0.5 bg-white rounded-md border-2 shadow-sm"
             style={{ borderColor: fill }}
           >
             <LanguageIcon
               name={name as LanguageKey}
               className="size-3 md:size-[14px]"
             />
-            <span className="text-[10px] md:text-xs">{name}</span>
+            <span className="text-[10px] leading-normal md:text-xs">
+              {name}
+            </span>
           </div>
         </foreignObject>
       );
