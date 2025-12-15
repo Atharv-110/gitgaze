@@ -17,7 +17,7 @@ const BentoComponent = ({ username }: { username: string }) => {
       </div>
 
       {/* Top Languages */}
-      <div className="md:col-span-2 md:row-span-4 md:col-start-2 md:row-start-4">
+      <div className="md:col-span-2 md:row-span-4 md:col-start-5 md:row-start-4">
         <TopLanguages username={username} />
       </div>
 
@@ -37,7 +37,7 @@ const BentoComponent = ({ username }: { username: string }) => {
       </div>
 
       {/* Contribution Graph */}
-      <div className="md:col-span-3 md:row-span-4 md:col-start-4 md:row-start-4">
+      <div className="md:col-span-3 md:row-span-4 md:col-start-2 md:row-start-4">
         <ContributionGraph username={username} />
       </div>
 

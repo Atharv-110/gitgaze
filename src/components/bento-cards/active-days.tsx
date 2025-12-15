@@ -1,10 +1,10 @@
 "use client";
-import React from "react";
-import Card from "../card";
-import BarChartComponent from "../bar-chart";
 import useGhContributionWindow from "@/hooks/useGhContributionGraph";
 import { DayWiseContributionProps } from "@/types/chart/chart.types";
 import { GhContributionDay } from "@/types/github/contributions.types";
+import React from "react";
+import BarChartComponent from "../bar-chart";
+import Card from "../card";
 
 const prepareWeeklyChartData = (
   data: GhContributionDay[]

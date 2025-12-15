@@ -1,14 +1,13 @@
 "use client";
-import React from "react";
 import { GhContributionDay } from "@/types/github/contributions.types";
-import hexToRgba from "hex-to-rgba";
+import React from "react";
 import {
-  AreaChart,
   Area,
-  XAxis,
-  YAxis,
+  AreaChart,
   CartesianGrid,
   Tooltip,
+  XAxis,
+  YAxis,
 } from "recharts";
 import CustomAreaTooltip from "./custom-area-tooltip";
 
@@ -50,7 +49,6 @@ const CustomAreaChart = ({ data }: { data: GhContributionDay[] }) => {
       <CartesianGrid strokeDasharray="3 3" opacity={0.5} />
       <XAxis
         tick={{ fontSize: 9 }}
-        interval={0}
         tickFormatter={(value: string) => new Date(value).getDate().toString()}
         dataKey="date"
         label={{

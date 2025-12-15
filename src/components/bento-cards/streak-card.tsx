@@ -104,7 +104,7 @@ const StreakCard = ({ username }: { username: string }) => {
         </div>
         <div className="w-1/2 h-full flex flex-col justify-center items-center gap-y-1.5">
           <div
-            className={`p-1 md:p-1.5 size-20 md:size-24 aspect-square rounded-full ${
+            className={`p-1 md:p-1.5 size-[4.8rem] md:size-24 aspect-square rounded-full ${
               streakData.type === "CURRENT"
                 ? "bg-gradient-to-b from-amber-300 via-amber-500  to-orange-600"
                 : "bg-amber-500"
@@ -117,7 +117,7 @@ const StreakCard = ({ username }: { username: string }) => {
                   alt="Fire Icon"
                   width={50}
                   height={50}
-                  className="size-7 md:size-8 absolute -top-4 md:-top-5 bg-white"
+                  className="size-6 md:size-8 absolute -top-[15px] md:-top-5 bg-white"
                   unoptimized
                 />
               )}

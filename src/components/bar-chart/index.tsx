@@ -47,7 +47,7 @@ const BarChartComponent = ({ data }: { data: DayWiseContributionProps[] }) => {
       <Bar
         dataKey="contributionCount"
         fill="#4CB944"
-        radius={4}
+        radius={5}
         activeBar={{ enableBackground: 0 }}
         label={{ position: "top", fontSize: 9, fill: "#000000" }}
       />
