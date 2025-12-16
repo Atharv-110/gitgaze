@@ -70,6 +70,7 @@ const TopRepos = ({ username }: { username: string }) => {
       cardTitle={"Top Repositories"}
       iconName={"BriefcaseIcon"}
       isLoading={isLoading}
+      className="max-sm:max-h-[300px]"
     >
       <div className="space-y-2.5 flex-1 overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:hidden">
         {data?.map((repo) => (

@@ -26,7 +26,7 @@ type IconProps = React.SVGProps<SVGSVGElement> & {
 };
 
 const IconHTML: React.FC<IconProps> = ({ size = 12, ...props }) => (
-  <svg width={size} height={size} viewBox="0 0 128 128">
+  <svg width={size} height={size} viewBox="0 0 128 128" {...props}>
     <path
       fill="#E44D26"
       d="M19.037 113.876L9.032 1.661h109.936l-10.016 112.198-45.019 12.48z"
@@ -44,7 +44,7 @@ const IconHTML: React.FC<IconProps> = ({ size = 12, ...props }) => (
 );
 
 const IconJavaScript: React.FC<IconProps> = ({ size = 12, ...props }) => (
-  <svg width={size} height={size} viewBox="0 0 128 128">
+  <svg width={size} height={size} viewBox="0 0 128 128" {...props}>
     <path fill="#F0DB4F" d="M1.408 1.408h125.184v125.185H1.408z"></path>
     <path
       fill="#323330"
@@ -54,7 +54,7 @@ const IconJavaScript: React.FC<IconProps> = ({ size = 12, ...props }) => (
 );
 
 const IconCSS: React.FC<IconProps> = ({ size = 12, ...props }) => (
-  <svg width={size} height={size} viewBox="0 0 128 128">
+  <svg width={size} height={size} viewBox="0 0 128 128" {...props}>
     <path
       fill="#1572B6"
       d="M18.814 114.123L8.76 1.352h110.48l-10.064 112.754-45.243 12.543-45.119-12.526z"
@@ -87,7 +87,7 @@ const IconTypeScript: React.FC<IconProps> = ({
 
   ...props
 }) => (
-  <svg width={size} height={size} viewBox="0 0 128 128">
+  <svg width={size} height={size} viewBox="0 0 128 128" {...props}>
     <path fill="#fff" d="M22.67 47h99.67v73.67H22.67z"></path>
     <path
       data-name="original"
@@ -98,7 +98,7 @@ const IconTypeScript: React.FC<IconProps> = ({
 );
 
 const IconJava: React.FC<IconProps> = ({ size = 12, ...props }) => (
-  <svg width={size} height={size} viewBox="0 0 128 128">
+  <svg width={size} height={size} viewBox="0 0 128 128" {...props}>
     <path
       fill="#0074BD"
       d="M47.617 98.12s-4.767 2.774 3.397 3.71c9.892 1.13 14.947.968 25.845-1.092 0 0 2.871 1.795 6.873 3.351-24.439 10.47-55.308-.607-36.115-5.969zm-2.988-13.665s-5.348 3.959 2.823 4.805c10.567 1.091 18.91 1.18 33.354-1.6 0 0 1.993 2.025 5.132 3.131-29.542 8.64-62.446.68-41.309-6.336z"
@@ -123,7 +123,7 @@ const IconJava: React.FC<IconProps> = ({ size = 12, ...props }) => (
 );
 
 const IconSCSS: React.FC<IconProps> = ({ size = 12, ...props }) => (
-  <svg width={size} height={size} viewBox="0 0 128 128">
+  <svg width={size} height={size} viewBox="0 0 128 128" {...props}>
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -138,7 +138,7 @@ const IconJupyterNotebook: React.FC<IconProps> = ({
 
   ...props
 }) => (
-  <svg width={size} height={size} viewBox="0 0 128 128">
+  <svg width={size} height={size} viewBox="0 0 128 128" {...props}>
     <path
       d="M109.766 7.281a7.691 7.691 0 01-1.09 4.282 7.583 7.583 0 01-3.262 2.949 7.49 7.49 0 01-4.34.62 7.525 7.525 0 01-3.953-1.913A7.642 7.642 0 0195.137 5a7.606 7.606 0 012.629-3.531 7.509 7.509 0 014.136-1.461 7.51 7.51 0 015.422 1.996 7.627 7.627 0 012.438 5.273zm0 0"
       fill="#767677"
@@ -159,7 +159,7 @@ const IconJupyterNotebook: React.FC<IconProps> = ({
 );
 
 const IconVue: React.FC<IconProps> = ({ size = 12, ...props }) => (
-  <svg width={size} height={size} viewBox="0 0 128 128">
+  <svg width={size} height={size} viewBox="0 0 128 128" {...props}>
     <path
       d="M0 8.934l49.854.158 14.167 24.47 14.432-24.47L128 8.935l-63.834 110.14zm126.98.637l-24.36.02-38.476 66.053L25.691 9.592.942 9.572l63.211 107.89zm-25.149-.008l-22.745.168-15.053 24.647L49.216 9.73l-22.794-.168 37.731 64.476zm-75.834-.17l23.002.009m-23.002-.01l23.002.01"
       fill="none"
@@ -176,7 +176,7 @@ const IconVue: React.FC<IconProps> = ({ size = 12, ...props }) => (
 );
 
 const IconPython: React.FC<IconProps> = ({ size = 12, ...props }) => (
-  <svg width={size} height={size} viewBox="0 0 128 128">
+  <svg width={size} height={size} viewBox="0 0 128 128" {...props}>
     <linearGradient
       id="python-original-a"
       gradientUnits="userSpaceOnUse"
@@ -231,7 +231,7 @@ const IconPython: React.FC<IconProps> = ({ size = 12, ...props }) => (
 );
 
 const IconPHP: React.FC<IconProps> = ({ size = 12, ...props }) => (
-  <svg width={size} height={size} viewBox="0 0 128 128">
+  <svg width={size} height={size} viewBox="0 0 128 128" {...props}>
     <path
       fill="url(#a)"
       d="M0 64c0 18.593 28.654 33.667 64 33.667 35.346 0 64-15.074 64-33.667 0-18.593-28.655-33.667-64-33.667C28.654 30.333 0 45.407 0 64Z"
@@ -274,7 +274,7 @@ const IconPHP: React.FC<IconProps> = ({ size = 12, ...props }) => (
 );
 
 const IconCPP: React.FC<IconProps> = ({ size = 12, ...props }) => (
-  <svg width={size} height={size} viewBox="0 0 128 128">
+  <svg width={size} height={size} viewBox="0 0 128 128" {...props}>
     <path
       fill="#00599c"
       d="M118.766 95.82c.89-1.543 1.441-3.28 1.441-4.843V36.78c0-1.558-.55-3.297-1.441-4.84l-55.32 31.94Zm0 0"
@@ -295,7 +295,7 @@ const IconCPP: React.FC<IconProps> = ({ size = 12, ...props }) => (
 );
 
 const IconC: React.FC<IconProps> = ({ size = 12, ...props }) => (
-  <svg width={size} height={size} viewBox="0 0 128 128">
+  <svg width={size} height={size} viewBox="0 0 128 128" {...props}>
     <path
       fill="#a9bacd"
       d="M125 50c-4-32-24-50-62-50C29 0 3 24 3 64c0 39 24 64 64 64 32 0 55-19 58-50H87c-2 11-8 20-20 20-21 0-24-16-24-33 0-23 8-35 22-35 13 0 20 7 22 20z"
@@ -304,7 +304,7 @@ const IconC: React.FC<IconProps> = ({ size = 12, ...props }) => (
 );
 
 const IconMDX: React.FC<IconProps> = ({ size = 12, ...props }) => (
-  <svg width={size} height={size} viewBox="0 0 128 128">
+  <svg width={size} height={size} viewBox="0 0 128 128" {...props}>
     <path
       style={{
         lineHeight: "normal",
@@ -341,7 +341,7 @@ const IconMDX: React.FC<IconProps> = ({ size = 12, ...props }) => (
 );
 
 const IconPostgreSQL: React.FC<IconProps> = ({ size = 12, ...props }) => (
-  <svg width={size} height={size} viewBox="0 0 128 128">
+  <svg width={size} height={size} viewBox="0 0 128 128" {...props}>
     <path d="M93.809 92.112c.785-6.533.55-7.492 5.416-6.433l1.235.108c3.742.17 8.637-.602 11.513-1.938 6.191-2.873 9.861-7.668 3.758-6.409-13.924 2.873-14.881-1.842-14.881-1.842 14.703-21.815 20.849-49.508 15.543-56.287-14.47-18.489-39.517-9.746-39.936-9.52l-.134.025c-2.751-.571-5.83-.912-9.289-.968-6.301-.104-11.082 1.652-14.709 4.402 0 0-44.683-18.409-42.604 23.151.442 8.841 12.672 66.898 27.26 49.362 5.332-6.412 10.484-11.834 10.484-11.834 2.558 1.699 5.622 2.567 8.834 2.255l.249-.212c-.078.796-.044 1.575.099 2.497-3.757 4.199-2.653 4.936-10.166 6.482-7.602 1.566-3.136 4.355-.221 5.084 3.535.884 11.712 2.136 17.238-5.598l-.22.882c1.474 1.18 1.375 8.477 1.583 13.69.209 5.214.558 10.079 1.621 12.948 1.063 2.868 2.317 10.256 12.191 8.14 8.252-1.764 14.561-4.309 15.136-27.985"></path>
     <path d="M75.458 125.256c-4.367 0-7.211-1.689-8.938-3.32-2.607-2.46-3.641-5.629-4.259-7.522l-.267-.79c-1.244-3.358-1.666-8.193-1.916-14.419-.038-.935-.064-1.898-.093-2.919-.021-.747-.047-1.684-.085-2.664a18.8 18.8 0 01-4.962 1.568c-3.079.526-6.389.356-9.84-.507-2.435-.609-4.965-1.871-6.407-3.82-4.203 3.681-8.212 3.182-10.396 2.453-3.853-1.285-7.301-4.896-10.542-11.037-2.309-4.375-4.542-10.075-6.638-16.943-3.65-11.96-5.969-24.557-6.175-28.693C4.292 23.698 7.777 14.44 15.296 9.129 27.157.751 45.128 5.678 51.68 7.915c4.402-2.653 9.581-3.944 15.433-3.851 3.143.051 6.136.327 8.916.823 2.9-.912 8.628-2.221 15.185-2.139 12.081.144 22.092 4.852 28.949 13.615 4.894 6.252 2.474 19.381.597 26.651-2.642 10.226-7.271 21.102-12.957 30.57 1.544.011 3.781-.174 6.961-.831 6.274-1.295 8.109 2.069 8.607 3.575 1.995 6.042-6.677 10.608-9.382 11.864-3.466 1.609-9.117 2.589-13.745 2.377l-.202-.013-1.216-.107-.12 1.014-.116.991c-.311 11.999-2.025 19.598-5.552 24.619-3.697 5.264-8.835 6.739-13.361 7.709-1.544.33-2.947.474-4.219.474zm-9.19-43.671c2.819 2.256 3.066 6.501 3.287 14.434.028.99.054 1.927.089 2.802.106 2.65.355 8.855 1.327 11.477.137.371.26.747.39 1.146 1.083 3.316 1.626 4.979 6.309 3.978 3.931-.843 5.952-1.599 7.534-3.851 2.299-3.274 3.585-9.86 3.821-19.575l4.783.116-4.75-.57.14-1.186c.455-3.91.783-6.734 3.396-8.602 2.097-1.498 4.486-1.353 6.389-1.01-2.091-1.58-2.669-3.433-2.823-4.193l-.399-1.965 1.121-1.663c6.457-9.58 11.781-21.354 14.609-32.304 2.906-11.251 2.02-17.226 1.134-18.356-11.729-14.987-32.068-8.799-34.192-8.097l-.359.194-1.8.335-.922-.191c-2.542-.528-5.366-.82-8.393-.869-4.756-.08-8.593 1.044-11.739 3.431l-2.183 1.655-2.533-1.043c-5.412-2.213-21.308-6.662-29.696-.721-4.656 3.298-6.777 9.76-6.305 19.207.156 3.119 2.275 14.926 5.771 26.377 4.831 15.825 9.221 21.082 11.054 21.693.32.108 1.15-.537 1.976-1.529a270.708 270.708 0 0110.694-12.07l2.77-2.915 3.349 2.225c1.35.897 2.839 1.406 4.368 1.502l7.987-6.812-1.157 11.808c-.026.265-.039.626.065 1.296l.348 2.238-1.51 1.688-.174.196 4.388 2.025 1.836-2.301z"></path>
     <path
@@ -356,7 +356,7 @@ const IconPostgreSQL: React.FC<IconProps> = ({ size = 12, ...props }) => (
 );
 
 const IconRuby: React.FC<IconProps> = ({ size = 12, ...props }) => (
-  <svg width={size} height={size} viewBox="0 0 128 128">
+  <svg width={size} height={size} viewBox="0 0 128 128" {...props}>
     <linearGradient
       id="ruby-original-a"
       gradientUnits="userSpaceOnUse"
@@ -673,7 +673,7 @@ const IconRuby: React.FC<IconProps> = ({ size = 12, ...props }) => (
 );
 
 const IconDocker: React.FC<IconProps> = ({ size = 12, ...props }) => (
-  <svg width={size} height={size} viewBox="0 0 128 128">
+  <svg width={size} height={size} viewBox="0 0 128 128" {...props}>
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -762,7 +762,7 @@ const IconDocker: React.FC<IconProps> = ({ size = 12, ...props }) => (
 );
 
 const IconShell: React.FC<IconProps> = ({ size = 12, ...props }) => (
-  <svg width={size} height={size} viewBox="0 0 128 128">
+  <svg width={size} height={size} viewBox="0 0 128 128" {...props}>
     <path
       fill="#293138"
       d="M112.205 26.129 71.8 2.142A15.326 15.326 0 0 0 64.005 0c-2.688 0-5.386.717-7.796 2.152L15.795 26.14C10.976 28.999 8 34.289 8 40.018v47.975c0 5.729 2.967 11.019 7.796 13.878L56.2 125.858A15.193 15.193 0 0 0 63.995 128a15.32 15.32 0 0 0 7.796-2.142l40.414-23.987c4.819-2.86 7.796-8.16 7.796-13.878V40.007c0-5.718-2.967-11.019-7.796-13.878zm-31.29 74.907.063 3.448c0 .418-.267.889-.588 1.06l-2.046 1.178c-.321.16-.6-.032-.6-.45l-.032-3.394c-1.745.728-3.523.9-4.647.45-.214-.086-.31-.397-.225-.76l.739-3.117c.064-.246.193-.493.364-.643a.726.726 0 0 1 .193-.139c.117-.064.235-.075.332-.032 1.22.407 2.773.214 4.272-.535 1.907-.964 3.18-2.913 3.16-4.84-.022-1.757-.964-2.474-3.267-2.496-2.934.01-5.675-.567-5.718-4.894-.032-3.555 1.81-7.26 4.744-9.595l-.032-3.48c0-.428.257-.9.589-1.07l1.98-1.264c.322-.161.6.042.6.46l.033 3.48c1.456-.578 2.72-.738 3.865-.47.247.063.364.406.257.802l-.77 3.084a1.372 1.372 0 0 1-.354.622.825.825 0 0 1-.203.15c-.108.053-.204.064-.3.053-.525-.118-1.767-.385-3.727.6-2.056 1.038-2.773 2.827-2.763 4.155.022 1.585.825 2.066 3.63 2.11 3.738.063 5.344 1.691 5.387 5.45.053 3.684-1.917 7.657-4.937 10.077zm28.206-64.787L70.89 59.86c-4.765 2.784-8.278 5.911-8.288 11.662v47.107c0 3.437 1.392 5.665 3.523 6.318a12.81 12.81 0 0 1-2.12.204c-2.239 0-4.445-.61-6.383-1.757L17.219 99.408c-3.951-2.345-6.403-6.725-6.403-11.426V40.007c0-4.7 2.452-9.08 6.403-11.426L57.634 4.594a12.555 12.555 0 0 1 6.382-1.756c2.238 0 4.444.61 6.382 1.756l40.415 23.987c3.33 1.981 5.579 5.397 6.21 9.242-1.36-2.86-4.38-3.63-7.902-1.574z"
@@ -775,7 +775,7 @@ const IconShell: React.FC<IconProps> = ({ size = 12, ...props }) => (
 );
 
 const IconKotlin: React.FC<IconProps> = ({ size = 12, ...props }) => (
-  <svg width={size} height={size} viewBox="0 0 128 128">
+  <svg width={size} height={size} viewBox="0 0 128 128" {...props}>
     <defs>
       <linearGradient
         id="a"

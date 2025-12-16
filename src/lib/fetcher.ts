@@ -2,8 +2,9 @@ import { GhYearlyContribution, Language } from "@/types/github/github.types";
 import { axiosInstance } from "./axios";
 import { GhContributionDay } from "@/types/github/contributions.types";
 import { RepositoryWithLanguageNames } from "@/types/github/repositories.types";
+import { GitHubUser } from "@/types/github/user.types";
 
-export async function fetchGitHubUser(username: string) {
+export async function fetchGitHubUser(username: string): Promise<GitHubUser> {
   const res = await axiosInstance.post("/user", { login: username });
   return res.data.data;
 }
