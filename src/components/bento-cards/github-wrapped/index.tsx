@@ -51,7 +51,7 @@ const GithubWrapped: React.FC<GithubWrappedProps> = ({
       { id: 1, content: <UserSlide userData={userData} /> },
       { id: 2, content: <TotalContributionsSlide /> },
       { id: 3, content: <TopLanguageSlide /> },
-      // { id: 4, content: <HighlightPRSlide /> },
+      { id: 4, content: <ActiveMonthSlide /> },
     ],
     [userData]
   );
@@ -84,7 +84,6 @@ const GithubWrapped: React.FC<GithubWrappedProps> = ({
           transition={{ duration: 0.4, ease: "easeInOut" }}
         >
           {slides[current].content}
-          {/* <TopLanguageSlide /> */}
         </motion.div>
       </AnimatePresence>
 
