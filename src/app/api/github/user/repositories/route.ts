@@ -44,7 +44,6 @@ export async function POST(req: Request) {
       success: false,
       message: result.message,
       data: null,
-      status: result.status,
     });
   }
   let nodes: RepositoryWithLanguageNames[] = [];
@@ -66,6 +65,5 @@ export async function POST(req: Request) {
     success: true,
     message: "OK",
     data: nodes,
-    status: result.status,
   });
 }

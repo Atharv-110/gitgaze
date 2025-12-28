@@ -10,7 +10,7 @@ import TopRepos from "@/components/bento-cards/top-repos";
 
 const BentoComponent = ({ username }: { username: string }) => {
   return (
-    <div className="h-full grid gap-4 xl:gap-5 max-sm:pb-10 grid-cols-1 auto-rows-auto md:grid-cols-6 md:grid-rows-10">
+    <div className="h-full grid gap-4 grid-cols-1 auto-rows-auto md:grid-cols-6 md:grid-rows-10">
       {/* Profile Card */}
       <div className="md:col-span-2 md:row-span-3">
         <ProfileCard username={username} />

@@ -4,7 +4,10 @@ import {
 } from "@/types/github/github.types";
 import { GitHubUser } from "@/types/github/user.types";
 import { NextResponse } from "next/server";
-import { fetchYearlyContributions, getUserCreatedAtDate } from "../helper";
+import {
+  fetchYearlyContributions,
+  getUserCreatedAtDate,
+} from "../../../utils/helper";
 import { stat } from "fs";
 
 const TOTAL_CONTRIBUTIONS_QUERY = `
@@ -27,7 +30,6 @@ export async function POST(req: Request) {
       success: false,
       message: "User not found",
       data: null,
-      status: 404,
     });
   }
   const contributions: GhYearlyContribution[] = [];
@@ -62,6 +64,5 @@ export async function POST(req: Request) {
     success: true,
     message: "OK",
     data: { contributions, userCreatedAt },
-    status: 200,
   });
 }

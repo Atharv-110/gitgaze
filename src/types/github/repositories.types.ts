@@ -1,6 +1,6 @@
 export interface RepositoriesResponse {
   repositories: {
-    pageInfo: PageInfo;
+    pageInfo?: PageInfo;
     nodes: RepositoryNode[];
   };
 }

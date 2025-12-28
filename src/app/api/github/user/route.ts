@@ -41,7 +41,6 @@ export async function POST(req: Request) {
         success: false,
         message: result.message,
         data: null,
-        status: result.status,
       },
       { status: 404 }
     );
@@ -51,6 +50,5 @@ export async function POST(req: Request) {
     success: true,
     message: "OK",
     data: result.data.user,
-    status: result.status,
   });
 }

@@ -1,28 +1,10 @@
 import {
   GhContributionDay,
-  GhUserContributionCalendar,
+  GhUserContributionCollection,
 } from "@/types/github/contributions.types";
 import { GitHubAPIResponse } from "@/types/github/github.types";
 import { NextResponse } from "next/server";
-import { fetchUserContributionCalendar } from "./helper";
-
-const CONTRIBUTION_WINDOW_QUERY = `
-query ($login: String!, $from: DateTime!, $to: DateTime!) {
-  user(login: $login) {
-    contributionsCollection(from: $from, to: $to) {
-      contributionCalendar {
-        totalContributions
-        weeks {
-          contributionDays {
-            date
-            contributionCount
-          }
-        }
-      }
-    }
-  }
-}
-`;
+import { fetchUserContributionCalendar } from "../../utils/helper";
 
 export async function POST(req: Request) {
   const { login, window, year } = (await req.json()) as {
@@ -32,11 +14,10 @@ export async function POST(req: Request) {
   };
 
   if (window && window > 365) {
-    return NextResponse.json<GitHubAPIResponse<GhUserContributionCalendar>>({
+    return NextResponse.json<GitHubAPIResponse<GhUserContributionCollection>>({
       success: false,
       message: "Window size cannot exceed 365 days",
       data: null,
-      status: 400,
     });
   }
 
@@ -46,19 +27,13 @@ export async function POST(req: Request) {
     startDate.setDate(endDate.getDate() - window);
   }
 
-  const result = await fetchUserContributionCalendar(
-    login,
-    CONTRIBUTION_WINDOW_QUERY,
-    startDate,
-    endDate
-  );
+  const result = await fetchUserContributionCalendar(login, startDate, endDate);
 
   if (!result.success || !result.data?.user) {
-    return NextResponse.json<GitHubAPIResponse<GhUserContributionCalendar>>({
+    return NextResponse.json<GitHubAPIResponse<GhUserContributionCollection>>({
       success: false,
       message: result.message,
       data: null,
-      status: result.status,
     });
   }
   const flattenData =
@@ -70,6 +45,5 @@ export async function POST(req: Request) {
     success: true,
     message: "OK",
     data: flattenData,
-    status: result.status,
   });
 }

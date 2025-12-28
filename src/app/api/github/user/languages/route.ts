@@ -5,6 +5,7 @@ import {
 } from "@/types/github/repositories.types";
 import { NextResponse } from "next/server";
 import { githubRequest } from "../../utils/githubClient";
+import { aggregateLanguages } from "../../utils/helper";
 
 const SINGLE_WINDOW_SIZE = 100;
 const MAX_LANGUAGES_PER_REPO = 10;
@@ -34,33 +35,6 @@ const LANGUAGE_QUERY = `
         }
       `;
 
-const aggregateLanguages = (repos: RepositoryNode[]): Language[] => {
-  const map = new Map<string, { totalSize: number; color: string }>();
-
-  for (const repo of repos) {
-    for (const { size, node } of repo.languages.edges) {
-      const { name, color } = node;
-      const lang = map.get(name);
-      if (!lang) {
-        map.set(name, {
-          totalSize: size ?? 0,
-          color: color ?? "#000000",
-        });
-      } else {
-        lang.totalSize += size ?? 0;
-      }
-    }
-  }
-
-  return [...map.entries()]
-    .map(([name, info]) => ({
-      name,
-      totalSize: info.totalSize,
-      color: info.color,
-    }))
-    .sort((a, b) => b.totalSize - a.totalSize);
-};
-
 export async function POST(req: Request) {
   const { login } = (await req.json()) as { login: string };
   let hasNextPage = true;
@@ -76,7 +50,6 @@ export async function POST(req: Request) {
         success: false,
         message: result.message,
         data: null,
-        status: result.status,
       });
     }
 
@@ -84,15 +57,17 @@ export async function POST(req: Request) {
 
     // Push new repo nodes
     allRepos.push(...repoData.nodes);
-    hasNextPage = repoData.pageInfo.hasNextPage;
-    afterCursor = repoData.pageInfo.endCursor;
+    hasNextPage = repoData.pageInfo ? repoData.pageInfo.hasNextPage : false;
+    afterCursor = repoData.pageInfo ? repoData.pageInfo.endCursor : null;
 
     if (!afterCursor && hasNextPage) break;
   }
+
+  const aggregatedLanguages = aggregateLanguages(allRepos);
+
   return NextResponse.json<GitHubAPIResponse<Language[]>>({
     success: true,
     message: "Fetched repositories & languages successfully",
-    data: aggregateLanguages(allRepos),
-    status: 200,
+    data: aggregatedLanguages,
   });
 }

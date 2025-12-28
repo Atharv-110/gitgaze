@@ -46,13 +46,13 @@ const Header = ({ username }: { username: string | null }) => {
             <h1 className="text-lg font-extrabold tracking-wider whitespace-nowrap pointer-events-none">
               {username + "'s"} <AuroraText>GitGaze</AuroraText>
             </h1>
-            <Button
+            {/* <Button
               icon="ShareIcon"
               size={16}
               label="Share"
               color="text-black"
               className="bg-white rounded-full gap-1 p-0 px-4 py-1.5 text-sm"
-            />
+            /> */}
           </div>
         )
       }

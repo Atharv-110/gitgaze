@@ -9,7 +9,7 @@ export async function POST(req: Request) {
 
     const apiUrl = `https://github-achievements-api.wangrunlin.workers.dev/${login}`;
 
-    const { data, status } = await axios.get(apiUrl);
+    const { data } = await axios.get(apiUrl);
 
     if (!data) {
       return NextResponse.json<GitHubAPIResponse<GhUserAchievement[]>>(
@@ -17,7 +17,6 @@ export async function POST(req: Request) {
           success: false,
           message: "Failed to fetch achievements",
           data: null,
-          status: status,
         },
         { status: 500 }
       );
@@ -29,7 +28,6 @@ export async function POST(req: Request) {
       success: true,
       message: "OK",
       data: achievements,
-      status: status,
     });
   } catch (error: any) {
     console.error("Error fetching achievements:", error?.message);

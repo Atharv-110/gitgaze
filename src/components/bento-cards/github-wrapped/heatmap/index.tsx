@@ -1,6 +1,7 @@
 import React from "react";
 import HeatMap from "@uiw/react-heat-map";
 import { Montserrat } from "next/font/google";
+import { topMonthContributionProps } from "@/types/github/github.types";
 
 const value = [
   { date: "2025/11/11", count: 2 },
@@ -13,11 +14,19 @@ const value = [
 ];
 const montserrat = Montserrat({ subsets: ["latin"], display: "swap" });
 
-const HeatMapComponent = () => {
+const HeatMapComponent = ({
+  data,
+}: {
+  data: topMonthContributionProps["monthData"];
+}) => {
+  const heatMapData = data.map(({ date, contributionCount }) => ({
+    date: date.replace(/-/g, "/"),
+    count: contributionCount,
+  }));
   return (
     <HeatMap
       fontFamily={montserrat.style.fontFamily}
-      value={value}
+      value={heatMapData}
       width={100}
       height={100}
       alignmentBaseline="central"
@@ -28,8 +37,8 @@ const HeatMapComponent = () => {
         rx: 2.5,
       }}
       space={2.5}
-      startDate={new Date("2025/11/01")}
-      endDate={new Date("2025/11/30")}
+      startDate={new Date(heatMapData[0].date)}
+      endDate={new Date(heatMapData[heatMapData.length - 1].date)}
       panelColors={{
         0: "#EFF2F5",
         1: "#BFFFD1",

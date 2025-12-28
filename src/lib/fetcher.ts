@@ -1,8 +1,12 @@
-import { GhYearlyContribution, Language } from "@/types/github/github.types";
-import { axiosInstance } from "./axios";
 import { GhContributionDay } from "@/types/github/contributions.types";
+import {
+  GhYearlyContribution,
+  Language,
+  WrappedServerResponse,
+} from "@/types/github/github.types";
 import { RepositoryWithLanguageNames } from "@/types/github/repositories.types";
 import { GitHubUser } from "@/types/github/user.types";
+import { axiosInstance } from "./axios";
 
 export async function fetchGitHubUser(username: string): Promise<GitHubUser> {
   const res = await axiosInstance.post("/user", { login: username });
@@ -62,6 +66,15 @@ export async function fetchGhContributionGraph(
     login: username,
     window: window,
     year: year,
+  });
+  return res.data.data;
+}
+
+export async function fetchGhWrappedData(
+  username: string
+): Promise<WrappedServerResponse> {
+  const res = await axiosInstance.post("/user/wrapped", {
+    login: username,
   });
   return res.data.data;
 }

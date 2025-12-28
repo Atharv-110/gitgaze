@@ -4,24 +4,7 @@ import {
 } from "@/types/github/contributions.types";
 import { GhStreak, GitHubAPIResponse } from "@/types/github/github.types";
 import { NextResponse } from "next/server";
-import { fetchUserContributionCalendar } from "../helper";
-
-const CONTRIBUTION_CALENDAR_QUERY = `
-      query ($login: String!) {
-        user(login: $login) {
-          contributionsCollection {
-            contributionCalendar {
-              weeks {
-                contributionDays {
-                  date
-                  contributionCount
-                }
-              }
-            }
-          }
-        }
-      }
-    `;
+import { fetchUserContributionCalendar } from "../../../utils/helper";
 
 const calculateStreak = (weeks: GhContributionWeek[]) => {
   const days: GhContributionDay[] = weeks.flatMap((w) => w.contributionDays);
@@ -75,10 +58,7 @@ const calculateStreak = (weeks: GhContributionWeek[]) => {
 
 export async function POST(req: Request) {
   const { login } = (await req.json()) as { login: string };
-  const result = await fetchUserContributionCalendar(
-    login,
-    CONTRIBUTION_CALENDAR_QUERY
-  );
+  const result = await fetchUserContributionCalendar(login);
 
   if (!result.success || !result.data?.user) {
     return NextResponse.json<
@@ -87,7 +67,6 @@ export async function POST(req: Request) {
       success: false,
       message: result.message,
       data: null,
-      status: result.status,
     });
   }
 
@@ -102,6 +81,5 @@ export async function POST(req: Request) {
     success: true,
     message: result.message,
     data: totalStreaks,
-    status: result.status,
   });
 }

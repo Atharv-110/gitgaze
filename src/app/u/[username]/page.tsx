@@ -25,7 +25,7 @@ const UserPage = async ({ params }: Props) => {
   const { username } = await params;
 
   return (
-    <section className="mt-16 xl:max-w-screen-xl w-full mx-auto">
+    <section className="mt-16 xl:max-w-screen-xl w-full mx-auto py-2">
       <BentoComponent username={username} />
     </section>
   );

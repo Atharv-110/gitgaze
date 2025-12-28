@@ -1,8 +1,9 @@
+import { GhContributionDay } from "./contributions.types";
+
 export interface GitHubAPIResponse<T> {
   success: boolean;
   message: string;
   data: T | null;
-  status: number;
 }
 
 export interface GitHubGraphQLResponse<T> {
@@ -28,8 +29,30 @@ export interface Language {
   color: string;
 }
 
+export interface topMonthContributionProps {
+  monthIndex: number;
+  monthName: string;
+  monthData: GhContributionDay[];
+}
+
+export interface CommitsSlideData {
+  prev: number;
+  current: number;
+}
+
+export type WrappedSlideData =
+  | CommitsSlideData
+  | Language[]
+  | topMonthContributionProps;
+
 export interface WrappedSlideProps {
+  slot: number;
   title: string;
   description: string;
-  stats: number | string | number[] | string[];
+  data: WrappedSlideData;
+}
+
+export interface WrappedServerResponse {
+  wrappedYear: number;
+  slides: WrappedSlideProps[];
 }
