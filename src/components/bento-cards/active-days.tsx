@@ -49,8 +49,8 @@ const ActiveDays = ({ username }: { username: string }) => {
   );
   const { isLoading, data: fetchedData } = useGhContributionWindow(
     username,
-    undefined,
-    new Date().getFullYear()
+    365,
+    undefined
   );
   React.useEffect(() => {
     if (fetchedData) {

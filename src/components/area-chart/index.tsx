@@ -46,7 +46,7 @@ const CustomAreaChart = ({ data }: { data: GhContributionDay[] }) => {
       responsive
       data={data}
     >
-      <CartesianGrid strokeDasharray="3 3" opacity={0.5} />
+      <CartesianGrid strokeDasharray="3 3" opacity={0.4} />
       <XAxis
         tick={{ fontSize: 9 }}
         tickFormatter={(value: string) => new Date(value).getDate().toString()}
@@ -54,12 +54,13 @@ const CustomAreaChart = ({ data }: { data: GhContributionDay[] }) => {
         label={{
           value: "Days",
           position: "center",
-          dy: 10,
-          fontSize: 12,
+          dy: 8,
+          fontSize: 11,
         }}
       />
       <YAxis
         tick={{ fontSize: 9 }}
+        tickLine={false}
         width="auto"
         domain={[0, ticks[ticks.length - 1]]}
         ticks={ticks}
@@ -70,8 +71,8 @@ const CustomAreaChart = ({ data }: { data: GhContributionDay[] }) => {
           value: "Contributions",
           angle: -90,
           position: "center",
-          dx: -10,
-          fontSize: 12,
+          dx: -8,
+          fontSize: 11,
         }}
       />
       <Tooltip content={<CustomAreaTooltip />} />
