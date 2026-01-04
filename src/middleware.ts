@@ -8,15 +8,14 @@ export async function middleware(req: NextRequest) {
 
   const username = match[1];
 
-  try {
-    await fetch(`${req.nextUrl.origin}/api/track-user`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username }),
-    });
-  } catch (err) {
-    console.error("⚠️ GitGaze User Tracking Middleware Failed:", err);
-  }
+  fetch(`${req.nextUrl.origin}/api/track-user`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username }),
+  }).catch((err) => {
+    console.error("⚠️ GitGaze User Tracking Failed:", err);
+  });
+
   return NextResponse.next();
 }
 
