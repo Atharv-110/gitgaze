@@ -10,12 +10,12 @@ import {
   GhContributionDay,
   GhUserContributionCollection,
 } from "@/types/github/contributions.types";
-import { githubRequest } from "../../utils/githubClient";
+import { githubRequest } from "../../../../../lib/githubClient";
 import { RepositoriesResponse } from "@/types/github/repositories.types";
 import {
   aggregateLanguages,
   fetchYearlyContributions,
-} from "../../utils/helper";
+} from "../../../../../lib/server.helpers";
 
 type WrappedQueryResponse = GhUserContributionCollection & RepositoriesResponse;
 

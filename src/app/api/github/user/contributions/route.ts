@@ -4,7 +4,7 @@ import {
 } from "@/types/github/contributions.types";
 import { GitHubAPIResponse } from "@/types/github/github.types";
 import { NextResponse } from "next/server";
-import { fetchUserContributionCalendar } from "../../utils/helper";
+import { fetchUserContributionCalendar } from "../../../../../lib/server.helpers";
 
 export async function POST(req: Request) {
   const { login, window, year } = (await req.json()) as {

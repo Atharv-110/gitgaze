@@ -23,6 +23,7 @@
     "framer-motion": "^12.23.26",
     "hex-to-rgba": "^2.0.1",
     "html2canvas": "^1.4.1",
+    "mongoose": "^9.1.1",
     "motion": "^12.23.24",
     "next": "^15.5.9",
     "react": "19.2.0",

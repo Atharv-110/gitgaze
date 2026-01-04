@@ -4,8 +4,8 @@ import {
   RepositoryNode,
 } from "@/types/github/repositories.types";
 import { NextResponse } from "next/server";
-import { githubRequest } from "../../utils/githubClient";
-import { aggregateLanguages } from "../../utils/helper";
+import { githubRequest } from "../../../../../lib/githubClient";
+import { aggregateLanguages } from "../../../../../lib/server.helpers";
 
 const SINGLE_WINDOW_SIZE = 100;
 const MAX_LANGUAGES_PER_REPO = 10;

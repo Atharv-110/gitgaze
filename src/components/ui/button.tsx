@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/client.helpers";
 import * as Icons from "@heroicons/react/24/outline";
 import { ButtonHTMLAttributes } from "react";
 

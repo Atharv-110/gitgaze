@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { githubRequest } from "../utils/githubClient";
+import { githubRequest } from "../../../../lib/githubClient";
 import type { GitHubAPIResponse } from "@/types/github/github.types";
 import { GitHubUser } from "@/types/github/user.types";
 

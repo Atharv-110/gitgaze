@@ -14,8 +14,8 @@ const serverDefaultHeaders = isServer
     };
 
 const baseURL = isServer
-  ? process.env.APP_URL?.replace(/\/$/, "") + "/api/github"
-  : "/api/github";
+  ? process.env.APP_URL?.replace(/\/$/, "") + "/api"
+  : "/api";
 
 export const axiosInstance = axios.create({
   baseURL,

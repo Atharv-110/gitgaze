@@ -15,7 +15,7 @@ import {
   topMonthContributionProps,
   WrappedSlideProps,
 } from "@/types/github/github.types";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/client.helpers";
 
 const UserSlideComponent = ({
   userData,

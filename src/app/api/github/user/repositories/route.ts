@@ -5,7 +5,7 @@ import {
   RepositoryWithLanguageNames,
 } from "@/types/github/repositories.types";
 import { NextResponse } from "next/server";
-import { githubRequest } from "../../utils/githubClient";
+import { githubRequest } from "../../../../../lib/githubClient";
 
 const PINNED_REPOS_QUERY = `
 query ($login: String!) {

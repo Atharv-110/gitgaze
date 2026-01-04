@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
 import {
   fetchYearlyContributions,
   getUserCreatedAtDate,
-} from "../../../utils/helper";
+} from "../../../../../../lib/server.helpers";
 import { stat } from "fs";
 
 const TOTAL_CONTRIBUTIONS_QUERY = `

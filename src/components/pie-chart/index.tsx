@@ -1,6 +1,6 @@
 "use client";
 import React, { useCallback, useMemo } from "react";
-import { getTextWidth } from "@/lib/utils";
+import { getTextWidth } from "@/lib/client.helpers";
 import { Language } from "@/types/github/github.types";
 import hexToRgba from "hex-to-rgba";
 import { Cell, Pie, PieChart, PieLabelRenderProps, Tooltip } from "recharts";

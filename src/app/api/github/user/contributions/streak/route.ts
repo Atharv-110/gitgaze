@@ -4,7 +4,7 @@ import {
 } from "@/types/github/contributions.types";
 import { GhStreak, GitHubAPIResponse } from "@/types/github/github.types";
 import { NextResponse } from "next/server";
-import { fetchUserContributionCalendar } from "../../../utils/helper";
+import { fetchUserContributionCalendar } from "../../../../../../lib/server.helpers";
 
 const calculateStreak = (weeks: GhContributionWeek[]) => {
   const days: GhContributionDay[] = weeks.flatMap((w) => w.contributionDays);

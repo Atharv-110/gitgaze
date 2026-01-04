@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/client.helpers";
 import React from "react";
 
 const Chip = ({

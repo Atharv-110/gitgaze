@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/client.helpers";
 import * as Icon from "@heroicons/react/24/outline";
 import React from "react";
 import Chip from "./ui/chip";
