@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import MainProvider from "@/providers/main-provider";
 import { Montserrat } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: {
@@ -47,6 +48,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <Analytics />
         <MainProvider>{children}</MainProvider>
       </body>
     </html>
