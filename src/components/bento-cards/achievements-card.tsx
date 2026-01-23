@@ -33,7 +33,10 @@ const AchievementsCard = ({ username }: { username: string }) => {
     }
     const size = divRef.current.getBoundingClientRect();
     setWidthPerItem(size.height);
-    setSpaceX((dataLength * size.height - size.width) / (dataLength - 1));
+    const spaceDataLength = dataLength > 4 ? 5 : dataLength;
+    setSpaceX(
+      (spaceDataLength * size.height - size.width) / (spaceDataLength - 1),
+    );
   }, [dataLength, achievements]);
 
   return (

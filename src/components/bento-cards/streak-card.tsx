@@ -11,7 +11,7 @@ const getTotalContributions = (data: GhYearlyContribution[]) => {
   return data.reduce(
     (total, yearContribution) =>
       total + yearContribution.totalCommitContributions,
-    0
+    0,
   );
 };
 
@@ -40,7 +40,7 @@ const StreakCard = ({ username }: { username: string }) => {
   useEffect(() => {
     if (yearlyContributionData) {
       setTotalContributions(
-        getTotalContributions(yearlyContributionData.contributions)
+        getTotalContributions(yearlyContributionData.contributions),
       );
       setUserCreatedAt(new Date(yearlyContributionData.userCreatedAt));
     }

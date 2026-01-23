@@ -19,7 +19,7 @@ const baseURL = isServer
 
 export const axiosInstance = axios.create({
   baseURL,
-  timeout: 8000,
+  timeout: 10000,
   headers: serverDefaultHeaders,
   ...(isServer && {
     httpAgent: new http.Agent({ keepAlive: true }),
@@ -33,8 +33,8 @@ axiosInstance.interceptors.response.use(
     console.error(
       "Axios Error:",
       error.response?.status,
-      error.response?.data?.message || error.message
+      error.response?.data?.message || error.message,
     );
     return Promise.reject(error);
-  }
+  },
 );
