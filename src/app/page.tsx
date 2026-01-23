@@ -28,7 +28,7 @@ export default async function Home() {
       </div>
       <CustomInput />
       {data && (
-        <div className="flex items-center">
+        <div className="flex items-center ">
           <AvatarCircles
             numPeople={data.length > 6 ? data.length - 6 : 0}
             avatarUrls={data
@@ -40,7 +40,7 @@ export default async function Home() {
                 };
               })}
           />
-          <p className="text-sm ml-1.5">are being gazed</p>
+          <p className="text-sm ml-1">being gazed</p>
         </div>
       )}
     </section>

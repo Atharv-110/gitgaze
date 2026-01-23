@@ -12,7 +12,7 @@ const ContributionGraph = ({ username }: { username: string }) => {
   const [window, setWindow] = React.useState<number>(30);
   const { data: fetchedData, isLoading } = useGhContributionWindow(
     username,
-    window
+    window,
   );
 
   React.useEffect(() => {
