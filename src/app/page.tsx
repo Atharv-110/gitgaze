@@ -1,11 +1,10 @@
-import BentoComponent from "@/components/bento-component";
 import { AuroraText } from "@/components/ui/aurora-text";
 import { AvatarCircles } from "@/components/ui/avatar-circles";
 import CustomInput from "@/components/ui/custom-input";
 import { GitHubUser } from "@/types/github/user.types";
 
 async function getUsers() {
-  const res = await fetch(`${process.env.APP_URL}/api/users`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/users`, {
     next: { revalidate: 300 },
   });
 
