@@ -28,7 +28,7 @@ export const AvatarCircles = ({
         >
           <Image
             key={index}
-            className="h-12 w-12 rounded-full border-2 border-white dark:border-gray-800"
+            className="h-10 w-10 md:h-12 md:w-12 rounded-full border-2 border-white dark:border-gray-800"
             src={url.imageUrl}
             width={48}
             height={48}
@@ -38,7 +38,7 @@ export const AvatarCircles = ({
       ))}
       {(numPeople ?? 0) > 0 && (
         <Link
-          className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-white bg-black text-center text-xs font-medium text-white hover:bg-gray-600 dark:border-gray-800 dark:bg-white dark:text-black"
+          className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full border-2 border-white bg-black text-center text-xs font-medium text-white hover:bg-gray-600 dark:border-gray-800 dark:bg-white dark:text-black"
           href=""
         >
           +{numPeople}

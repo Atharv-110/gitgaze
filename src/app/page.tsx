@@ -40,7 +40,7 @@ export default async function Home() {
                 };
               })}
           />
-          <p className="text-sm ml-1">being gazed</p>
+          <p className="text-xs md:text-sm ml-1">being gazed</p>
         </div>
       )}
     </section>
