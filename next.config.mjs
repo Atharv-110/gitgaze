@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "github.githubassets.com",
       },
+      {
+        protocol: "https",
+        hostname: "api.producthunt.com",
+      },
     ],
     qualities: [75, 85, 90, 95, 100],
     dangerouslyAllowSVG: true,

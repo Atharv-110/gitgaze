@@ -2,6 +2,8 @@ import { AuroraText } from "@/components/ui/aurora-text";
 import { AvatarCircles } from "@/components/ui/avatar-circles";
 import CustomInput from "@/components/ui/custom-input";
 import { GitHubUser } from "@/types/github/user.types";
+import Image from "next/image";
+import Link from "next/link";
 
 async function getUsers() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/users`, {
@@ -43,6 +45,19 @@ export default async function Home() {
           <p className="text-xs md:text-sm ml-1">being gazed</p>
         </div>
       )}
+      <Link
+        href="https://www.producthunt.com/products/gitgaze?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-gitgaze"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Image
+          alt="GitGaze - Your GitHub, Reimagined with GitGazeGitGaze 🔮 | Product Hunt"
+          width="200"
+          height="100"
+          className="w-44"
+          src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1064536&amp;theme=light&amp;t=1769292319040"
+        />
+      </Link>
     </section>
   );
 }
