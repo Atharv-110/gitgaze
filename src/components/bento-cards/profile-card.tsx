@@ -12,6 +12,7 @@ import Card from "../card";
 import Chip from "../ui/chip";
 import { ParseEmoji } from "../ui/parse-emoji";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import { cn } from "@/lib/client.helpers";
 
 const ProfileCard = ({ username }: { username: string }) => {
   const [userData, setUserData] = React.useState<GitHubUser | null>(null);
@@ -36,11 +37,20 @@ const ProfileCard = ({ username }: { username: string }) => {
               height={80}
               className="h-full rounded-xl object-contain"
             />{" "}
-            <div className="space-y-1.5">
-              <Chip>
-                <ParseEmoji emoji={userData.status?.emojiHTML} size={15} />{" "}
-                <p>{userData.status?.message}</p>
-              </Chip>
+            <div className="space-y-1">
+              {userData.status && (
+                <Chip
+                  className={cn(
+                    "leading-none",
+                    userData.status.message ? "px-2 py-0.5" : "p-0.5",
+                  )}
+                >
+                  <ParseEmoji emoji={userData.status?.emojiHTML} size={15} />
+                  {userData.status.message && (
+                    <p className="line-clamp-1">{userData.status.message}</p>
+                  )}
+                </Chip>
+              )}
               <h1 className="pl-px flex items-center justify-start font-semibold text-lg md:text-xl leading-none gap-x-1">
                 {userData.name}{" "}
                 {userData.isDeveloperProgramMember && (

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { JSX } from "react";
+import { JSX } from "react";
 
 export const ParseEmoji = ({
   emoji,
@@ -29,14 +29,7 @@ export const ParseEmoji = ({
   }
 
   if (text) {
-    return (
-      <span
-        className="inline-block align-middle leading-none"
-        // style={{ fontSize: size - 4 }}
-      >
-        {text}
-      </span>
-    );
+    return <span style={{ fontSize: size - 1 }}>{text}</span>;
   }
 
   return null;
