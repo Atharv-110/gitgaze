@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     siteName: "GitGaze",
     images: [
       {
-        url: "/og-image.png",
+        url: "/opengraph-image.jpg",
         width: 1200,
         height: 630,
         alt: "GitGaze Landing Page Open Graph Image",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     creator: "@atharv_110",
     description:
       "Showcase your GitHub statistics and activities in a personalized and share-ready dashboard.",
-    images: ["/og-image.png"],
+    images: ["/opengraph-image.jpg"],
   },
   other: {
     "og:logo": "/icons/icon.png",
