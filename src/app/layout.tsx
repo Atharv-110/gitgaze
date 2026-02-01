@@ -9,6 +9,13 @@ export const metadata: Metadata = {
     default: "GitGaze by Atharv Vani",
     template: "%s - GitGaze",
   },
+  authors: [
+    { name: "Atharv Vani", url: "https://www.gitgaze.dev/u/atharv-110" },
+  ],
+  description:
+    "Showcase your GitHub statistics and activities in a personalized and share-ready dashboard.",
+  keywords:
+    "gitgaze, github, github stats, open source, contributions, github wrapped",
   icons: {
     icon: "/icons/icon.png",
     apple: "/icons/apple-icon.png",
@@ -34,10 +41,17 @@ export const metadata: Metadata = {
       },
     ],
   },
-  description:
-    "Showcase your GitHub statistics and activities in a personalized and share-ready dashboard.",
-  keywords:
-    "gitgaze, github, github stats, open source, contributions, github wrapped",
+  twitter: {
+    card: "summary_large_image",
+    title: "GitGaze by Atharv Vani",
+    creator: "@atharv_110",
+    description:
+      "Showcase your GitHub statistics and activities in a personalized and share-ready dashboard.",
+    images: ["/og-image.png"],
+  },
+  other: {
+    "og:logo": "/icons/icon.png",
+  },
 };
 
 const montserrat = Montserrat({ subsets: ["latin"], display: "swap" });
