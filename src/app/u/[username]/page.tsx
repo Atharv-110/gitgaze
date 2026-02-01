@@ -7,16 +7,17 @@ type Props = {
 
 export async function generateMetadata(
   { params }: Props,
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const { username } = await params;
   const lowercasedUsername = username.toLowerCase();
+  const userUrl = `${process.env.NEXT_PUBLIC_APP_URL || "https://www.gitgaze.dev"}/u/${lowercasedUsername}`;
 
   return {
     title: lowercasedUsername,
     description: `Discover ${lowercasedUsername}’s GitHub statistics and activity in a personalized, visual, and share-ready dashboard — highlighting their achievements, contributions, and developer journey.`,
     alternates: {
-      canonical: `/u/${username}`,
+      canonical: userUrl,
     },
   };
 }

@@ -7,7 +7,12 @@ import { Analytics } from "@vercel/analytics/next";
 export const metadata: Metadata = {
   title: {
     default: "GitGaze by Atharv Vani",
-    template: "%s | GitGaze",
+    template: "%s - GitGaze",
+  },
+  icons: {
+    icon: "/icons/icon.png",
+    apple: "/icons/apple-icon.png",
+    shortcut: "/icons/favicon.ico",
   },
   metadataBase: new URL("https://www.gitgaze.dev"),
   alternates: {
@@ -20,10 +25,19 @@ export const metadata: Metadata = {
     description:
       "Showcase your GitHub statistics and activities in a personalized and share-ready dashboard.",
     siteName: "GitGaze",
-    images: ["/gitgaze_logo.png"],
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "GitGaze Landing Page Open Graph Image",
+      },
+    ],
   },
   description:
     "Showcase your GitHub statistics and activities in a personalized and share-ready dashboard.",
+  keywords:
+    "gitgaze, github, github stats, open source, contributions, github wrapped",
 };
 
 const montserrat = Montserrat({ subsets: ["latin"], display: "swap" });
