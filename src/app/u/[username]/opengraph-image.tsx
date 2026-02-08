@@ -113,7 +113,9 @@ export default async function OG({ params }: UserSlugProps) {
             >
               {user.name}
             </h1>
-            <p tw="w-3/4 text-slate-800 text-center m-0 mt-4">{user.bio}</p>
+            <p tw="flex justify-center items-center w-3/4 text-slate-800 text-center m-0 mt-4">
+              {user.bio}
+            </p>
             <div tw="flex items-center justify-center py-3 px-5 bg-black text-white rounded-xl m-0 mt-5">
               gitgaze.dev/u/{user.login}
             </div>
