@@ -23,7 +23,7 @@ export default async function OG({ params }: UserSlugProps) {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ login: username }),
-    cache: "no-store",
+    next: { revalidate: 60 * 60 },
   });
 
   if (!res.ok) {
@@ -40,6 +40,7 @@ export default async function OG({ params }: UserSlugProps) {
         display: "flex",
         flexDirection: "column",
         position: "relative",
+        backgroundColor: "white",
       }}
     >
       <div
@@ -94,7 +95,7 @@ export default async function OG({ params }: UserSlugProps) {
       </div>
       {/* User Info */}
       <div tw="flex flex-col flex-1 px-8 pb-8 pt-2">
-        <div tw="w-full h-full p-5 flex border border-slate-300 rounded-xl bg-white/20 shadow-lg">
+        <div tw="w-full h-full p-5 flex border border-slate-300 rounded-xl bg-gray-300/20 shadow-lg">
           <div tw="flex flex-col justify-center w-full items-center">
             <img
               src={user.avatarUrl}
