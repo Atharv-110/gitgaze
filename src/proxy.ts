@@ -4,6 +4,8 @@ export async function proxy(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
 
   const match = pathname.match(/^\/u\/([^/]+)/);
+  console.log(match);
+
   if (!match) return NextResponse.next();
 
   const username = match[1];
@@ -20,5 +22,5 @@ export async function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/u/:path*"],
+  matcher: ["/u/:path"],
 };

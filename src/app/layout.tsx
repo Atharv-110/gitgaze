@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/icons/icon.png",
     apple: "/icons/apple-icon.png",
-    shortcut: "/icons/favicon.ico",
+    shortcut: "/icons/icon.png",
   },
   metadataBase: new URL("https://www.gitgaze.dev"),
   alternates: {

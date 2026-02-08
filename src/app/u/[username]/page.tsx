@@ -1,12 +1,9 @@
 import { Metadata, ResolvingMetadata } from "next";
 import BentoComponent from "@/components/bento-component";
-
-type Props = {
-  params: Promise<{ username: string }>;
-};
+import { UserSlugProps } from "@/types/github/github.types";
 
 export async function generateMetadata(
-  { params }: Props,
+  { params }: UserSlugProps,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const { username } = await params;
@@ -19,10 +16,17 @@ export async function generateMetadata(
     alternates: {
       canonical: userUrl,
     },
+    openGraph: {
+      images: [`/u/${username}/opengraph-image`],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: [`/u/${username}/opengraph-image`],
+    },
   };
 }
 
-const UserPage = async ({ params }: Props) => {
+const UserPage = async ({ params }: UserSlugProps) => {
   const { username } = await params;
 
   return (

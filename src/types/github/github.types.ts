@@ -56,3 +56,7 @@ export interface WrappedServerResponse {
   wrappedYear: number;
   slides: WrappedSlideProps[];
 }
+
+export type UserSlugProps = {
+  params: Promise<{ username: string }>;
+};
