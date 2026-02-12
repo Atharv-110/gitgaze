@@ -11,17 +11,6 @@ export async function POST(req: Request) {
 
     const { data } = await axios.get(apiUrl);
 
-    if (!data) {
-      return NextResponse.json<GitHubAPIResponse<GhUserAchievement[]>>(
-        {
-          success: false,
-          message: "Failed to fetch achievements",
-          data: null,
-        },
-        { status: 500 }
-      );
-    }
-
     const achievements: GhUserAchievement[] = data?.achievements ?? [];
 
     return NextResponse.json<GitHubAPIResponse<GhUserAchievement[]>>({
@@ -29,12 +18,18 @@ export async function POST(req: Request) {
       message: "OK",
       data: achievements,
     });
-  } catch (error: any) {
-    console.error("Error fetching achievements:", error?.message);
+  } catch (error: unknown) {
+    let errorMessage = "Unknown error";
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    } else if (typeof error === "string") {
+      errorMessage = error;
+    }
+    console.error("Error fetching achievements:", errorMessage);
 
     return NextResponse.json(
-      { success: false, message: "Failed to fetch achievements", data: null },
-      { status: 500 }
+      { success: false, message: "No Achievements Found", data: null },
+      { status: 404 },
     );
   }
 }

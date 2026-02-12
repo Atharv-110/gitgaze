@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import http from "http";
 import https from "https";
 
@@ -30,11 +30,11 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.response.use(
   (res) => res,
   (error) => {
-    console.error(
-      "Axios Error:",
-      error.response?.status,
-      error.response?.data?.message || error.message,
-    );
-    return Promise.reject(error);
+    // console.error(
+    //   "Axios Error:",
+    //   error.response?.status,
+    //   error.response?.data?.message || error.message,
+    // );
+    return Promise.reject(error?.response ?? error);
   },
 );

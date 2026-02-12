@@ -5,6 +5,9 @@ const config: Config = {
   content: ["./app/**/*.{js,ts,jsx,tsx,mdx}", "./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-montserrat)", "system-ui", "sans-serif"],
+      },
       keyframes: {
         aurora: {
           "0%": {

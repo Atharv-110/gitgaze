@@ -1,6 +1,7 @@
 "use client";
 import useGhUserAchievements from "@/hooks/useGhAchievements";
 import { GhUserAchievement } from "@/types/github/user.types";
+import { AxiosError } from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useLayoutEffect } from "react";
@@ -40,8 +41,12 @@ const AchievementsCard = ({ username }: { username: string }) => {
   }, [dataLength, achievements]);
 
   return (
-    <Card cardTitle="Achievements" iconName="TrophyIcon" isLoading={isLoading}>
-      {error && <div>Error loading user</div>}
+    <Card
+      cardTitle="Achievements"
+      iconName="TrophyIcon"
+      isLoading={isLoading}
+      errorMsg={error ? "No Achievements Found" : undefined}
+    >
       {achievements && (
         <div
           ref={divRef}

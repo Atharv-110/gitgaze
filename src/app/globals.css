@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.markdown-body {
+  border-radius: 14px;
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(12px);
+  font-weight: normal !important;
+  font-family: var(--font-montserrat), system-ui, sans-serif !important;
+}
+
+.markdown-body p,
+li {
+  @apply text-slate-600 text-xs md:text-sm;
+}
+
+.markdown-body h1 {
+  @apply !font-bold !text-3xl;
+}
+
+.markdown-body h2 {
+  @apply !font-semibold !text-2xl;
+}
+
+.markdown-body div {
+  @apply flex items-center justify-center gap-2 flex-wrap;
+}

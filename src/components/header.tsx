@@ -1,8 +1,6 @@
-import React from "react";
-import DynamicIsland from "./dynamic-island";
-import Button from "./ui/button";
-import { AuroraText } from "./ui/aurora-text";
 import Image from "next/image";
+import DynamicIsland from "./dynamic-island";
+import { AuroraText } from "./ui/aurora-text";
 
 const Header = ({ username }: { username: string | null }) => {
   return (

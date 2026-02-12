@@ -6,6 +6,7 @@ import Image from "next/image";
 import React, { useEffect } from "react";
 import Card from "../card";
 import { AuroraText } from "../ui/aurora-text";
+import fireImg from "@/assets/images/fire.gif";
 
 const getTotalContributions = (data: GhYearlyContribution[]) => {
   return data.reduce(
@@ -113,7 +114,7 @@ const StreakCard = ({ username }: { username: string }) => {
             <div className="relative p-2 flex flex-col justify-center items-center w-full h-full rounded-full bg-white">
               {streakData.type === "CURRENT" && (
                 <Image
-                  src="/fire.gif"
+                  src={fireImg}
                   alt="Fire Icon"
                   width={50}
                   height={50}

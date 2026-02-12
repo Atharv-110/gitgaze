@@ -7,7 +7,7 @@ import { Analytics } from "@vercel/analytics/next";
 export const metadata: Metadata = {
   title: {
     default: "GitGaze by Atharv Vani",
-    template: "%s - GitGaze",
+    template: "%s at GitGaze",
   },
   authors: [
     { name: "Atharv Vani", url: "https://www.gitgaze.dev/u/atharv-110" },
@@ -54,7 +54,11 @@ export const metadata: Metadata = {
   },
 };
 
-const montserrat = Montserrat({ subsets: ["latin"], display: "swap" });
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-montserrat",
+});
 
 export default function RootLayout({
   children,
@@ -70,8 +74,8 @@ export default function RootLayout({
       "Showcase your GitHub statistics and activities in a personalized and share-ready dashboard.",
   };
   return (
-    <html lang="en" className={montserrat.className}>
-      <body className="relative z-20 flex flex-col h-[100dvh] max-h-[100dvh] overflow-hidden bg-white">
+    <html lang="en" className={montserrat.variable}>
+      <body className="font-sans relative z-20 flex flex-col h-[100dvh] max-h-[100dvh] overflow-hidden bg-white">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -22,6 +22,13 @@ export interface GitHubUser {
   twitterUsername: string | null;
   company: string | null;
   websiteUrl: string | null;
+  socialAccounts: { nodes: GhSocialAccountNode[] | [] };
+  email?: string | null;
+}
+
+export interface GhSocialAccountNode {
+  provider: string;
+  url: string;
 }
 
 export interface GhUserAchievement {

@@ -18,6 +18,13 @@ export async function POST(req: Request) {
         twitterUsername
         websiteUrl
         company
+        email
+        socialAccounts(first: 5) {
+          nodes {
+            provider
+            url
+          }
+        }
         followers {
             totalCount
         }
@@ -42,13 +49,30 @@ export async function POST(req: Request) {
         message: result.message,
         data: null,
       },
-      { status: 404 }
+      { status: 404 },
     );
+  }
+
+  let modifiedUserData: GitHubUser = result.data.user;
+
+  if (result.data.user.email) {
+    modifiedUserData = {
+      ...result.data.user,
+      socialAccounts: {
+        nodes: [
+          ...result.data.user.socialAccounts.nodes,
+          {
+            provider: "EMAIL",
+            url: `mailto:${result.data.user.email}`,
+          },
+        ],
+      },
+    };
   }
 
   return NextResponse.json<GitHubAPIResponse<GitHubUser>>({
     success: true,
     message: "OK",
-    data: result.data.user,
+    data: modifiedUserData,
   });
 }

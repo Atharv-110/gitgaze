@@ -16,6 +16,7 @@ import {
   WrappedSlideProps,
 } from "@/types/github/github.types";
 import { cn } from "@/lib/client.helpers";
+import winnerPodiumImg from "@/assets/images/winner_podium.svg";
 
 const UserSlideComponent = ({
   userData,
@@ -69,7 +70,7 @@ const TotalContributionsSlideComponent = ({
             <div
               className={cn(
                 "flex flex-col items-center",
-                commitsDiff < 0 ? "text-red-500" : "text-green-500"
+                commitsDiff < 0 ? "text-red-500" : "text-green-500",
               )}
             >
               {commitsDiff < 0 ? (
@@ -94,7 +95,7 @@ const TotalContributionsSlideComponent = ({
   );
 };
 export const TotalContributionsSlide = React.memo(
-  TotalContributionsSlideComponent
+  TotalContributionsSlideComponent,
 );
 
 const TopLanguageSlideComponent = ({
@@ -111,11 +112,12 @@ const TopLanguageSlideComponent = ({
         <>
           <div className="relative mt-10">
             <Image
-              src="/winner_podium.svg"
+              src={winnerPodiumImg}
               alt="Winner Podium"
               width={100}
               height={100}
               className="w-52 opacity-90"
+              loading="eager"
               quality={75}
             />
             {/* First Place */}

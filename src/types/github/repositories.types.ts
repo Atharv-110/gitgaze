@@ -11,6 +11,17 @@ export interface PinnedRepoResponse {
   };
 }
 
+export interface GitHubReadmeResponse {
+  repository: {
+    defaultBranchRef?: {
+      name: string;
+    } | null;
+    object?: {
+      text?: string;
+    } | null;
+  } | null;
+}
+
 export interface PageInfo {
   hasNextPage: boolean;
   endCursor: string | null;
@@ -26,8 +37,10 @@ export interface RepositoryNode {
   languages: Languages;
 }
 
-export interface RepositoryWithLanguageNames
-  extends Omit<RepositoryNode, "languages"> {
+export interface RepositoryWithLanguageNames extends Omit<
+  RepositoryNode,
+  "languages"
+> {
   languageNames: string[];
 }
 

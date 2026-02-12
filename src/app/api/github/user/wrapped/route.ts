@@ -126,7 +126,7 @@ function prepareResponseData(data: {
 
 function getTopMonthContributions(
   data: GhContributionDay[],
-  wrappedYear: number
+  wrappedYear: number,
 ) {
   const monthTotals: Record<number, number> = {};
 
@@ -138,7 +138,7 @@ function getTopMonthContributions(
   const monthIndex = Object.entries(monthTotals).reduce(
     (maxMonth, [month, total]) =>
       total > (monthTotals[maxMonth] ?? 0) ? Number(month) : maxMonth,
-    0
+    0,
   );
 
   return {
@@ -147,7 +147,7 @@ function getTopMonthContributions(
       month: "long",
     }),
     monthData: data.filter(
-      ({ date }) => new Date(date).getMonth() === monthIndex
+      ({ date }) => new Date(date).getMonth() === monthIndex,
     ),
   };
 }
@@ -171,7 +171,7 @@ export async function POST(req: Request) {
     PREV_WRAPPED_QUERY,
     login,
     `${wrappedYear - 1}-01-01T00:00:00Z`,
-    `${wrappedYear - 1}-12-31T23:59:59Z`
+    `${wrappedYear - 1}-12-31T23:59:59Z`,
   );
 
   if (!result.success || !result.data?.user || !prevYearContributions) {
@@ -191,12 +191,12 @@ export async function POST(req: Request) {
 
   const flattenData =
     contributionsCollection.contributionCalendar.weeks.flatMap(
-      (week) => week.contributionDays
+      (week) => week.contributionDays,
     );
 
   const topMonthContribution = getTopMonthContributions(
     flattenData,
-    wrappedYear
+    wrappedYear,
   );
   const topLanguages = aggregateLanguages(repositories.nodes);
   const response = prepareResponseData({
@@ -213,6 +213,4 @@ export async function POST(req: Request) {
     message: "OK",
     data: response,
   });
-
-  // console.log(topMonthContribution);
 }

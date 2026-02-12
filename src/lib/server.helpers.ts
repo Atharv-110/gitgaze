@@ -5,7 +5,7 @@ import { RepositoryNode } from "@/types/github/repositories.types";
 import { Language } from "@/types/github/github.types";
 
 export const getUserCreatedAtDate = async (
-  login: string
+  login: string,
 ): Promise<string | null> => {
   const query = `
     query ($login: String!) {
@@ -16,7 +16,7 @@ export const getUserCreatedAtDate = async (
   `;
   const result = await githubRequest<{ user: Pick<GitHubUser, "createdAt"> }>(
     query,
-    { login }
+    { login },
   );
   if (!result.success || !result.data?.user) {
     return null;
@@ -46,7 +46,7 @@ query ($login: String!, $from: DateTime, $to: DateTime) {
 export const fetchUserContributionCalendar = async (
   login: string,
   from?: Date,
-  to?: Date
+  to?: Date,
 ) => {
   if (from && to) {
     return await githubRequest<{
@@ -67,7 +67,7 @@ export const fetchYearlyContributions = async (
   query: string,
   login: string,
   from: string,
-  to: string
+  to: string,
 ): Promise<GhUserContributionCollection | null> => {
   const res = await githubRequest<{
     user: GhUserContributionCollection;
@@ -102,3 +102,31 @@ export const aggregateLanguages = (repos: RepositoryNode[]): Language[] => {
     }))
     .sort((a, b) => b.totalSize - a.totalSize);
 };
+
+export function rewriteRelativePaths(
+  markdown: string,
+  username: string,
+  branch: string,
+) {
+  const repoName = username;
+
+  const rawBase = `https://raw.githubusercontent.com/${username}/${repoName}/${branch}/`;
+
+  // Replace image markdown syntax
+  const updated = markdown.replace(
+    /!\[([^\]]*)\]\((?!https?:\/\/)([^)]+)\)/g,
+    (_, alt, path) => {
+      const cleanPath = path.startsWith("/") ? path.slice(1) : path;
+      return `![${alt}](${rawBase}${cleanPath})`;
+    },
+  );
+
+  // Replace HTML img tags
+  return updated.replace(
+    /<img\s+([^>]*?)src=["'](?!https?:\/\/)([^"']+)["']([^>]*)>/g,
+    (_, before, path, after) => {
+      const cleanPath = path.startsWith("/") ? path.slice(1) : path;
+      return `<img ${before}src="${rawBase}${cleanPath}"${after}>`;
+    },
+  );
+}

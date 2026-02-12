@@ -10,6 +10,7 @@ interface CardProps {
   cardTitle?: string;
   iconName?: keyof typeof Icon;
   isLoading?: boolean;
+  errorMsg?: string;
 }
 
 const Card = ({
@@ -18,14 +19,15 @@ const Card = ({
   cardTitle,
   iconName,
   isLoading,
+  errorMsg,
 }: CardProps) => {
   const IconComponent = Icon[iconName as keyof typeof Icon];
   return (
     <div
       className={cn(
-        "w-full h-full flex flex-col justify-between overflow-hidden items-stretch isolate p-3 md:p-5 bg-white border border-slate-200 shadow-md rounded-xl max-sm:min-h-[200px]",
+        "w-full h-full flex flex-col justify-between overflow-hidden items-stretch isolate p-3 md:p-4 bg-white border border-slate-200 shadow-md rounded-xl max-sm:min-h-[200px]",
         cardTitle ? "space-y-2" : "space-y-2",
-        className
+        className,
       )}
     >
       {cardTitle && (
@@ -41,7 +43,12 @@ const Card = ({
           <Loader size={30} />
         </div>
       )}
-      {!isLoading && children}
+      {!isLoading && !errorMsg && children}
+      {errorMsg && (
+        <div className="text-xs flex-1 flex items-center justify-center">
+          {errorMsg}
+        </div>
+      )}
     </div>
   );
 };

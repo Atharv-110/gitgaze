@@ -28,7 +28,7 @@ githubAxios.defaults.httpsAgent = new https.Agent({
 
 export async function githubRequest<T>(
   query: string,
-  variables: Record<string, unknown> = {}
+  variables: Record<string, unknown> = {},
 ): Promise<GitHubAPIResponse<T>> {
   try {
     const response = await githubAxios.post<GitHubGraphQLResponse<T>>("", {

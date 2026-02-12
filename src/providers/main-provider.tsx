@@ -11,7 +11,9 @@ const queryClient = new QueryClient();
 
 export default function MainProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const isDynamicUserPage = /^\/u\/[^/]+$/.test(pathname);
+  const isDynamicUserPage =
+    pathname.startsWith("/u/") && pathname.split("/").length > 2;
+
   const username = isDynamicUserPage ? pathname.split("/")[2] : null;
 
   return (
