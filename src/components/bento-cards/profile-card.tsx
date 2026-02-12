@@ -42,12 +42,9 @@ const ProfileCard = ({ username }: { username: string }) => {
             <div className="h-full flex flex-col justify-between py-px">
               {userData.status && (
                 <Chip
-                  className={cn(
-                    "leading-none",
-                    userData.status.message
-                      ? "px-2 py-0.5 rounded-md"
-                      : "p-0.5",
-                  )}
+                  className={
+                    userData.status.message ? "px-2 py-0.5 rounded-md" : "p-0.5"
+                  }
                 >
                   <ParseEmoji emoji={userData.status?.emojiHTML} size={15} />
                   {userData.status.message && (

@@ -23,13 +23,17 @@ export const ParseEmoji = ({
         title={img.getAttribute("title") ?? ""}
         width={size}
         height={size}
-        className="inline-block align-middle"
+        className="inline-block align-middle aspect-square"
       />
     );
   }
 
   if (text) {
-    return <span style={{ fontSize: size - 1 }}>{text}</span>;
+    return (
+      <span className="aspect-square" style={{ fontSize: size - 3 }}>
+        {text}
+      </span>
+    );
   }
 
   return null;

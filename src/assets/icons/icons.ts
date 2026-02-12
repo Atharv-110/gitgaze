@@ -4,6 +4,7 @@ import email from "@/assets/icons/mail.svg";
 import reddit from "@/assets/icons/reddit.svg";
 import instagram from "@/assets/icons/instagram.svg";
 import link from "@/assets/icons/link.svg";
+import youtube from "@/assets/icons/youtube.svg";
 type IconMap = { [key: string]: { src: string } };
 
 const icons: IconMap = {
@@ -12,10 +13,11 @@ const icons: IconMap = {
   EMAIL: email,
   REDDIT: reddit,
   INSTAGRAM: instagram,
+  YOUTUBE: youtube,
   GENERIC: link,
 };
 
 export function getIcon(param?: string): string | undefined {
-  if (!param) return icons["GENERIC"].src;
+  if (!param || !icons[param]) return icons["GENERIC"].src;
   return icons[param].src;
 }
