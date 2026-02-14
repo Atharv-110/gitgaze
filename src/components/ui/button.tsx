@@ -30,11 +30,13 @@ export default function Button({
     <button
       {...props}
       className={cn(
-        "flex items-center gap-1.5 py-2 px-4 rounded-md bg-black hover:opacity-90",
-        className
+        "flex items-center gap-1 py-2 px-4 rounded-md bg-black hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity",
+        className,
       )}
     >
-      {label && <span className={cn("font-medium", color)}>{label}</span>}
+      {label && (
+        <span className={cn("font-medium leading-none", color)}>{label}</span>
+      )}
       <IconComponent style={{ width: size, height: size }} className={color} />
     </button>
   );

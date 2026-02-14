@@ -1,3 +1,4 @@
+import React from "react";
 import Image from "next/image";
 import DynamicIsland from "./dynamic-island";
 import { AuroraText } from "./ui/aurora-text";
@@ -58,4 +59,4 @@ const Header = ({ username }: { username: string | null }) => {
   );
 };
 
-export default Header;
+export default React.memo(Header);
