@@ -30,7 +30,7 @@ export default function Button({
     <button
       {...props}
       className={cn(
-        "flex items-center gap-1 py-2 px-4 rounded-md bg-black hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity",
+        "flex items-center gap-1 py-2 px-4 rounded-md bg-black hover:opacity-90 disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed transition-opacity",
         className,
       )}
     >

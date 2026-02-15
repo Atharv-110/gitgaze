@@ -43,7 +43,9 @@ const ProfileCard = ({ username }: { username: string }) => {
               {userData.status && (
                 <Chip
                   className={
-                    userData.status.message ? "px-2 py-0.5 rounded-md" : "p-0.5"
+                    userData.status.message
+                      ? "px-2 py-0.5 rounded-md"
+                      : "p-0.5 aspect-square"
                   }
                 >
                   <ParseEmoji emoji={userData.status?.emojiHTML} size={15} />

@@ -16,8 +16,6 @@ const ReadmeRenderer = ({ username }: { username: string }) => {
   const { data: markdown, isLoading, isError } = useGithubUserReadme(username);
   const router = useRouter();
 
-  if (!markdown) return null;
-
   const handleDownload = () => {
     if (!markdown) return;
 
@@ -44,7 +42,6 @@ const ReadmeRenderer = ({ username }: { username: string }) => {
             className="bg-transparent border border-slate-400  hover:border-slate-500 group rounded-full p-1.5"
             color="text-slate-400 !size-4 md:!size-5 group-hover:text-slate-500"
             onClick={() => router.back()}
-            // size={20}
           />
           <h1 className="text-xl md:text-3xl font-semibold">README</h1>
         </div>
@@ -63,16 +60,17 @@ const ReadmeRenderer = ({ username }: { username: string }) => {
       <div
         className={cn(
           "markdown-body p-3 md:p-6 rounded-xl border shadow-md",
-          (isLoading || isError) && "min-h-96 flex items-center justify-center",
+          (isLoading || isError || !markdown) &&
+            "min-h-96 flex items-center justify-center",
         )}
       >
-        {isLoading && <Loader size={24} />}
-        {isError && (
+        {isLoading ? (
+          <Loader size={24} />
+        ) : isError || !markdown ? (
           <p className="text-sm tracking-wide font-normal !text-slate-600">
             Failed to load/parse README.MD file
           </p>
-        )}
-        {markdown && (
+        ) : (
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw, rehypeHighlight, rehypeSanitize]}
