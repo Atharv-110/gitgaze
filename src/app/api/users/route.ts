@@ -1,26 +1,74 @@
 import { githubRequest } from "@/lib/githubClient";
 import { connectDB } from "@/lib/mongo";
 import Users from "@/models/Users";
-import { GitHubAPIResponse } from "@/types/github/github.types";
+import { PaginatedAPIResponse } from "@/types/github/github.types";
 import { GitHubUser } from "@/types/github/user.types";
-import { NextResponse } from "next/server";
+import mongoose from "mongoose";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+const LIMIT = 20;
+
+export async function GET(req: NextRequest) {
   try {
     await connectDB();
-    const users = await Users.find({}).sort({ views: -1 }).lean();
+
+    const { searchParams } = new URL(req.url);
+
+    const lastViews = searchParams.get("lastViews");
+    const lastId = searchParams.get("lastId");
+    const allUsers = searchParams.get("allUsers");
+
+    let filter: any = {};
+    let limit = LIMIT;
+
+    // If NOT allUsers → apply pagination
+    if (!allUsers) {
+      if (lastViews && lastId) {
+        filter = {
+          $or: [
+            { views: { $lt: Number(lastViews) } },
+            {
+              views: Number(lastViews),
+              _id: { $gt: new mongoose.Types.ObjectId(lastId) },
+            },
+          ],
+        };
+      }
+    } else {
+      // fetch everything at once
+      limit = 0;
+    }
+
+    const usersQuery = Users.find(filter).sort({ views: -1, _id: 1 }).lean();
+
+    if (!allUsers) {
+      usersQuery.limit(limit);
+    }
+
+    const users = await usersQuery;
+
+    if (!users.length) {
+      return NextResponse.json({
+        success: true,
+        message: "No users found",
+        data: [],
+        nextCursor: null,
+      });
+    }
+
     const usernames = users.map((u) => u.username);
 
+    // Batch GitHub Query
     const query = `
       query {
         ${usernames
           .map(
             (u, i) => `
-            user${i}: user(login: "${u}") {
-              login
-              avatarUrl
-            }
-          `,
+              user${i}: user(login: "${u}") {
+                login
+                avatarUrl
+              }
+            `,
           )
           .join("\n")}
       }
@@ -31,26 +79,40 @@ export async function GET() {
     }>(query);
 
     const userdata = result.data ? Object.values(result.data) : [];
+
+    // Cursor only when paginating
+    let nextCursor = null;
+
+    if (!allUsers && users.length === LIMIT) {
+      const lastUser = users[users.length - 1];
+      nextCursor = {
+        lastViews: lastUser.views,
+        lastId: lastUser._id.toString(),
+      };
+    }
+
     return NextResponse.json<
-      GitHubAPIResponse<Pick<GitHubUser, "login" | "avatarUrl">[]>
+      PaginatedAPIResponse<
+        Pick<GitHubUser, "login" | "avatarUrl">[],
+        { lastViews: number; lastId: string }
+      >
     >({
       success: true,
       message: "OK",
       data: userdata,
+      nextCursor,
     });
   } catch (error) {
     console.error("GitGaze Avatar Pipeline Failed:", error);
-    const errorMessage =
-      error instanceof Error ? error.message : "Unknown error";
-    return NextResponse.json<
-      GitHubAPIResponse<Pick<GitHubUser, "login" | "avatarUrl">>
-    >(
+
+    return NextResponse.json(
       {
         success: false,
-        message: errorMessage,
+        message:
+          error instanceof Error ? error.message : "Unknown server error",
         data: null,
       },
-      { status: 404 },
+      { status: 500 },
     );
   }
 }

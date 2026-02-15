@@ -13,7 +13,9 @@ const UsersSchema = new mongoose.Schema(
     views: { type: Number, default: 1 },
     firstSeenAt: Date,
   },
-  { timestamps: true }
+  { timestamps: true },
 );
+
+UsersSchema.index({ views: -1, _id: 1 });
 
 export default mongoose.models.users || mongoose.model("users", UsersSchema);

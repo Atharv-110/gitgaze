@@ -6,9 +6,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 async function getUsers() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/users`, {
-    next: { revalidate: 300 },
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/users?allUsers=true`,
+    {
+      next: { revalidate: 300 },
+    },
+  );
 
   if (!res.ok) return [];
 

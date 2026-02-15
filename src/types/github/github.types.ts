@@ -6,6 +6,10 @@ export interface GitHubAPIResponse<T> {
   data: T | null;
 }
 
+export interface PaginatedAPIResponse<T, C> extends GitHubAPIResponse<T> {
+  nextCursor: C | null;
+}
+
 export interface GitHubGraphQLResponse<T> {
   data?: T;
   errors?: Array<{ message: string }>;
