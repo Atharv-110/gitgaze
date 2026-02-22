@@ -89,7 +89,7 @@ const DynamicIsland = (props: DynamicIslandProps) => {
   return (
     <div
       hidden={isHide}
-      className={`live-island-wrapper fixed inset-x-0 top-[--top] z-[9999] ${wrapperClassName}`}
+      className={`live-island-wrapper inset-x-0 top-[--top] z-[9999] ${wrapperClassName}`}
       style={
         {
           "--top": getVal(top),

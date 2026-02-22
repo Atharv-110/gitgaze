@@ -59,7 +59,7 @@ export async function GET(req: NextRequest) {
     const usernames = users.map((u) => u.username);
 
     // Batch GitHub Query
-    const query = `
+    let query = `
       query {
         ${usernames
           .map(
@@ -73,10 +73,57 @@ export async function GET(req: NextRequest) {
           .join("\n")}
       }
     `;
+    if (!allUsers) {
+      query = `
+        query {
+          ${usernames
+            .map(
+              (u, i) => `
+                user${i}: user(login: "${u}") {
+                  login
+                  name
+                  bio
+                  createdAt
+                  avatarUrl
+                  isDeveloperProgramMember
+                  websiteUrl
+                  company
+                  email
+                  socialAccounts(first: 5) {
+                    nodes {
+                      provider
+                      url
+                    }
+                  }
+                  followers {
+                      totalCount
+                  }
+                  following {
+                      totalCount
+                  }
+                  status {
+                    message
+                    emoji
+                    emojiHTML
+                  }
+                }
+              `,
+            )
+            .join("\n")}
+        }
+      `;
+    }
 
-    const result = await githubRequest<{
-      [key: string]: Pick<GitHubUser, "login" | "avatarUrl">;
-    }>(query);
+    let result = null;
+    if (allUsers) {
+      result = await githubRequest<{
+        [key: string]: Pick<GitHubUser, "login" | "avatarUrl">;
+      }>(query);
+    } else {
+      result = await githubRequest<{
+        [key: string]: GitHubUser;
+      }>(query);
+    }
 
     const userdata = result.data ? Object.values(result.data) : [];
 
@@ -91,17 +138,31 @@ export async function GET(req: NextRequest) {
       };
     }
 
-    return NextResponse.json<
-      PaginatedAPIResponse<
-        Pick<GitHubUser, "login" | "avatarUrl">[],
-        { lastViews: number; lastId: string }
-      >
-    >({
-      success: true,
-      message: "OK",
-      data: userdata,
-      nextCursor,
-    });
+    if (allUsers) {
+      return NextResponse.json<
+        PaginatedAPIResponse<
+          Pick<GitHubUser, "login" | "avatarUrl">[],
+          { lastViews: number; lastId: string } | null
+        >
+      >({
+        success: true,
+        message: "OK",
+        data: userdata as Pick<GitHubUser, "login" | "avatarUrl">[],
+        nextCursor,
+      });
+    } else {
+      return NextResponse.json<
+        PaginatedAPIResponse<
+          GitHubUser[],
+          { lastViews: number; lastId: string } | null
+        >
+      >({
+        success: true,
+        message: "OK",
+        data: userdata as GitHubUser[],
+        nextCursor,
+      });
+    }
   } catch (error) {
     console.error("GitGaze Avatar Pipeline Failed:", error);
 

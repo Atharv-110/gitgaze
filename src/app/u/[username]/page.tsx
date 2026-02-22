@@ -1,6 +1,7 @@
-import { Metadata, ResolvingMetadata } from "next";
 import BentoComponent from "@/components/bento-component";
+import { Route } from "@/enums/route.enum";
 import { UserSlugProps } from "@/types/github/github.types";
+import { Metadata, ResolvingMetadata } from "next";
 
 export async function generateMetadata(
   { params }: UserSlugProps,
@@ -17,11 +18,11 @@ export async function generateMetadata(
       canonical: userUrl,
     },
     openGraph: {
-      images: [`/u/${username}/opengraph-image`],
+      images: [Route.OPENGRAPH_IMAGE(username)],
     },
     twitter: {
       card: "summary_large_image",
-      images: [`/u/${username}/opengraph-image`],
+      images: [Route.OPENGRAPH_IMAGE(username)],
     },
   };
 }
@@ -30,7 +31,7 @@ const UserPage = async ({ params }: UserSlugProps) => {
   const { username } = await params;
 
   return (
-    <section className="mt-16 xl:max-w-screen-xl w-full mx-auto py-2">
+    <section className="max-w-screen-xl w-full mx-auto py-2">
       <BentoComponent username={username} />
     </section>
   );

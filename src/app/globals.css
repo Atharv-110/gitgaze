@@ -3,9 +3,8 @@
 @tailwind utilities;
 
 .markdown-body {
-  border-radius: 14px;
-  background-color: rgba(255, 255, 255, 0.5) !important;
-  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 1) !important;
   font-weight: normal !important;
   font-family: var(--font-montserrat), system-ui, sans-serif !important;
 }

@@ -1,8 +1,14 @@
-import { GitHubUser } from "@/types/github/user.types";
-import { githubRequest } from "./githubClient";
 import { GhUserContributionCollection } from "@/types/github/contributions.types";
-import { RepositoryNode } from "@/types/github/repositories.types";
 import { Language } from "@/types/github/github.types";
+import { RepositoryNode } from "@/types/github/repositories.types";
+import { GitHubUser } from "@/types/github/user.types";
+import {
+  GitGazeHolopinBadge,
+  GitGazeHolopinResponse,
+  HolopinOrganization,
+  HolopinResponse,
+} from "@/types/integration/holopin.types";
+import { githubRequest } from "./githubClient";
 
 export const getUserCreatedAtDate = async (
   login: string,
@@ -129,4 +135,69 @@ export function rewriteRelativePaths(
       return `<img ${before}src="${rawBase}${cleanPath}"${after}>`;
     },
   );
+}
+
+export function transformHolopinData(
+  data: HolopinResponse,
+): GitGazeHolopinResponse {
+  const hacktoberfestMap = new Map<number, GitGazeHolopinBadge[]>();
+  const otherBadges: GitGazeHolopinBadge[] = [];
+
+  let hacktoberfestOrganization: HolopinOrganization | null = null;
+
+  for (const sticker of data.stickers) {
+    const badge: GitGazeHolopinBadge = {
+      id: sticker.id,
+      name: sticker.name,
+      description: sticker.description,
+      image: sticker.image,
+    };
+
+    const org = sticker.organization?.username?.toLowerCase();
+
+    // Hacktoberfest handling
+    if (org === "hacktoberfest") {
+      // store organization once
+      if (!hacktoberfestOrganization) {
+        hacktoberfestOrganization = {
+          name: sticker.organization.name,
+          username: sticker.organization.username,
+          image: sticker.organization.image ?? null,
+          description: sticker.organization.description ?? null,
+        };
+      }
+
+      // extract year from badge name
+      const yearMatch = sticker.name.match(/20\d{2}/);
+
+      if (yearMatch) {
+        const year = Number(yearMatch[0]);
+
+        if (!hacktoberfestMap.has(year)) {
+          hacktoberfestMap.set(year, []);
+        }
+
+        hacktoberfestMap.get(year)!.push(badge);
+        continue;
+      }
+    }
+
+    // Non Hacktoberfest badges
+    otherBadges.push(badge);
+  }
+
+  const hacktoberfestYears = [...hacktoberfestMap.entries()]
+    .map(([year, badges]) => ({
+      year,
+      badges,
+    }))
+    .sort((a, b) => b.year - a.year);
+
+  return {
+    hacktoberfest: {
+      organization: hacktoberfestOrganization,
+      badges: hacktoberfestYears,
+    },
+    otherBadges,
+  };
 }

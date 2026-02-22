@@ -1,3 +1,4 @@
+import { Route } from "@/enums/route.enum";
 import { cn } from "@/lib/client.helpers";
 import Image from "next/image";
 import Link from "next/link";
@@ -39,7 +40,9 @@ export const AvatarCircles = ({
       {(numPeople ?? 0) > 0 && (
         <Link
           className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full border-2 border-white bg-black text-center text-xs font-medium text-white hover:bg-gray-600 dark:border-gray-800 dark:bg-white dark:text-black"
-          href=""
+          href={Route.DISCOVER}
+          target="_blank"
+          rel="noopener noreferrer"
         >
           +{numPeople}
         </Link>

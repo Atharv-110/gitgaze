@@ -15,7 +15,6 @@ export async function POST(req: Request) {
         createdAt
         avatarUrl
         isDeveloperProgramMember
-        twitterUsername
         websiteUrl
         company
         email

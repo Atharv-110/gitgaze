@@ -1,4 +1,5 @@
 "use client";
+import { getIcon } from "@/assets/icons/icons";
 import useGithubUser from "@/hooks/useGithubUser";
 import { GitHubUser } from "@/types/github/user.types";
 import {
@@ -7,25 +8,37 @@ import {
   UsersIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import Card from "../card";
 import Chip from "../ui/chip";
+import LanguageIcon, { LanguageKey } from "../ui/language-icon";
 import { ParseEmoji } from "../ui/parse-emoji";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { cn } from "@/lib/client.helpers";
-import Link from "next/link";
-import { getIcon } from "@/assets/icons/icons";
-import LanguageIcon, { LanguageKey } from "../ui/language-icon";
+import { Route } from "@/enums/route.enum";
 
-const ProfileCard = ({ username }: { username: string }) => {
-  const [userData, setUserData] = React.useState<GitHubUser | null>(null);
-  const { data, isLoading, error } = useGithubUser(username);
+const ProfileCard = ({
+  username,
+  initData = null,
+}: {
+  username?: string;
+  initData?: GitHubUser | null;
+}) => {
+  const [userData, setUserData] = React.useState<GitHubUser | null>(initData);
+  const shouldFetch = !initData;
+  const { data, isLoading, error } = useGithubUser(username, {
+    enabled: !!username && shouldFetch,
+  });
 
   React.useEffect(() => {
-    if (data) {
+    if (initData) {
+      setUserData(initData);
+      return;
+    }
+    if (data && !initData) {
       setUserData(data);
     }
-  }, [data]);
+  }, [data, initData]);
 
   return (
     <Card isLoading={isLoading} errorMsg={error ? "User Not Found" : undefined}>
@@ -123,7 +136,7 @@ const ProfileCard = ({ username }: { username: string }) => {
               ))}
             <Link
               className="max-w-44 flex-1 flex items-center justify-center text-xs md:text-sm tracking-wide bg-slate-100 p-1 md:p-1.5 gap-[5px] font-medium rounded-lg border hover:border-slate-400"
-              href={`/u/${username}/readme`}
+              href={Route.USER_README(username)}
             >
               <LanguageIcon size={20} name={"MDX" as LanguageKey} />
               Readme

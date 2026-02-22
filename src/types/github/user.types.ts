@@ -18,8 +18,6 @@ export interface GitHubUser {
   followers: { totalCount: number };
   following: { totalCount: number };
   isDeveloperProgramMember: boolean;
-  isHireable: boolean;
-  twitterUsername: string | null;
   company: string | null;
   websiteUrl: string | null;
   socialAccounts: { nodes: GhSocialAccountNode[] | [] };

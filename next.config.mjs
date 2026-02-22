@@ -14,6 +14,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "api.producthunt.com",
       },
+      {
+        protocol: "https",
+        hostname: "assets.holopin.io",
+      },
+      {
+        protocol: "https",
+        hostname: "www.holopin.io",
+      },
     ],
     qualities: [75, 85, 90, 95, 100],
     dangerouslyAllowSVG: true,

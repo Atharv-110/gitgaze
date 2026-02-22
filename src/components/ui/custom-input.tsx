@@ -3,14 +3,15 @@ import Image from "next/image";
 import React from "react";
 import Button from "./button";
 import { useRouter } from "next/navigation";
+import { Route } from "@/enums/route.enum";
 
 const CustomInput = () => {
   const [value, setValue] = React.useState("");
   const router = useRouter();
   const handleClick = () => {
-    const trimmedValue = value.trim();
-    if (trimmedValue) {
-      router.push(`/u/${trimmedValue}`);
+    const userName = value.trim();
+    if (userName) {
+      router.push(Route.USER_PROFILE(userName));
     }
   };
 
@@ -42,7 +43,8 @@ const CustomInput = () => {
       <Button
         icon="ArrowRightIcon"
         size={28}
-        className="w-12 h-12 aspect-square justify-center p-0 rounded-full"
+        className="w-12 h-12 aspect-square justify-center p-0 rounded-full bg-black border-black hover:opacity-80"
+        color="text-white group-hover:text-white"
         onClick={handleClick}
       />
     </div>

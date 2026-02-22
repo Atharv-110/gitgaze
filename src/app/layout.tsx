@@ -75,7 +75,7 @@ export default function RootLayout({
   };
   return (
     <html lang="en" className={montserrat.variable}>
-      <body className="font-sans relative z-20 flex flex-col h-[100dvh] max-h-[100dvh] overflow-hidden bg-white">
+      <body className="font-sans z-20 flex flex-col h-[100dvh] max-h-[100dvh] overflow-hidden bg-white relative">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

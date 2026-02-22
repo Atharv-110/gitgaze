@@ -25,7 +25,7 @@ const Card = ({
   return (
     <div
       className={cn(
-        "w-full h-full flex flex-col justify-between overflow-hidden items-stretch isolate p-3 md:p-4 bg-white border border-slate-200 shadow-md rounded-xl max-sm:min-h-[200px]",
+        "w-full h-full flex flex-col justify-between overflow-hidden items-stretch isolate p-3 md:p-4 bg-white backdrop-blur border-2 border-slate-200 shadow-sm rounded-xl max-sm:min-h-[200px]",
         cardTitle ? "space-y-2" : "space-y-2",
         className,
       )}

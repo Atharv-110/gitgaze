@@ -44,7 +44,7 @@ export function getTextWidth(
   text: string,
   fontSize: number = 12,
   fontFamily: string = "Montserrat, sans-serif",
-  fontWeight: string = "normal"
+  fontWeight: string = "normal",
 ): { width: number; height: number } {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
@@ -58,4 +58,22 @@ export function getTextWidth(
     metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
 
   return { width: metrics.width, height: fontHeight };
+}
+
+export function detectHolopin(readme: string) {
+  if (!readme) return null;
+
+  // Match holopin.me badge
+  const badgeMatch = readme.match(/https:\/\/holopin\.me\/([a-zA-Z0-9_-]+)/i);
+
+  if (badgeMatch) return badgeMatch[1];
+
+  // Match holopin.io profile
+  const profileMatch = readme.match(
+    /https:\/\/holopin\.io\/@([a-zA-Z0-9_-]+)/i,
+  );
+
+  if (profileMatch) return profileMatch[1];
+
+  return null;
 }

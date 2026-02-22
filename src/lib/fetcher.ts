@@ -7,16 +7,13 @@ import {
 import { RepositoryWithLanguageNames } from "@/types/github/repositories.types";
 import { GitHubUser } from "@/types/github/user.types";
 import { axiosInstance } from "./axios";
+import { GitGazeHolopinResponse } from "@/types/integration/holopin.types";
 
-export async function fetchGitHubUser(username: string): Promise<GitHubUser> {
+export async function fetchGitHubUser(username?: string): Promise<GitHubUser> {
+  if (!username) {
+    return Promise.reject(new Error("Username is required"));
+  }
   const res = await axiosInstance.post("/github/user", { login: username });
-  return res.data.data;
-}
-
-export async function fetchGitHubUserReadme(username: string): Promise<string> {
-  const res = await axiosInstance.post("/github/user/repositories/profile", {
-    login: username,
-  });
   return res.data.data;
 }
 
@@ -82,6 +79,15 @@ export async function fetchGhWrappedData(
 ): Promise<WrappedServerResponse> {
   const res = await axiosInstance.post("/github/user/wrapped", {
     login: username,
+  });
+  return res.data.data;
+}
+
+export async function fetchHolopinBadges(
+  username: string,
+): Promise<GitGazeHolopinResponse> {
+  const res = await axiosInstance.post("/holopin/badges", {
+    holopinUsername: username,
   });
   return res.data.data;
 }
