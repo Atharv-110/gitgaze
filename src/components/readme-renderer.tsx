@@ -54,7 +54,7 @@ const ReadmeRenderer = ({
   }, [handleDownload, handleCopy, setConfig]);
 
   return (
-    <div className="max-w-[980px] w-full space-y-5">
+    <div className="max-w-[980px] h-full w-full space-y-5">
       <div
         className={cn(
           "markdown-body p-3 md:p-6 rounded-xl border-2 border-slate-200 shadow-sm",

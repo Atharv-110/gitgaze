@@ -7,8 +7,6 @@ const Holopin = ({ holopinUsername }: { holopinUsername: string | null }) => {
   const { data, isLoading, error } = useHolopinBadges(holopinUsername || "");
   const hacktoberfestData = data?.hacktoberfest;
 
-  console.log(data?.otherBadges);
-
   return (
     <>
       {hacktoberfestData?.badges.map((badge) => (

@@ -27,11 +27,15 @@ const UserReadmePage = async ({ params }: UserSlugProps) => {
   };
 
   return (
-    <section className="max-w-screen-xl w-full mx-auto py-2 flex flex-col md:flex-row items-start gap-2">
+    <section
+      className={`max-w-screen-xl w-full mx-auto py-2 flex flex-col md:flex-row items-start gap-2 ${holopinUsername ? "justify-normal" : "justify-center"}`}
+    >
       <ReadmeRenderer username={username} readme={readme} />
-      <aside className="w-full h-full flex-1 space-y-2">
-        <Integrations {...integrationProps} />
-      </aside>
+      {holopinUsername && (
+        <aside className="w-full h-full flex-1 space-y-2">
+          <Integrations {...integrationProps} />
+        </aside>
+      )}
     </section>
   );
 };
