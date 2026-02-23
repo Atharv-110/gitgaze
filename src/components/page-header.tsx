@@ -88,7 +88,7 @@ const PageHeader = ({
   return (
     <header
       className={cn(
-        "absolute border-b md:border-2 border-slate-200 rounded-xl z-10 max-w-screen-xl w-full md:top-2 left-1/2 -translate-x-1/2 max-h-10 md:max-h-12 h-full bg-white/50 md:bg-white backdrop-blur shadow-sm flex items-center justify-between px-4",
+        "absolute border-b md:border-2 border-slate-200 rounded-none md:rounded-xl z-10 max-w-screen-xl w-full md:top-2 left-1/2 -translate-x-1/2 max-h-11 md:max-h-12 h-full bg-white/50 md:bg-white backdrop-blur shadow-sm flex items-center justify-between px-2 md:px-4",
         wrapperClassName,
         overrideWrapperClassName,
       )}
@@ -97,7 +97,7 @@ const PageHeader = ({
         {showBackButton && showBack && (
           <Button
             icon="ArrowLeftIcon"
-            className="bg-transparent border border-slate-400  hover:border-slate-500 group rounded-full p-1.5"
+            className="bg-transparent border border-slate-400  hover:border-slate-500 group rounded-full p-1 md:p-1.5"
             color="text-slate-400 !size-3 md:!size-4 group-hover:text-slate-500"
             onClick={() => router.back()}
           />
@@ -105,14 +105,14 @@ const PageHeader = ({
         {showHomeButton && (
           <Button
             icon="HomeIcon"
-            className="bg-transparent border border-slate-400  hover:border-slate-500 group rounded-full p-1.5"
+            className="bg-transparent border border-slate-400  hover:border-slate-500 group rounded-full p-1 md:p-1.5"
             color="text-slate-400 !size-3 md:!size-4 group-hover:text-slate-500"
             onClick={() => router.push(Route.HOME)}
           />
         )}
         {defaultType ? (
-          <h1 className="text-base w-fit md:text-xl font-bold line-clamp-1">
-            {username && <span>{username}'s </span>}
+          <h1 className="text-base w-fit md:text-xl font-bold">
+            {username && `${username}'s `}
             <AuroraText>{routeName}</AuroraText>
           </h1>
         ) : (

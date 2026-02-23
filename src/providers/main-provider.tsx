@@ -22,7 +22,11 @@ export default function MainProvider({ children }: { children: ReactNode }) {
     <PageHeaderProvider>
       <QueryClientProvider client={queryClient}>
         <Background />
-        <PageHeader route={pathname} username={username} />
+        <PageHeader
+          showHomeButton={false}
+          route={pathname}
+          username={username}
+        />
         <main
           className={`${pathname === Route.HOME ? "pt-0" : "pt-14"} flex-1 w-full flex justify-start px-4 xl:px-16 overflow-y-auto [&::-webkit-scrollbar]:hidden`}
         >
