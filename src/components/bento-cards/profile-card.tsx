@@ -123,22 +123,25 @@ const ProfileCard = ({
                   key={node.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full max-w-9"
+                  className="w-full max-w-7 md:max-w-9"
                 >
                   <Image
                     src={getIcon(node.provider) as string}
                     alt={node.provider || "Social Icon"}
                     width={36}
                     height={36}
-                    className="w-full aspect-square bg-slate-100 border border-slate-200 rounded-lg p-1.5 object-contain hover:border-slate-400"
+                    className="w-full aspect-square size-7 md:size-9 bg-slate-50 border border-slate-200 rounded-lg p-1.5 object-contain hover:border-slate-400"
                   />
                 </Link>
               ))}
             <Link
-              className="max-w-44 flex-1 flex items-center justify-center text-xs md:text-sm tracking-wide bg-slate-100 p-1 md:p-1.5 gap-[5px] font-medium rounded-lg border hover:border-slate-400"
+              className="max-w-44 flex-1 flex items-center justify-center text-xs md:text-sm tracking-wide bg-slate-50 p-1 md:p-1.5 gap-[5px] font-medium rounded-lg border hover:border-slate-400"
               href={Route.USER_README(username)}
             >
-              <LanguageIcon size={20} name={"MDX" as LanguageKey} />
+              <LanguageIcon
+                name={"MDX" as LanguageKey}
+                className="md:!size-5 !size-4"
+              />
               Readme
             </Link>
           </div>

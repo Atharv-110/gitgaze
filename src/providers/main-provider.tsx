@@ -2,7 +2,7 @@
 
 import Background from "@/components/background";
 import Footer from "@/components/footer";
-import Header from "@/components/header";
+import PageHeader from "@/components/page-header";
 import { Route } from "@/enums/route.enum";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { usePathname } from "next/navigation";
@@ -22,7 +22,7 @@ export default function MainProvider({ children }: { children: ReactNode }) {
     <PageHeaderProvider>
       <QueryClientProvider client={queryClient}>
         <Background />
-        <Header username={username} route={pathname} />
+        <PageHeader route={pathname} username={username} />
         <main
           className={`${pathname === Route.HOME ? "pt-0" : "pt-14"} flex-1 w-full flex justify-start px-4 xl:px-16 overflow-y-auto [&::-webkit-scrollbar]:hidden`}
         >

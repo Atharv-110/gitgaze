@@ -6,7 +6,6 @@ import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
 import remarkGfm from "remark-gfm";
-import Loader from "./ui/loader";
 
 import { usePageHeaderContext } from "@/providers/page-header-provider";
 import "github-markdown-css/github-markdown-light.css";
@@ -54,11 +53,11 @@ const ReadmeRenderer = ({
   }, [handleDownload, handleCopy, setConfig]);
 
   return (
-    <div className="max-w-[980px] h-full w-full space-y-5">
+    <div className="max-w-[980px] w-full space-y-5">
       <div
         className={cn(
           "markdown-body p-3 md:p-6 rounded-xl border-2 border-slate-200 shadow-sm",
-          !readme && "h-full flex items-center justify-center",
+          !readme && "min-h-[50vh] flex items-center justify-center",
         )}
       >
         {!readme ? (

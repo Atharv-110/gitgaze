@@ -69,7 +69,7 @@ const HolopinCard = ({
   };
 
   return (
-    <Card className="max-h-60" isLoading={isLoading} errorMsg={errorMsg}>
+    <Card className="h-60" isLoading={isLoading} errorMsg={errorMsg}>
       {/* Header */}
       <div className="flex justify-between items-center">
         <Chip>
