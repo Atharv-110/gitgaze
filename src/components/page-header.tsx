@@ -8,6 +8,8 @@ import { AuroraText } from "./ui/aurora-text";
 import Button from "./ui/button";
 
 function getRouteBasedConfig(route: string, username?: string) {
+  console.log("getRouteBasedConfig: ", route);
+
   switch (route) {
     case Route.HOME:
       return { name: null, className: "hidden" };
