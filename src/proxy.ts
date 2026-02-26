@@ -9,13 +9,13 @@ export async function proxy(req: NextRequest) {
 
   const username = match[1];
 
-  // fetch(`${req.nextUrl.origin}/api/track-user`, {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify({ username }),
-  // }).catch((err) => {
-  //   console.error("GitGaze User Tracking Failed:", err);
-  // });
+  fetch(`${req.nextUrl.origin}/api/track-user`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username }),
+  }).catch((err) => {
+    console.error("GitGaze User Tracking Failed:", err);
+  });
 
   return NextResponse.next();
 }
