@@ -2,10 +2,11 @@ import { GhContributionDay } from "@/types/github/contributions.types";
 import {
   GhYearlyContribution,
   Language,
+  PaginatedAPIResponse,
   WrappedServerResponse,
 } from "@/types/github/github.types";
 import { RepositoryWithLanguageNames } from "@/types/github/repositories.types";
-import { GitHubUser } from "@/types/github/user.types";
+import { GitGazeUser, GitHubUser } from "@/types/github/user.types";
 import { axiosInstance } from "./axios";
 import { GitGazeHolopinResponse } from "@/types/integration/holopin.types";
 
@@ -15,6 +16,27 @@ export async function fetchGitHubUser(username?: string): Promise<GitHubUser> {
   }
   const res = await axiosInstance.post("/github/user", { login: username });
   return res.data.data;
+}
+
+export async function fetchGitgazeUsers(
+  lastViews?: number,
+  lastId?: string,
+  allUsers: boolean = false,
+): Promise<
+  PaginatedAPIResponse<
+    GitGazeUser[],
+    { lastViews: number; lastId: string } | null
+  >
+> {
+  const res = await axiosInstance.get("/users", {
+    params: {
+      lastViews,
+      lastId,
+      allUsers,
+    },
+  });
+
+  return res.data;
 }
 
 export async function fetchGhUserAchievements(username: string) {

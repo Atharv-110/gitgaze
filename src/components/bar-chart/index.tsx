@@ -28,7 +28,12 @@ const BarChartComponent = ({ data }: { data: DayWiseContributionProps[] }) => {
       className="w-full max-w-full max-h-full aspect-[1.618]"
       responsive
       data={data}
-      margin={{ bottom: 10 }}
+      margin={{
+        top: 4,
+        right: 0,
+        left: 0,
+        bottom: 12,
+      }}
     >
       <Tooltip
         wrapperStyle={{ pointerEvents: "none" }}
@@ -37,8 +42,9 @@ const BarChartComponent = ({ data }: { data: DayWiseContributionProps[] }) => {
       />
       <XAxis
         dataKey="name"
-        tick={{ fontSize: 11, fontWeight: 500 }}
+        tick={{ fontSize: 10, fontWeight: 500 }}
         interval={0}
+        stroke="#64748b"
         axisLine={false}
         tickLine={false}
         tickFormatter={(value: string) => value.slice(0, 3)}
@@ -47,9 +53,9 @@ const BarChartComponent = ({ data }: { data: DayWiseContributionProps[] }) => {
       <Bar
         dataKey="contributionCount"
         fill="#4CB944"
-        radius={5}
+        radius={8}
         activeBar={{ enableBackground: 0 }}
-        label={{ position: "top", fontSize: 9, fill: "#000000" }}
+        label={{ position: "top", fontSize: 9, fill: "#64748b" }}
       />
     </BarChart>
   );

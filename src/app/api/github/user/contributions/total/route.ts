@@ -8,7 +8,6 @@ import {
   fetchYearlyContributions,
   getUserCreatedAtDate,
 } from "../../../../../../lib/server.helpers";
-import { stat } from "fs";
 
 const TOTAL_CONTRIBUTIONS_QUERY = `
         query ($login: String!, $from: DateTime!, $to: DateTime!) {
@@ -45,7 +44,7 @@ export async function POST(req: Request) {
       TOTAL_CONTRIBUTIONS_QUERY,
       login,
       from,
-      to
+      to,
     );
 
     contributions.push({

@@ -10,8 +10,10 @@ import {
   YAxis,
 } from "recharts";
 import CustomAreaTooltip from "./custom-area-tooltip";
+import { formatShortDate } from "@/lib/client.helpers";
+import hexToRgba from "hex-to-rgba";
 
-function getDynamicYAxisTicks(maxValue: number, desiredTicks = 6): number[] {
+function getDynamicYAxisTicks(maxValue: number, desiredTicks = 5): number[] {
   if (maxValue <= 0) return [0, 1];
   const roughStep = maxValue / desiredTicks;
   const magnitude = Math.pow(10, Math.floor(Math.log10(roughStep)));
@@ -35,7 +37,7 @@ const CustomAreaChart = ({ data }: { data: GhContributionDay[] }) => {
       data && data.length
         ? data.reduce(
             (max, d) => (d.contributionCount > max ? d.contributionCount : max),
-            0
+            0,
           )
         : 0;
     return getDynamicYAxisTicks(maxValue, 6);
@@ -45,45 +47,44 @@ const CustomAreaChart = ({ data }: { data: GhContributionDay[] }) => {
       className="w-full max-w-full max-h-full aspect-[1.618]"
       responsive
       data={data}
+      margin={{
+        top: 8,
+        right: 5,
+        left: 5,
+        bottom: 0,
+      }}
     >
-      <CartesianGrid strokeDasharray="3 3" opacity={0.4} />
+      <CartesianGrid vertical={false} opacity={0.4} />
       <XAxis
         tick={{ fontSize: 9 }}
-        tickFormatter={(value: string) => new Date(value).getDate().toString()}
+        tickLine={false}
+        minTickGap={20}
+        axisLine={false}
+        height={16}
+        stroke="#64748b"
+        tickFormatter={(value: string) => formatShortDate(value)}
         dataKey="date"
-        label={{
-          value: "Days",
-          position: "center",
-          dy: 8,
-          fontSize: 11,
-        }}
       />
       <YAxis
         tick={{ fontSize: 9 }}
         tickLine={false}
         width="auto"
+        axisLine={false}
+        stroke="#64748b"
         domain={[0, ticks[ticks.length - 1]]}
-        ticks={ticks}
         scale="linear"
         type="number"
         allowDecimals={false}
-        label={{
-          value: "Contributions",
-          angle: -90,
-          position: "center",
-          dx: -8,
-          fontSize: 11,
-        }}
       />
       <Tooltip content={<CustomAreaTooltip />} />
       <Area
-        type="monotone"
+        type="linear"
         dataKey="contributionCount"
         stroke="#e17100"
         strokeWidth={2}
-        fill="#fe9a00"
-        dot={{ fill: "#fe9a00" }}
-        activeDot={{ r: 5, fill: "#e17100" }}
+        fill={"#fed7aa"}
+        dot={{ r: 0, fill: "#fe9a00" }}
+        activeDot={{ r: 4, fill: "#e17100" }}
       />
     </AreaChart>
   );

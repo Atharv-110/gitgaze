@@ -2,11 +2,11 @@ import { githubRequest } from "@/lib/githubClient";
 import { connectDB } from "@/lib/mongo";
 import Users from "@/models/Users";
 import { PaginatedAPIResponse } from "@/types/github/github.types";
-import { GitHubUser } from "@/types/github/user.types";
+import { GitHubUser, GitGazeUser } from "@/types/github/user.types";
 import mongoose from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
-const LIMIT = 20;
+const LIMIT = 15;
 
 export async function GET(req: NextRequest) {
   try {
@@ -16,8 +16,7 @@ export async function GET(req: NextRequest) {
 
     const lastViews = searchParams.get("lastViews");
     const lastId = searchParams.get("lastId");
-    const allUsers = searchParams.get("allUsers");
-
+    const allUsers = searchParams.get("allUsers") === "true";
     let filter: any = {};
     let limit = LIMIT;
 
@@ -82,19 +81,9 @@ export async function GET(req: NextRequest) {
                 user${i}: user(login: "${u}") {
                   login
                   name
-                  bio
-                  createdAt
                   avatarUrl
                   isDeveloperProgramMember
-                  websiteUrl
                   company
-                  email
-                  socialAccounts(first: 5) {
-                    nodes {
-                      provider
-                      url
-                    }
-                  }
                   followers {
                       totalCount
                   }
@@ -125,7 +114,18 @@ export async function GET(req: NextRequest) {
       }>(query);
     }
 
-    const userdata = result.data ? Object.values(result.data) : [];
+    const userdata = result.data
+      ? users
+          .map((u, i) => {
+            const ghUser = (result.data as any)[`user${i}`];
+            if (!ghUser) return null;
+            return {
+              ...ghUser,
+              views: u.views,
+            };
+          })
+          .filter(Boolean)
+      : [];
 
     // Cursor only when paginating
     let nextCursor = null;
@@ -141,25 +141,25 @@ export async function GET(req: NextRequest) {
     if (allUsers) {
       return NextResponse.json<
         PaginatedAPIResponse<
-          Pick<GitHubUser, "login" | "avatarUrl">[],
+          Pick<GitGazeUser, "login" | "avatarUrl" | "views">[],
           { lastViews: number; lastId: string } | null
         >
       >({
         success: true,
         message: "OK",
-        data: userdata as Pick<GitHubUser, "login" | "avatarUrl">[],
+        data: userdata as Pick<GitGazeUser, "login" | "avatarUrl" | "views">[],
         nextCursor,
       });
     } else {
       return NextResponse.json<
         PaginatedAPIResponse<
-          GitHubUser[],
+          GitGazeUser[],
           { lastViews: number; lastId: string } | null
         >
       >({
         success: true,
         message: "OK",
-        data: userdata as GitHubUser[],
+        data: userdata as GitGazeUser[],
         nextCursor,
       });
     }

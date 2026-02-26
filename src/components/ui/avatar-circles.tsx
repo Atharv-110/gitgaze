@@ -21,12 +21,7 @@ export const AvatarCircles = ({
   return (
     <div className={cn("z-10 flex -space-x-4 rtl:space-x-reverse", className)}>
       {avatarUrls.map((url, index) => (
-        <Link
-          key={index}
-          href={url.profileUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Link key={index} href={Route.DISCOVER}>
           <Image
             key={index}
             className="h-10 w-10 md:h-12 md:w-12 rounded-full border-2 border-white dark:border-gray-800"
@@ -41,8 +36,6 @@ export const AvatarCircles = ({
         <Link
           className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full border-2 border-white bg-black text-center text-xs font-medium text-white hover:bg-gray-600 dark:border-gray-800 dark:bg-white dark:text-black"
           href={Route.DISCOVER}
-          target="_blank"
-          rel="noopener noreferrer"
         >
           +{numPeople}
         </Link>

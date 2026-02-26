@@ -5,7 +5,7 @@ import * as Icons from "@heroicons/react/24/outline";
 import { ButtonHTMLAttributes } from "react";
 
 interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  icon: keyof typeof Icons;
+  icon?: keyof typeof Icons;
   label?: string;
   size?: number;
   color?: string;
@@ -19,12 +19,7 @@ export default function Button({
   className = "",
   ...props
 }: IconButtonProps) {
-  const IconComponent = Icons[icon];
-
-  if (!IconComponent) {
-    console.error(`Icon "${icon}" not found in Heroicons.`);
-    return null;
-  }
+  const IconComponent = icon ? Icons[icon] : null;
 
   return (
     <button
@@ -44,10 +39,12 @@ export default function Button({
           {label}
         </span>
       )}
-      <IconComponent
-        style={{ width: size, height: size }}
-        className={cn("group-hover:text-black", color)}
-      />
+      {IconComponent && (
+        <IconComponent
+          style={{ width: size, height: size }}
+          className={cn("group-hover:text-black", color)}
+        />
+      )}
     </button>
   );
 }

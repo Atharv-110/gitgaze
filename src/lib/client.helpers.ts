@@ -77,3 +77,19 @@ export function detectHolopin(readme: string) {
 
   return null;
 }
+
+export const formatShortDate = (date: string | Date) =>
+  new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+  }).format(new Date(date));
+
+export function formatCompactNumber(value: number | string): string {
+  return new Intl.NumberFormat("en", {
+    notation: "compact",
+    maximumFractionDigits: 1,
+  })
+    .format(Number(value))
+    .replace(".0", "")
+    .toLowerCase();
+}

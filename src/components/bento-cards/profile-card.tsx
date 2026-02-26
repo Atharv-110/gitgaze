@@ -1,7 +1,9 @@
 "use client";
 import { getIcon } from "@/assets/icons/icons";
+import { Route } from "@/enums/route.enum";
 import useGithubUser from "@/hooks/useGithubUser";
-import { GitHubUser } from "@/types/github/user.types";
+import { formatCompactNumber } from "@/lib/client.helpers";
+import { GitGazeUser, GitHubUser } from "@/types/github/user.types";
 import {
   BuildingOffice2Icon,
   CpuChipIcon,
@@ -15,16 +17,17 @@ import Chip from "../ui/chip";
 import LanguageIcon, { LanguageKey } from "../ui/language-icon";
 import { ParseEmoji } from "../ui/parse-emoji";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { Route } from "@/enums/route.enum";
 
 const ProfileCard = ({
   username,
   initData = null,
 }: {
   username?: string;
-  initData?: GitHubUser | null;
+  initData?: GitGazeUser | null;
 }) => {
-  const [userData, setUserData] = React.useState<GitHubUser | null>(initData);
+  const [userData, setUserData] = React.useState<
+    GitHubUser | GitGazeUser | null
+  >(initData);
   const shouldFetch = !initData;
   const { data, isLoading, error } = useGithubUser(username, {
     enabled: !!username && shouldFetch,
@@ -52,7 +55,9 @@ const ProfileCard = ({
               height={80}
               className="max-w-[72px] md:max-w-20 aspect-square h-full rounded-full object-contain border-2 border-slate-300"
             />{" "}
-            <div className="h-full flex flex-col justify-between py-px">
+            <div
+              className={`h-full flex flex-col py-px ${userData.status && userData.name ? "justify-between" : "gap-y-1"}`}
+            >
               {userData.status && (
                 <Chip
                   className={
@@ -101,50 +106,54 @@ const ProfileCard = ({
               <p className="flex items-center justify-start text-xs md:text-sm gap-1 text-slate-600">
                 <UsersIcon className="size-3 md:size-4" />
                 <span className="font-medium">
-                  {userData.followers.totalCount}
+                  {formatCompactNumber(userData.followers.totalCount)}
                 </span>{" "}
                 followers <span className="font-bold">·</span>{" "}
                 <span className="font-medium">
-                  {userData.following.totalCount}
+                  {formatCompactNumber(userData.following.totalCount)}
                 </span>{" "}
                 following
               </p>
             </div>
           </div>
-          <p className="text-xs tracking-wide leading-snug text-slate-600 line-clamp-3">
-            {userData.bio}
-          </p>
+          {userData.bio && (
+            <p className="text-xs tracking-wide leading-snug text-slate-600 line-clamp-3">
+              {userData.bio}
+            </p>
+          )}
 
-          <div className="flex items-stretch justify-start gap-1.5">
-            {userData?.socialAccounts?.nodes.length > 0 &&
-              userData?.socialAccounts?.nodes.map((node) => (
-                <Link
-                  href={node.url}
-                  key={node.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full max-w-7 md:max-w-9"
-                >
-                  <Image
-                    src={getIcon(node.provider) as string}
-                    alt={node.provider || "Social Icon"}
-                    width={36}
-                    height={36}
-                    className="w-full aspect-square size-7 md:size-9 bg-slate-50 border border-slate-200 rounded-lg p-1.5 object-contain hover:border-slate-400"
-                  />
-                </Link>
-              ))}
-            <Link
-              className="max-w-44 flex-1 flex items-center justify-center text-xs md:text-sm tracking-wide bg-slate-50 p-1 md:p-1.5 gap-[5px] font-medium rounded-lg border hover:border-slate-400"
-              href={Route.USER_README(username)}
-            >
-              <LanguageIcon
-                name={"MDX" as LanguageKey}
-                className="md:!size-5 !size-4"
-              />
-              Readme
-            </Link>
-          </div>
+          {!initData && (
+            <div className="flex items-stretch justify-start gap-1.5">
+              {userData?.socialAccounts?.nodes.length > 0 &&
+                userData?.socialAccounts?.nodes.map((node) => (
+                  <Link
+                    href={node.url}
+                    key={node.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full max-w-7 md:max-w-9"
+                  >
+                    <Image
+                      src={getIcon(node.provider) as string}
+                      alt={node.provider || "Social Icon"}
+                      width={36}
+                      height={36}
+                      className="w-full aspect-square size-7 md:size-9 bg-slate-50 border border-slate-200 rounded-lg p-1.5 object-contain hover:border-slate-400"
+                    />
+                  </Link>
+                ))}
+              <Link
+                className="max-w-44 flex-1 flex items-center justify-center text-xs md:text-sm tracking-wide bg-slate-50 p-1 md:p-1.5 gap-[5px] font-medium rounded-lg border hover:border-slate-400"
+                href={Route.USER_README(username)}
+              >
+                <LanguageIcon
+                  name={"MDX" as LanguageKey}
+                  className="md:!size-5 !size-4"
+                />
+                Readme
+              </Link>
+            </div>
+          )}
         </>
       )}
     </Card>

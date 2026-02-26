@@ -34,3 +34,12 @@ export interface GhUserAchievement {
   tier: number | null;
   image: string | null;
 }
+
+export interface GitGazeUser extends GitHubUser {
+  views: number;
+}
+
+export type PageParam =
+  | { lastViews: number; lastId: string }
+  | undefined
+  | null;

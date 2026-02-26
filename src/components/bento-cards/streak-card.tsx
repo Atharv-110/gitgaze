@@ -7,6 +7,7 @@ import React, { useEffect } from "react";
 import Card from "../card";
 import { AuroraText } from "../ui/aurora-text";
 import fireImg from "@/assets/images/fire.gif";
+import { formatCompactNumber } from "@/lib/client.helpers";
 
 const getTotalContributions = (data: GhYearlyContribution[]) => {
   return data.reduce(
@@ -72,7 +73,7 @@ const StreakCard = ({ username }: { username: string }) => {
               colors={["#ABE098", "#83D475", "#57C84D", "#2EB62C"]}
               className="text-5xl md:text-6xl leading-none font-extrabold"
             >
-              {totalContributions}
+              {formatCompactNumber(totalContributions)}
             </AuroraText>
 
             <p className="text-xs inline-flex items-center gap-1 text-slate-600">
@@ -123,7 +124,7 @@ const StreakCard = ({ username }: { username: string }) => {
                 />
               )}
               <h2 className="text-2xl md:text-3xl leading-none font-bold">
-                {streakData.streak.count}
+                {formatCompactNumber(streakData.streak.count)}
               </h2>
               <p className="text-xs leading-none text-slate-600">Days</p>
               {/* "#FDB777", "#FDA766", "#FD7F2C", "#FF6200" */}
