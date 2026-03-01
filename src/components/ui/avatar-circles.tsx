@@ -20,15 +20,15 @@ export const AvatarCircles = ({
 }: AvatarCirclesProps) => {
   return (
     <div className={cn("z-10 flex -space-x-4 rtl:space-x-reverse", className)}>
-      {avatarUrls.map((url, index) => (
-        <Link key={index} href={Route.DISCOVER}>
+      {avatarUrls.map((url) => (
+        <Link key={url.profileUrl} href={Route.USER_PROFILE(url.profileUrl)}>
           <Image
-            key={index}
             className="h-10 w-10 md:h-12 md:w-12 rounded-full border-2 border-white dark:border-gray-800"
             src={url.imageUrl}
-            width={48}
-            height={48}
-            alt={`Avatar ${index + 1}`}
+            sizes="40px"
+            width={40}
+            height={40}
+            alt={`Avatar for ${url.profileUrl}`}
           />
         </Link>
       ))}

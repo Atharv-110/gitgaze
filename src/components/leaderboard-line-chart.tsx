@@ -17,6 +17,7 @@ import CustomAreaTooltip from "./area-chart/custom-area-tooltip";
 import Card from "./card";
 import { useRouter } from "next/navigation";
 import { Route } from "@/enums/route.enum";
+import { getGithubAvatar } from "@/lib/client.helpers";
 
 interface AvatarDotProps {
   cx?: number;
@@ -46,7 +47,6 @@ const AvatarDot = React.memo((props: AvatarDotProps) => {
 
   return (
     <foreignObject
-      onClick={handleAvatarClick}
       overflow={"visible"}
       x={cx - rectSize / 2}
       y={cy - rectSize / 2}
@@ -54,20 +54,25 @@ const AvatarDot = React.memo((props: AvatarDotProps) => {
       height={rectSize}
     >
       <div className="relative w-full h-full">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div
+          onClick={handleAvatarClick}
+          className="cursor-pointer absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          style={{ pointerEvents: "auto" }}
+        >
           <Image
-            src={payload.avatarUrl}
+            src={getGithubAvatar(payload.avatarUrl, 96)} // 48px × 2 for retina
             alt={payload.name ?? payload.login}
-            width={50}
-            height={50}
-            className={`md:size-12 size-10 rounded-full border-2 aspect-square object-contain ${
+            width={48}
+            height={48}
+            sizes="(max-width: 768px) 40px, 48px"
+            className={`rounded-full border-2 object-cover ${
               active
                 ? "border-[#fe9a00]"
                 : "border-slate-300 animate-avatar-pop"
-            }`}
+            } md:size-12 size-10`}
             style={{
               animationDelay: `${delay}ms`,
-              scale: active ? 1.25 : 1,
+              transform: active ? "scale(1.25)" : "scale(1)",
             }}
           />
         </div>

@@ -93,3 +93,5 @@ export function formatCompactNumber(value: number | string): string {
     .replace(".0", "")
     .toLowerCase();
 }
+
+export const getGithubAvatar = (url: string, size = 112) => `${url}&s=${size}`;

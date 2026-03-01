@@ -120,7 +120,6 @@ const StreakCard = ({ username }: { username: string }) => {
                   width={50}
                   height={50}
                   className="size-6 md:size-8 absolute -top-[15px] md:-top-5 bg-white"
-                  unoptimized
                 />
               )}
               <h2 className="text-2xl md:text-3xl leading-none font-bold">

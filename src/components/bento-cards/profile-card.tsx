@@ -2,7 +2,7 @@
 import { getIcon } from "@/assets/icons/icons";
 import { Route } from "@/enums/route.enum";
 import useGithubUser from "@/hooks/useGithubUser";
-import { formatCompactNumber } from "@/lib/client.helpers";
+import { formatCompactNumber, getGithubAvatar } from "@/lib/client.helpers";
 import { GitGazeUser, GitHubUser } from "@/types/github/user.types";
 import {
   BuildingOffice2Icon,
@@ -49,11 +49,12 @@ const ProfileCard = ({
         <>
           <div className="flex items-stretch gap-3">
             <Image
-              src={userData.avatarUrl}
-              alt={`${userData.name}'s avatar`}
+              src={getGithubAvatar(userData.avatarUrl, 160)} // 80px × 2 retina
+              alt={`${userData.name ?? userData.login}'s avatar`}
               width={80}
               height={80}
-              className="max-w-[72px] md:max-w-20 aspect-square h-full rounded-full object-contain border-2 border-slate-300"
+              sizes="(max-width: 768px) 72px, 80px"
+              className="max-w-[72px] md:max-w-20 rounded-full object-cover border-2 border-slate-300"
             />{" "}
             <div
               className={`h-full flex flex-col py-px ${userData.status && userData.name ? "justify-between" : "gap-y-1"}`}

@@ -1,22 +1,22 @@
-import React from "react";
-import Image from "next/image";
-import { motion } from "framer-motion";
+import winnerPodiumImg from "@/assets/images/winner_podium.svg";
 import { AuroraText } from "@/components/ui/aurora-text";
 import LanguageIcon, { LanguageKey } from "@/components/ui/language-icon";
-import { GitHubUser } from "@/types/github/user.types";
-import {
-  ArrowTrendingDownIcon,
-  ArrowTrendingUpIcon,
-} from "@heroicons/react/24/outline";
-import HeatMapComponent from "./heatmap";
+import { cn, getGithubAvatar } from "@/lib/client.helpers";
 import {
   CommitsSlideData,
   Language,
   topMonthContributionProps,
   WrappedSlideProps,
 } from "@/types/github/github.types";
-import { cn } from "@/lib/client.helpers";
-import winnerPodiumImg from "@/assets/images/winner_podium.svg";
+import { GitHubUser } from "@/types/github/user.types";
+import {
+  ArrowTrendingDownIcon,
+  ArrowTrendingUpIcon,
+} from "@heroicons/react/24/outline";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import React from "react";
+import HeatMapComponent from "./heatmap";
 
 const UserSlideComponent = ({
   userData,
@@ -34,11 +34,12 @@ const UserSlideComponent = ({
   return (
     <div className=" w-full h-full flex flex-col items-center justify-center gap-1.5">
       <Image
-        src={userData.avatarUrl}
-        alt={`${userData.name}'s avatar`}
+        src={getGithubAvatar(userData.avatarUrl, 150)}
+        alt={`${userData.name ?? userData.login}'s avatar`}
         width={75}
         height={75}
-        className="rounded-full aspect-square object-contain"
+        sizes="75px"
+        className="rounded-full object-cover"
       />
       <h2 className="text-lg font-bold">👋 Hello, {firstName}!</h2>
       <p className="text-xs text-slate-600">

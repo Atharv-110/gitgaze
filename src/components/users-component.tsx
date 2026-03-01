@@ -8,6 +8,7 @@ import Card from "./card";
 import Chip from "./ui/chip";
 import Loader from "./ui/loader";
 import { ParseEmoji } from "./ui/parse-emoji";
+import { getGithubAvatar } from "@/lib/client.helpers";
 
 const UserCard = React.memo(({ user }: { user: GitGazeUser | null }) => {
   if (!user) return null;
@@ -15,11 +16,12 @@ const UserCard = React.memo(({ user }: { user: GitGazeUser | null }) => {
     <Card className="max-sm:min-h-full p-2 md:p-2">
       <div className="flex items-center gap-x-2">
         <Image
-          src={user.avatarUrl}
+          src={getGithubAvatar(user.avatarUrl, 56)}
           alt={`${user.name}'s avatar`}
-          width={80}
-          height={80}
-          className="size-14 aspect-square h-full rounded-lg object-contain border-2 border-slate-300"
+          width={56}
+          height={56}
+          sizes="56px"
+          className="rounded-lg object-cover border-2 border-slate-300"
         />
         <div className="flex-1 flex flex-col justify-between gap-y-1 pb-1">
           <h1 className="text-base font-semibold line-clamp-1">

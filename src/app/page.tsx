@@ -1,6 +1,7 @@
 import { AuroraText } from "@/components/ui/aurora-text";
 import { AvatarCircles } from "@/components/ui/avatar-circles";
 import CustomInput from "@/components/ui/custom-input";
+import { getGithubAvatar } from "@/lib/client.helpers";
 import { GitHubUser } from "@/types/github/user.types";
 import Image from "next/image";
 import Link from "next/link";
@@ -40,8 +41,8 @@ export default async function Home() {
               .slice(0, 6)
               .map((user: Pick<GitHubUser, "login" | "avatarUrl">) => {
                 return {
-                  imageUrl: user.avatarUrl,
-                  profileUrl: `/u/${user.login}`,
+                  imageUrl: getGithubAvatar(user.avatarUrl, 80),
+                  profileUrl: user.login,
                 };
               })}
           />
