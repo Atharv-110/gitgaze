@@ -19,7 +19,7 @@ const UserCard = React.memo(({ user }: { user: GitGazeUser | null }) => {
           alt={`${user.name}'s avatar`}
           width={80}
           height={80}
-          className="max-w-16 aspect-square h-full rounded-lg object-contain border-2 border-slate-300"
+          className="size-14 aspect-square h-full rounded-lg object-contain border-2 border-slate-300"
         />
         <div className="flex-1 flex flex-col justify-between gap-y-1 pb-1">
           <h1 className="text-base font-semibold line-clamp-1">
@@ -31,10 +31,10 @@ const UserCard = React.memo(({ user }: { user: GitGazeUser | null }) => {
                 className={
                   user.status.message
                     ? "px-2 py-0.5 rounded-lg"
-                    : "p-0.5 aspect-square w-6"
+                    : "p-1 aspect-square leading-none"
                 }
               >
-                <ParseEmoji emoji={user.status?.emojiHTML} size={14} />
+                <ParseEmoji emoji={user.status?.emojiHTML} size={15} />
                 {user.status.message && (
                   <p className="line-clamp-1">{user.status.message}</p>
                 )}

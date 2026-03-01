@@ -10,8 +10,14 @@ let cached = (global as any).mongoose;
 if (!cached) {
   cached = (global as any).mongoose = { conn: null, promise: null };
 }
+
 export async function connectDB() {
   if (cached.conn) {
+    return cached.conn;
+  }
+
+  if (mongoose.connection.readyState === 1) {
+    cached.conn = mongoose.connection;
     return cached.conn;
   }
 
@@ -21,16 +27,23 @@ export async function connectDB() {
         dbName: "gitgaze",
         bufferCommands: false,
       })
-      .then((mongoose) => {
+      .then((mongooseInstance) => {
         console.log("✅ [MongoDB] Connected successfully");
-        return mongoose;
+        return mongooseInstance;
       })
       .catch((err) => {
         console.error("❌ [MongoDB] Connection failed:", err.message);
+        cached.promise = null;
         throw err;
       });
   }
 
-  cached.conn = await cached.promise;
+  try {
+    cached.conn = await cached.promise;
+  } catch (err) {
+    cached.promise = null;
+    throw err;
+  }
+
   return cached.conn;
 }

@@ -1,8 +1,9 @@
 "use client";
 import useGitgazeUsers from "@/hooks/useGitgazeUsers";
-import { GitGazeUser } from "@/types/github/user.types";
+import { GitGazeUser, GitHubUser } from "@/types/github/user.types";
 import Image from "next/image";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useMediaQuery } from "@uidotdev/usehooks";
 import {
   CartesianGrid,
   Line,
@@ -14,6 +15,8 @@ import {
 } from "recharts";
 import CustomAreaTooltip from "./area-chart/custom-area-tooltip";
 import Card from "./card";
+import { useRouter } from "next/navigation";
+import { Route } from "@/enums/route.enum";
 
 interface AvatarDotProps {
   cx?: number;
@@ -30,30 +33,48 @@ const AvatarDot = React.memo((props: AvatarDotProps) => {
 
   if (!cx || !cy || !payload || totalPoints <= 1) return null;
 
-  const delay = React.useMemo(
-    () => (active ? 0 : (index / (totalPoints - 1)) * duration),
-    [active, index, totalPoints, duration],
-  );
+  const router = useRouter();
+
+  const delay = active ? 0 : (index / (totalPoints - 1)) * duration;
+  const name = payload.name ?? payload.login;
+
+  const handleAvatarClick = React.useCallback(() => {
+    router.push(Route.USER_PROFILE(payload.login));
+  }, [payload.login, router]);
+
+  const rectSize = 100;
 
   return (
     <foreignObject
-      onClick={() => {
-        console.log(payload);
-      }}
+      onClick={handleAvatarClick}
       overflow={"visible"}
-      x={cx - 25}
-      y={cy - 25}
-      width={50}
-      height={50}
+      x={cx - rectSize / 2}
+      y={cy - rectSize / 2}
+      width={rectSize}
+      height={rectSize}
     >
-      <Image
-        src={payload.avatarUrl}
-        alt={payload.login}
-        width={50}
-        height={50}
-        className={`md:size-12 size-10 rounded-full border-2 object-cover ${active ? "border-slate-500" : "border-slate-300 animate-avatar-pop"}`}
-        style={{ animationDelay: `${delay}ms`, scale: active ? 1.3 : 1 }}
-      />
+      <div className="relative w-full h-full">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <Image
+            src={payload.avatarUrl}
+            alt={payload.name ?? payload.login}
+            width={50}
+            height={50}
+            className={`md:size-12 size-10 rounded-full border-2 aspect-square object-contain ${
+              active
+                ? "border-[#fe9a00]"
+                : "border-slate-300 animate-avatar-pop"
+            }`}
+            style={{
+              animationDelay: `${delay}ms`,
+              scale: active ? 1.25 : 1,
+            }}
+          />
+        </div>
+        <p className="absolute top-[calc(50%+28px)] left-1/2 -translate-x-1/2 md:block hidden text-xs text-slate-600 text-center line-clamp-1 whitespace-nowrap">
+          {name}
+        </p>
+      </div>
     </foreignObject>
   );
 });
@@ -67,17 +88,22 @@ const yAxisDomain: [(dataMin: number) => number, (dataMax: number) => number] =
 const chartMargin = {
   top: 16,
   right: 14,
-  left: -14,
+  left: -24,
   bottom: 0,
 };
 
 const LINE_DURATION = 2500;
 const customTooltip = (
-  <CustomAreaTooltip type="text" valuePrefix="Profile Views" />
+  <CustomAreaTooltip type="text" label="name" valuePrefix="Profile Views" />
 );
 
-const LeaderBoardLineChart = () => {
-  const [mounted, setMounted] = useState(false);
+const TICK_MOBILE = { fontSize: 10 };
+const TICK_DESKTOP = { fontSize: 12 };
+const X_AXIS_PADDING_MOBILE = { left: 12, right: 12 };
+const X_AXIS_PADDING_DESKTOP = { left: 48, right: 48 };
+
+const LeaderBoardLineChartContent = () => {
+  const isMobile = useMediaQuery("only screen and (max-width : 768px)");
   const { data, isLoading } = useGitgazeUsers(false, "desc", 5);
 
   const chartData = useMemo(() => {
@@ -88,8 +114,6 @@ const LeaderBoardLineChart = () => {
     );
   }, [data]);
   const totalPoints = chartData.length;
-
-  useEffect(() => setMounted(true), []);
 
   const renderDot = useCallback(
     (props: Omit<AvatarDotProps, "totalPoints" | "duration" | "active">) => (
@@ -116,7 +140,6 @@ const LeaderBoardLineChart = () => {
     [totalPoints],
   );
 
-  if (!mounted) return null;
   return (
     <Card
       cardTitle="Leaderboard Graph"
@@ -135,19 +158,18 @@ const LeaderBoardLineChart = () => {
               data={chartData}
               margin={chartMargin}
             >
-              <CartesianGrid opacity={0.4} />
+              <CartesianGrid vertical={false} opacity={0.4} />
               <XAxis
                 dataKey="login"
-                tickMargin={10}
-                tick={{ fontSize: 12 }}
+                tick={false}
                 axisLine={false}
-                tickLine={false}
-                padding={{ left: 20, right: 20 }}
+                padding={
+                  isMobile ? X_AXIS_PADDING_MOBILE : X_AXIS_PADDING_DESKTOP
+                }
               />
 
               <YAxis
-                tick={{ fontSize: 12 }}
-                tickMargin={10}
+                tick={isMobile ? TICK_MOBILE : TICK_DESKTOP}
                 axisLine={false}
                 tickLine={false}
                 allowDecimals={false}
@@ -157,7 +179,7 @@ const LeaderBoardLineChart = () => {
               <Tooltip content={customTooltip} />
 
               <Line
-                type="monotone"
+                type="linear"
                 dataKey="views"
                 stroke="#fe9a00"
                 strokeWidth={3}
@@ -173,6 +195,18 @@ const LeaderBoardLineChart = () => {
       </div>
     </Card>
   );
+};
+
+const LeaderBoardLineChart = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
+  return <LeaderBoardLineChartContent />;
 };
 
 export default LeaderBoardLineChart;

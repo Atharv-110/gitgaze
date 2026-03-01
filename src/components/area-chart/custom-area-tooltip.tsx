@@ -40,13 +40,13 @@ const CustomAreaTooltip: React.FC<ExtendedTooltipProps> = ({
   return (
     <div className="bg-black/55 backdrop-blur-sm rounded-lg px-3 py-2 text-white border border-black max-w-xs">
       {formattedLabel && (
-        <p className="text-[10px] font-medium text-slate-100 mb-1">
+        <p className="md:text-xs text-[10px] font-medium text-slate-100 mb-1">
           {typeof formattedLabel === "string"
             ? formattedLabel
             : String(formattedLabel)}
         </p>
       )}
-      <p className="font-semibold text-xs">
+      <p className="font-semibold md:text-sm text-xs">
         {valuePrefix}&nbsp;:&nbsp;{value}
       </p>
     </div>

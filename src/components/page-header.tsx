@@ -20,12 +20,12 @@ function getRouteBasedConfig(route: string, username?: string) {
     case Route.USER_README(username): {
       return {
         name: "Readme",
-        className: "bg-white/50",
+        className: "md:bg-white/50",
         rightSideComponent: ReadmeRightSideComponent,
       };
     }
     case Route.DISCOVER: {
-      return { name: "Discover", className: "bg-white/50 shadow-sm" };
+      return { name: "Discover", className: "md:bg-white/50" };
     }
     default:
       return { name: null, className: "hidden" };

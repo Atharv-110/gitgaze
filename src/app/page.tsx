@@ -7,7 +7,7 @@ import Link from "next/link";
 
 async function getUsers() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_URL}/api/users?allUsers=true&sort=asc`,
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/users?sort=desc&limit=0`,
     {
       next: { revalidate: 300 },
     },

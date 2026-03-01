@@ -6,7 +6,7 @@ import { GitGazeUser, GitHubUser } from "@/types/github/user.types";
 import mongoose from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
-const LIMIT = 16;
+const LIMIT = 20;
 
 export async function GET(req: NextRequest) {
   try {
