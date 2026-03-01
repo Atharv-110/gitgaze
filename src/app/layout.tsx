@@ -3,56 +3,9 @@ import "./globals.css";
 import MainProvider from "@/providers/main-provider";
 import { Montserrat } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { constructMetadata } from "@/utils/metadata";
 
-export const metadata: Metadata = {
-  title: {
-    default: "GitGaze by Atharv Vani",
-    template: "%s at GitGaze",
-  },
-  authors: [
-    { name: "Atharv Vani", url: "https://www.gitgaze.dev/u/atharv-110" },
-  ],
-  description:
-    "Showcase your GitHub statistics and activities in a personalized and share-ready dashboard.",
-  keywords:
-    "gitgaze, github, github stats, open source, contributions, github wrapped",
-  icons: {
-    icon: "/icons/icon.png",
-    apple: "/icons/apple-icon.png",
-    shortcut: "/icons/icon.png",
-  },
-  metadataBase: new URL("https://www.gitgaze.dev"),
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    type: "website",
-    url: "https://www.gitgaze.dev",
-    title: "GitGaze by Atharv Vani",
-    description:
-      "Showcase your GitHub statistics and activities in a personalized and share-ready dashboard.",
-    siteName: "GitGaze",
-    images: [
-      {
-        url: "/opengraph-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "GitGaze Landing Page Open Graph Image",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "GitGaze by Atharv Vani",
-    creator: "@atharv_110",
-    description:
-      "Showcase your GitHub statistics and activities in a personalized and share-ready dashboard.",
-    images: ["/opengraph-image.jpg"],
-  },
-  other: {
-    "og:logo": "/icons/icon.png",
-  },
-};
+export const metadata: Metadata = constructMetadata();
 
 const montserrat = Montserrat({
   subsets: ["latin"],

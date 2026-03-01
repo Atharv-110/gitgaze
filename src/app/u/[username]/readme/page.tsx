@@ -1,8 +1,25 @@
 import Integrations from "@/components/integration";
 import ReadmeRenderer from "@/components/readme-renderer";
+import { Route } from "@/enums/route.enum";
 import { detectHolopin } from "@/lib/client.helpers";
 import { UserSlugProps } from "@/types/github/github.types";
 import { IntegrationComponentProps } from "@/types/integration/integration.types";
+import { constructMetadata } from "@/utils/metadata";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: UserSlugProps): Promise<Metadata> {
+  const { username } = await params;
+  const lowercasedUsername = username.toLowerCase();
+
+  return constructMetadata({
+    title: lowercasedUsername + " at GitGaze",
+    description: `Explore ${lowercasedUsername}’s README with special integrations like holopin badges`,
+    canonicalUrl: Route.USER_README(username),
+    image: Route.OPENGRAPH_IMAGE(username),
+  });
+}
 
 async function getReadmeByUsername(username: string) {
   const res = await fetch(

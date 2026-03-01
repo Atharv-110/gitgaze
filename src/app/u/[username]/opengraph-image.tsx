@@ -72,13 +72,6 @@ export default async function OG({ params }: UserSlugProps) {
       {/* Header */}
       <div tw="flex items-center justify-between max-h-24 w-full px-8 py-4">
         <div tw="flex items-center">
-          <div tw="flex items-center justify-center p-2 bg-black rounded-lg">
-            <img
-              src={`${BASE_URL}/gitgaze_logo.png`}
-              alt="GitGaze Logo"
-              tw="w-10"
-            />
-          </div>
           <h1
             tw="ml-2 font-bold text-4xl leading-none"
             style={{
@@ -95,12 +88,12 @@ export default async function OG({ params }: UserSlugProps) {
       </div>
       {/* User Info */}
       <div tw="flex flex-col flex-1 px-8 pb-8 pt-2">
-        <div tw="w-full h-full p-5 flex border border-slate-300 rounded-xl bg-gray-300/20 shadow-lg">
+        <div tw="w-full h-full p-5 flex border-2 border-slate-300 rounded-xl bg-white/40 shadow-md">
           <div tw="flex flex-col justify-center w-full items-center">
             <img
               src={user.avatarUrl}
               alt={`${user.login}'s avatar`}
-              tw="w-50 h-50 rounded-full border-4 border-slate-100 shadow-lg"
+              tw="w-50 h-50 rounded-full border-4 border-slate-300 shadow-md"
             />
             <h1
               tw="text-5xl font-bold tracking-wide m-0 mt-4"
@@ -113,10 +106,10 @@ export default async function OG({ params }: UserSlugProps) {
             >
               {user.name}
             </h1>
-            <p tw="flex justify-center items-center w-3/4 text-slate-800 text-center m-0 mt-4">
+            <p tw="flex justify-center text-lg items-center w-3/4 text-center m-0 mt-4">
               {user.bio}
             </p>
-            <div tw="flex items-center justify-center py-3 px-5 bg-black text-white rounded-xl m-0 mt-5">
+            <div tw="flex items-center text-slate-700 justify-center py-3 px-5 m-0 mt-5">
               gitgaze.dev/u/{user.login}
             </div>
           </div>

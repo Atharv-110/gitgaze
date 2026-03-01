@@ -1,30 +1,21 @@
 import BentoComponent from "@/components/bento-component";
 import { Route } from "@/enums/route.enum";
 import { UserSlugProps } from "@/types/github/github.types";
-import { Metadata, ResolvingMetadata } from "next";
+import { constructMetadata } from "@/utils/metadata";
+import { Metadata } from "next";
 
-export async function generateMetadata(
-  { params }: UserSlugProps,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: UserSlugProps): Promise<Metadata> {
   const { username } = await params;
   const lowercasedUsername = username.toLowerCase();
-  const userUrl = `${process.env.NEXT_PUBLIC_APP_URL || "https://www.gitgaze.dev"}/u/${lowercasedUsername}`;
 
-  return {
-    title: lowercasedUsername,
-    description: `Discover ${lowercasedUsername}’s GitHub statistics and activity in a personalized, visual, and share-ready dashboard — highlighting their achievements, contributions, and developer journey.`,
-    alternates: {
-      canonical: userUrl,
-    },
-    openGraph: {
-      images: [Route.OPENGRAPH_IMAGE(username)],
-    },
-    twitter: {
-      card: "summary_large_image",
-      images: [Route.OPENGRAPH_IMAGE(username)],
-    },
-  };
+  return constructMetadata({
+    title: lowercasedUsername + " at GitGaze",
+    description: `Discover ${lowercasedUsername}’s GitHub statistics and activity in a personalized, visual, and share-ready dashboard — highlighting their achievements, and contributions.`,
+    canonicalUrl: `/u/${lowercasedUsername}`,
+    image: Route.OPENGRAPH_IMAGE(lowercasedUsername),
+  });
 }
 
 const UserPage = async ({ params }: UserSlugProps) => {
