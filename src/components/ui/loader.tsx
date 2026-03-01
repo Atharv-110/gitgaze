@@ -1,8 +1,14 @@
 import React from "react";
 
-const Loader = ({ size = 24 }: { size: number }) => {
+const Loader = ({
+  size = 24,
+  className,
+}: {
+  size?: number;
+  className?: React.HTMLAttributes<HTMLDivElement>["className"];
+}) => {
   return (
-    <div role="status">
+    <div className={className} role="status">
       <svg
         aria-hidden="true"
         className="inline text-neutral-tertiary animate-spin fill-brand"

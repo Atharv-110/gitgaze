@@ -6,7 +6,7 @@ const Chip = ({
   className,
 }: {
   children: React.ReactNode;
-  className?: HTMLDivElement["className"];
+  className?: React.HTMLAttributes<HTMLDivElement>["className"];
 }) => {
   return (
     <div

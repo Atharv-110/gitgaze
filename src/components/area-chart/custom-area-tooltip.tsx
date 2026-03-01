@@ -1,27 +1,54 @@
 "use client";
-import React from "react";
 import { CustomTooltipProps } from "@/types/chart/chart.types";
 import { GhContributionDay } from "@/types/github/contributions.types";
+import { GitGazeUser } from "@/types/github/user.types";
+import React from "react";
 
-const CustomAreaTooltip: React.FC<CustomTooltipProps<GhContributionDay[]>> = ({
+export interface ExtendedTooltipProps extends CustomTooltipProps<
+  GhContributionDay[] | GitGazeUser[]
+> {
+  valuePrefix?: string;
+  type?: "date" | "text";
+}
+
+const CustomAreaTooltip: React.FC<ExtendedTooltipProps> = ({
   active,
   payload,
   label,
+  valuePrefix,
+  type = "text",
 }) => {
   if (!active || !payload?.length) return null;
 
   const { value } = payload[0];
-  const date = label ? new Date(label) : null;
-  return (
-    <div className="bg-black/55 backdrop-blur-sm rounded-lg px-3 py-2 text-white border border-black">
-      <p className="text-[10px] font-medium text-slate-100">
-        {date?.toLocaleDateString("en-US", {
+
+  const formattedLabel = React.useMemo(() => {
+    if (!label) return null;
+    if (type === "date") {
+      const date = new Date(label as string);
+      if (!isNaN(date.getTime())) {
+        return date.toLocaleDateString("en-US", {
           month: "long",
           day: "2-digit",
           year: "numeric",
-        })}
+        });
+      }
+    }
+    return label;
+  }, [label, type]);
+
+  return (
+    <div className="bg-black/55 backdrop-blur-sm rounded-lg px-3 py-2 text-white border border-black max-w-xs">
+      {formattedLabel && (
+        <p className="text-[10px] font-medium text-slate-100 mb-1">
+          {typeof formattedLabel === "string"
+            ? formattedLabel
+            : String(formattedLabel)}
+        </p>
+      )}
+      <p className="font-semibold text-xs">
+        {valuePrefix}&nbsp;:&nbsp;{value}
       </p>
-      <p className="font-semibold text-xs">Contributions: {value}</p>
     </div>
   );
 };

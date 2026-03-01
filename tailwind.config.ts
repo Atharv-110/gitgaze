@@ -68,6 +68,17 @@ const config: Config = {
             width: "calc(var(--small-width) * 0.94)",
           },
         },
+        "avatar-pop": {
+          "0%": {
+            transform: "scale(0.6)",
+          },
+          "50%": {
+            transform: "scale(1.35)",
+          },
+          "100%": {
+            transform: "scale(1)",
+          },
+        },
       },
       animation: {
         aurora: "aurora 8s ease-in-out infinite alternate",
@@ -75,6 +86,7 @@ const config: Config = {
         downUp: "downUp 40s ease-in-out infinite",
         "turn-to-large": "turn-to-large 0.6s ease-in-out forwards",
         "turn-to-small": "turn-to-small 0.6s ease-in-out forwards",
+        "avatar-pop": "avatar-pop 0.6s ease forwards",
       },
       backgroundSize: {
         aurora: "400% 400%",

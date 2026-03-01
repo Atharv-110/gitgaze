@@ -1,4 +1,5 @@
 "use client";
+import { formatShortDate } from "@/lib/client.helpers";
 import { GhContributionDay } from "@/types/github/contributions.types";
 import React from "react";
 import {
@@ -10,8 +11,6 @@ import {
   YAxis,
 } from "recharts";
 import CustomAreaTooltip from "./custom-area-tooltip";
-import { formatShortDate } from "@/lib/client.helpers";
-import hexToRgba from "hex-to-rgba";
 
 function getDynamicYAxisTicks(maxValue: number, desiredTicks = 5): number[] {
   if (maxValue <= 0) return [0, 1];
@@ -76,7 +75,9 @@ const CustomAreaChart = ({ data }: { data: GhContributionDay[] }) => {
         type="number"
         allowDecimals={false}
       />
-      <Tooltip content={<CustomAreaTooltip />} />
+      <Tooltip
+        content={<CustomAreaTooltip valuePrefix="Contributions" type="date" />}
+      />
       <Area
         type="linear"
         dataKey="contributionCount"

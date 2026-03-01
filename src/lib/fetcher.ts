@@ -7,8 +7,8 @@ import {
 } from "@/types/github/github.types";
 import { RepositoryWithLanguageNames } from "@/types/github/repositories.types";
 import { GitGazeUser, GitHubUser } from "@/types/github/user.types";
-import { axiosInstance } from "./axios";
 import { GitGazeHolopinResponse } from "@/types/integration/holopin.types";
+import { axiosInstance } from "./axios";
 
 export async function fetchGitHubUser(username?: string): Promise<GitHubUser> {
   if (!username) {
@@ -22,6 +22,8 @@ export async function fetchGitgazeUsers(
   lastViews?: number,
   lastId?: string,
   allUsers: boolean = false,
+  sort: string = "asc",
+  limit?: number,
 ): Promise<
   PaginatedAPIResponse<
     GitGazeUser[],
@@ -33,6 +35,8 @@ export async function fetchGitgazeUsers(
       lastViews,
       lastId,
       allUsers,
+      sort,
+      limit,
     },
   });
 

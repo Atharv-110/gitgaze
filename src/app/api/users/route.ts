@@ -2,11 +2,11 @@ import { githubRequest } from "@/lib/githubClient";
 import { connectDB } from "@/lib/mongo";
 import Users from "@/models/Users";
 import { PaginatedAPIResponse } from "@/types/github/github.types";
-import { GitHubUser, GitGazeUser } from "@/types/github/user.types";
+import { GitGazeUser, GitHubUser } from "@/types/github/user.types";
 import mongoose from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
-const LIMIT = 15;
+const LIMIT = 16;
 
 export async function GET(req: NextRequest) {
   try {
@@ -17,18 +17,22 @@ export async function GET(req: NextRequest) {
     const lastViews = searchParams.get("lastViews");
     const lastId = searchParams.get("lastId");
     const allUsers = searchParams.get("allUsers") === "true";
+    const sort = searchParams.get("sort") === "desc" ? -1 : 1;
+    const userLimit = searchParams.get("limit") || LIMIT;
     let filter: any = {};
-    let limit = LIMIT;
+    let limit = userLimit ? Number(userLimit) : LIMIT;
 
     // If NOT allUsers → apply pagination
     if (!allUsers) {
       if (lastViews && lastId) {
+        const viewCondition =
+          sort === 1 ? { $gt: Number(lastViews) } : { $lt: Number(lastViews) };
         filter = {
           $or: [
-            { views: { $lt: Number(lastViews) } },
+            { views: viewCondition },
             {
               views: Number(lastViews),
-              _id: { $gt: new mongoose.Types.ObjectId(lastId) },
+              _id: { $lt: new mongoose.Types.ObjectId(lastId) },
             },
           ],
         };
@@ -38,7 +42,7 @@ export async function GET(req: NextRequest) {
       limit = 0;
     }
 
-    const usersQuery = Users.find(filter).sort({ views: -1, _id: 1 }).lean();
+    const usersQuery = Users.find(filter).sort({ views: sort, _id: -1 }).lean();
 
     if (!allUsers) {
       usersQuery.limit(limit);
