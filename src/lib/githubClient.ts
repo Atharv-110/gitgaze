@@ -6,7 +6,6 @@ import {
 
 const githubAxios: AxiosInstance = axios.create({
   baseURL: process.env.GITHUB_GRAPHQL!,
-  timeout: 10000,
   headers: {
     "Content-Type": "application/json",
     "Accept-Encoding": "gzip, br",

@@ -21,7 +21,7 @@ export const AvatarCircles = ({
   return (
     <div className={cn("z-10 flex -space-x-4 rtl:space-x-reverse", className)}>
       {avatarUrls.map((url) => (
-        <Link key={url.profileUrl} href={Route.USER_PROFILE(url.profileUrl)}>
+        <Link key={url.profileUrl} href={Route.DISCOVER}>
           <Image
             className="h-10 w-10 md:h-12 md:w-12 rounded-full border-2 border-white dark:border-gray-800"
             src={url.imageUrl}

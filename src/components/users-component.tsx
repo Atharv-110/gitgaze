@@ -1,19 +1,25 @@
 "use client";
+import { Route } from "@/enums/route.enum";
 import useGitgazeUsers from "@/hooks/useGitgazeUsers";
+import { getGithubAvatar } from "@/lib/client.helpers";
 import { GitGazeUser } from "@/types/github/user.types";
 import { EyeIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import Card from "./card";
 import Chip from "./ui/chip";
 import Loader from "./ui/loader";
 import { ParseEmoji } from "./ui/parse-emoji";
-import { getGithubAvatar } from "@/lib/client.helpers";
 
 const UserCard = React.memo(({ user }: { user: GitGazeUser | null }) => {
   if (!user) return null;
+  const router = useRouter();
   return (
-    <Card className="max-sm:min-h-full p-2 md:p-2">
+    <Card
+      className="max-sm:min-h-full p-1.5 md:p-1.5 cursor-pointer hover:border-slate-300 hover:bg-slate-50"
+      props={{ onClick: () => router.push(Route.USER_PROFILE(user.login)) }}
+    >
       <div className="flex items-center gap-x-2">
         <Image
           src={getGithubAvatar(user.avatarUrl, 56)}

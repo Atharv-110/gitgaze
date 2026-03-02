@@ -35,9 +35,22 @@ const AvatarDot = React.memo((props: AvatarDotProps) => {
   if (!cx || !cy || !payload || totalPoints <= 1) return null;
 
   const router = useRouter();
+  const isLeader = index === totalPoints - 1;
 
   const delay = active ? 0 : (index / (totalPoints - 1)) * duration;
   const name = payload.name ?? payload.login;
+
+  const [leaderActive, setLeaderActive] = React.useState(false);
+
+  React.useEffect(() => {
+    if (!isLeader) return;
+
+    const timer = setTimeout(() => {
+      setLeaderActive(true);
+    }, delay + 600);
+
+    return () => clearTimeout(timer);
+  }, [isLeader, delay]);
 
   const handleAvatarClick = React.useCallback(() => {
     router.push(Route.USER_PROFILE(payload.login));
@@ -61,21 +74,23 @@ const AvatarDot = React.memo((props: AvatarDotProps) => {
         >
           <Image
             src={getGithubAvatar(payload.avatarUrl, 96)}
-            alt={payload.name ?? payload.login}
+            alt={name}
             width={48}
             height={48}
             sizes="(max-width: 768px) 40px, 48px"
-            className={`rounded-full border-2 object-cover ${
-              active
-                ? "border-[#fe9a00]"
-                : "border-slate-300 animate-avatar-pop"
-            } md:size-12 size-10`}
+            className={`rounded-full border-2 object-cover md:size-12 size-10
+              ${
+                active || leaderActive
+                  ? "border-[#fe9a00]"
+                  : "border-slate-300 animate-avatar-pop"
+              }`}
             style={{
               animationDelay: `${delay}ms`,
               transform: active ? "scale(1.2)" : "scale(1)",
             }}
           />
         </div>
+
         <p className="absolute top-[calc(50%+28px)] left-1/2 -translate-x-1/2 md:block hidden text-xs text-slate-600 text-center line-clamp-1 whitespace-nowrap">
           {name}
         </p>
@@ -109,7 +124,7 @@ const X_AXIS_PADDING_DESKTOP = { left: 48, right: 48 };
 
 const LeaderBoardLineChartContent = () => {
   const isMobile = useMediaQuery("only screen and (max-width : 768px)");
-  const { data, isLoading } = useGitgazeUsers(false, "desc", 5);
+  const { data, isLoading } = useGitgazeUsers(false, "desc", isMobile ? 5 : 6);
 
   const chartData = useMemo(() => {
     return (
@@ -184,7 +199,7 @@ const LeaderBoardLineChartContent = () => {
               <Tooltip content={customTooltip} />
 
               <Line
-                type="linear"
+                type="monotone"
                 dataKey="views"
                 stroke="#fe9a00"
                 strokeWidth={3}

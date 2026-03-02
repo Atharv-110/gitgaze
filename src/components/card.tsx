@@ -11,6 +11,7 @@ interface CardProps {
   iconName?: keyof typeof Icon;
   isLoading?: boolean;
   errorMsg?: string;
+  props?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 const Card = ({
@@ -20,6 +21,7 @@ const Card = ({
   iconName,
   isLoading,
   errorMsg,
+  props,
 }: CardProps) => {
   const IconComponent = Icon[iconName as keyof typeof Icon];
   return (
@@ -29,6 +31,7 @@ const Card = ({
         cardTitle ? "space-y-2" : "space-y-2",
         className,
       )}
+      {...props}
     >
       {cardTitle && (
         <Chip>

@@ -19,7 +19,6 @@ const baseURL = isServer
 
 export const axiosInstance = axios.create({
   baseURL,
-  timeout: 10000,
   headers: serverDefaultHeaders,
   ...(isServer && {
     httpAgent: new http.Agent({ keepAlive: true }),
