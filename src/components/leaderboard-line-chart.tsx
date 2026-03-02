@@ -1,9 +1,12 @@
 "use client";
+import { Route } from "@/enums/route.enum";
 import useGitgazeUsers from "@/hooks/useGitgazeUsers";
-import { GitGazeUser, GitHubUser } from "@/types/github/user.types";
-import Image from "next/image";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { getGithubAvatar } from "@/lib/client.helpers";
+import { GitGazeUser } from "@/types/github/user.types";
 import { useMediaQuery } from "@uidotdev/usehooks";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   CartesianGrid,
   Line,
@@ -15,9 +18,6 @@ import {
 } from "recharts";
 import CustomAreaTooltip from "./area-chart/custom-area-tooltip";
 import Card from "./card";
-import { useRouter } from "next/navigation";
-import { Route } from "@/enums/route.enum";
-import { getGithubAvatar } from "@/lib/client.helpers";
 
 interface AvatarDotProps {
   cx?: number;
@@ -60,7 +60,7 @@ const AvatarDot = React.memo((props: AvatarDotProps) => {
           style={{ pointerEvents: "auto" }}
         >
           <Image
-            src={getGithubAvatar(payload.avatarUrl, 96)} // 48px × 2 for retina
+            src={getGithubAvatar(payload.avatarUrl, 96)}
             alt={payload.name ?? payload.login}
             width={48}
             height={48}
@@ -72,7 +72,7 @@ const AvatarDot = React.memo((props: AvatarDotProps) => {
             } md:size-12 size-10`}
             style={{
               animationDelay: `${delay}ms`,
-              transform: active ? "scale(1.25)" : "scale(1)",
+              transform: active ? "scale(1.2)" : "scale(1)",
             }}
           />
         </div>

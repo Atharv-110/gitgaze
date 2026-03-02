@@ -102,14 +102,15 @@ const PageHeader = ({
             onClick={() => router.back()}
           />
         )}
-        {showHomeButton && (
-          <Button
-            icon="HomeIcon"
-            className="bg-transparent border border-slate-400  hover:border-slate-500 group rounded-full p-1 md:p-1.5"
-            color="text-slate-400 !size-3 md:!size-4 group-hover:text-slate-500"
-            onClick={() => router.push(Route.HOME)}
-          />
-        )}
+        {showHomeButton ||
+          (!(showBackButton && showBack) && (
+            <Button
+              icon="HomeIcon"
+              className="bg-transparent border border-slate-400  hover:border-slate-500 group rounded-full p-1 md:p-1.5"
+              color="text-slate-400 !size-3 md:!size-4 group-hover:text-slate-500"
+              onClick={() => router.push(Route.HOME)}
+            />
+          ))}
         {defaultType ? (
           <h1 className="text-base w-fit md:text-xl font-bold">
             {username && `${username}'s `}

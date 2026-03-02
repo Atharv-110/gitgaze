@@ -13,7 +13,7 @@ export async function generateMetadata({
   return constructMetadata({
     title: lowercasedUsername + " at GitGaze",
     description: `Discover ${lowercasedUsername}’s GitHub statistics and activity in a personalized, visual, and share-ready dashboard — highlighting their achievements, and contributions.`,
-    canonicalUrl: `/u/${lowercasedUsername}`,
+    canonicalUrl: Route.USER_PROFILE(lowercasedUsername),
     image: Route.OPENGRAPH_IMAGE(lowercasedUsername),
   });
 }

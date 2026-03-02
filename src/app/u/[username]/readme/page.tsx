@@ -49,9 +49,11 @@ const UserReadmePage = async ({ params }: UserSlugProps) => {
     >
       <ReadmeRenderer username={username} readme={readme} />
 
-      <div className="w-full flex-1 space-y-2">
-        <Integrations {...integrationProps} />
-      </div>
+      {holopinUsername && (
+        <div className="w-full flex-1 space-y-2">
+          <Integrations {...integrationProps} />
+        </div>
+      )}
     </section>
   );
 };

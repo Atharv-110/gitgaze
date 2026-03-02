@@ -33,10 +33,10 @@ const UserCard = React.memo(({ user }: { user: GitGazeUser | null }) => {
                 className={
                   user.status.message
                     ? "px-2 py-0.5 rounded-lg"
-                    : "p-1 aspect-square leading-none"
+                    : "p-0.5 size-5 aspect-square"
                 }
               >
-                <ParseEmoji emoji={user.status?.emojiHTML} size={15} />
+                <ParseEmoji emoji={user.status?.emojiHTML} size={14} />
                 {user.status.message && (
                   <p className="line-clamp-1">{user.status.message}</p>
                 )}
