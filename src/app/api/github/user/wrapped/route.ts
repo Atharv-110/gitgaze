@@ -1,17 +1,16 @@
-import { NextResponse } from "next/server";
+import {
+  GhContributionDay,
+  GhUserContributionCollection,
+} from "@/types/github/contributions.types";
 import {
   GitHubAPIResponse,
   Language,
   topMonthContributionProps,
   WrappedServerResponse,
-  WrappedSlideProps,
 } from "@/types/github/github.types";
-import {
-  GhContributionDay,
-  GhUserContributionCollection,
-} from "@/types/github/contributions.types";
-import { githubRequest } from "../../../../../lib/githubClient";
 import { RepositoriesResponse } from "@/types/github/repositories.types";
+import { NextResponse } from "next/server";
+import { githubRequest } from "../../../../../lib/githubClient";
 import {
   aggregateLanguages,
   fetchYearlyContributions,
@@ -154,10 +153,11 @@ function getTopMonthContributions(
 
 export async function POST(req: Request) {
   const { login } = (await req.json()) as { login: string };
-  const wrappedYear =
-    new Date().getMonth() === 11
-      ? new Date().getFullYear()
-      : new Date().getFullYear() - 1;
+  // const wrappedYear =
+  //   new Date().getMonth() === 11
+  //     ? new Date().getFullYear()
+  //     : new Date().getFullYear() - 1;
+  const wrappedYear = new Date().getFullYear();
   const fromDate = new Date(`${wrappedYear}-01-01T00:00:00Z`);
   const toDate = new Date(`${wrappedYear}-12-31T23:59:59Z`);
   const result = await githubRequest<{

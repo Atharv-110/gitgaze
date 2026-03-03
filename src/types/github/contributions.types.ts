@@ -13,6 +13,8 @@ export interface GhUserContributionCollection {
     totalPullRequestContributions?: number;
     totalIssueContributions?: number;
     totalRepositoryContributions?: number;
+    totalPullRequestReviewContributions?: number;
+    restrictedContributionsCount?: number;
     contributionCalendar: {
       weeks: GhContributionWeek[];
     };

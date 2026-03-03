@@ -50,9 +50,10 @@ export async function fetchGhUserAchievements(username: string) {
   return res.data.data;
 }
 
-export async function fetchGhYearlyContributions(
-  username: string,
-): Promise<{ contributions: GhYearlyContribution[]; userCreatedAt: string }> {
+export async function fetchGhYearlyContributions(username: string): Promise<{
+  contributions: GhYearlyContribution[];
+  userCreatedAt: string;
+}> {
   const res = await axiosInstance.post("/github/user/contributions/total", {
     login: username,
   });

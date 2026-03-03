@@ -9,14 +9,6 @@ import { AuroraText } from "../ui/aurora-text";
 import fireImg from "@/assets/images/fire.gif";
 import { formatCompactNumber } from "@/lib/client.helpers";
 
-const getTotalContributions = (data: GhYearlyContribution[]) => {
-  return data.reduce(
-    (total, yearContribution) =>
-      total + yearContribution.totalCommitContributions,
-    0,
-  );
-};
-
 const StreakCard = ({ username }: { username: string }) => {
   const [totalContributions, setTotalContributions] = React.useState<number>(0);
   const [streakData, setStreakData] = React.useState<{
@@ -39,6 +31,23 @@ const StreakCard = ({ username }: { username: string }) => {
     error: totalStreaksError,
   } = useGhTotalStreaks(username);
 
+  const getTotalContributions = React.useCallback(
+    (data: GhYearlyContribution[]) => {
+      return data.reduce(
+        (total, yearContribution) =>
+          total +
+          yearContribution.totalCommitContributions +
+          yearContribution.totalPullRequestContributions +
+          yearContribution.totalIssueContributions +
+          yearContribution.totalRepositoryContributions +
+          yearContribution.totalPullRequestReviewContributions +
+          yearContribution.restrictedContributionsCount,
+        0,
+      );
+    },
+    [],
+  );
+
   useEffect(() => {
     if (yearlyContributionData) {
       setTotalContributions(
@@ -59,7 +68,7 @@ const StreakCard = ({ username }: { username: string }) => {
         });
       }
     }
-  }, [yearlyContributionData, totalStreaksData]);
+  }, [yearlyContributionData, totalStreaksData, getTotalContributions]);
   return (
     <Card
       cardTitle="Contributions & Streak"

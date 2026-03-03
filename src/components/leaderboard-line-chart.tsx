@@ -81,17 +81,17 @@ const AvatarDot = React.memo((props: AvatarDotProps) => {
             className={`rounded-full border-2 object-cover md:size-12 size-10
               ${
                 active || leaderActive
-                  ? "border-[#fe9a00]"
+                  ? "border-[#fe9a00] border-[3px]"
                   : "border-slate-300 animate-avatar-pop"
               }`}
             style={{
               animationDelay: `${delay}ms`,
-              transform: active ? "scale(1.2)" : "scale(1)",
+              transform: active || leaderActive ? "scale(1.2)" : "scale(1)",
             }}
           />
         </div>
 
-        <p className="absolute top-[calc(50%+28px)] left-1/2 -translate-x-1/2 md:block hidden text-xs text-slate-600 text-center line-clamp-1 whitespace-nowrap">
+        <p className="absolute top-[calc(50%+29px)] left-1/2 -translate-x-1/2 md:block hidden text-xs text-slate-600 text-center line-clamp-1 whitespace-nowrap">
           {name}
         </p>
       </div>

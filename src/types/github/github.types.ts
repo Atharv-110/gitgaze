@@ -19,6 +19,11 @@ export interface GitHubGraphQLResponse<T> {
 export interface GhYearlyContribution {
   year: number;
   totalCommitContributions: number;
+  totalPullRequestContributions: number;
+  totalIssueContributions: number;
+  totalRepositoryContributions: number;
+  totalPullRequestReviewContributions: number;
+  restrictedContributionsCount: number;
 }
 
 export interface GhStreak {

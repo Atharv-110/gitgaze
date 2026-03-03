@@ -14,6 +14,11 @@ const TOTAL_CONTRIBUTIONS_QUERY = `
             user(login: $login) {
                 contributionsCollection(from: $from, to: $to) {
                     totalCommitContributions
+                    totalIssueContributions
+                    totalPullRequestContributions
+                    totalPullRequestReviewContributions
+                    totalRepositoryContributions
+                    restrictedContributionsCount
                 }
             }
         }
@@ -47,10 +52,22 @@ export async function POST(req: Request) {
       to,
     );
 
+    const contributionCollection = yearData?.contributionsCollection;
+
     contributions.push({
       year,
       totalCommitContributions:
-        yearData?.contributionsCollection.totalCommitContributions ?? 0,
+        contributionCollection?.totalCommitContributions ?? 0,
+      totalPullRequestContributions:
+        contributionCollection?.totalPullRequestContributions ?? 0,
+      totalIssueContributions:
+        contributionCollection?.totalIssueContributions ?? 0,
+      totalRepositoryContributions:
+        contributionCollection?.totalRepositoryContributions ?? 0,
+      totalPullRequestReviewContributions:
+        contributionCollection?.totalPullRequestReviewContributions ?? 0,
+      restrictedContributionsCount:
+        contributionCollection?.restrictedContributionsCount ?? 0,
     });
   }
 
