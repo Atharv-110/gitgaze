@@ -28,7 +28,7 @@ export default function MainProvider({ children }: { children: ReactNode }) {
           username={username}
         />
         <main
-          className={`${pathname === Route.HOME ? "pt-0" : "pt-14"} flex-1 w-full flex justify-start px-4 xl:px-16 overflow-y-auto [&::-webkit-scrollbar]:hidden`}
+          className={`${pathname === Route.HOME ? "pt-0" : "pt-14"} flex-1 w-full flex justify-start px-4 xl:px-16 overflow-y-auto scroll-smooth [&::-webkit-scrollbar]:hidden`}
         >
           {children}
         </main>

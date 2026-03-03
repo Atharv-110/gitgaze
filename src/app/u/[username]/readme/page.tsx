@@ -31,14 +31,16 @@ async function getReadmeByUsername(username: string) {
   );
 
   const json = await res.json();
-  return json.data as string;
+  const readme = json.data as string;
+  const holopinUsername = detectHolopin(readme);
+
+  return { readme, holopinUsername };
 }
 
 const UserReadmePage = async ({ params }: UserSlugProps) => {
   const { username } = await params;
-  const readme = await getReadmeByUsername(username);
+  const { readme, holopinUsername } = await getReadmeByUsername(username);
 
-  const holopinUsername = detectHolopin(readme);
   const integrationProps: IntegrationComponentProps = {
     holopinUsername,
   };
